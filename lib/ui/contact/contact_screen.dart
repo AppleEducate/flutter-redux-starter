@@ -47,7 +47,19 @@ class ContactScreen extends StatelessWidget {
 
           ContactFields.last_name,
 
+          ContactFields.cell_phone,
+
+          ContactFields.office_phone,
+
+          ContactFields.home_phone,
+
+          ContactFields.date_created,
+
+          ContactFields.date_modified,
+
           ContactFields.email,
+
+          ContactFields.last_activity,
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,

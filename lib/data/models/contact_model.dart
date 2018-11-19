@@ -10,7 +10,19 @@ class ContactFields {
 
   static const String last_name = 'last_name';
 
+  static const String cell_phone = 'cell_phone';
+
+  static const String office_phone = 'office_phone';
+
+  static const String home_phone = 'home_phone';
+
+  static const String date_created = 'date_created';
+
+  static const String date_modified = 'date_modified';
+
   static const String email = 'email';
+
+  static const String last_activity = 'last_activity';
 }
 
 abstract class ContactEntity extends Object
@@ -21,7 +33,19 @@ abstract class ContactEntity extends Object
 
   String get last_name;
 
+  String get cell_phone;
+
+  String get office_phone;
+
+  String get home_phone;
+
+  String get date_created;
+
+  String get date_modified;
+
   String get email;
+
+  String get last_activity;
 
   static int counter = 0;
   factory ContactEntity() {
@@ -32,7 +56,19 @@ abstract class ContactEntity extends Object
 
       last_name: '',
 
+      cell_phone: '',
+
+      office_phone: '',
+
+      home_phone: '',
+
+      date_created: '',
+
+      date_modified: '',
+
       email: '',
+
+      last_activity: '',
     );
   }
 
@@ -56,8 +92,32 @@ abstract class ContactEntity extends Object
         response = contactA.last_name.compareTo(contactB.last_name);
         break;
 
+      case ContactFields.cell_phone:
+        response = contactA.cell_phone.compareTo(contactB.cell_phone);
+        break;
+
+      case ContactFields.office_phone:
+        response = contactA.office_phone.compareTo(contactB.office_phone);
+        break;
+
+      case ContactFields.home_phone:
+        response = contactA.home_phone.compareTo(contactB.home_phone);
+        break;
+
+      case ContactFields.date_created:
+        response = contactA.date_created.compareTo(contactB.date_created);
+        break;
+
+      case ContactFields.date_modified:
+        response = contactA.date_modified.compareTo(contactB.date_modified);
+        break;
+
       case ContactFields.email:
         response = contactA.email.compareTo(contactB.email);
+        break;
+
+      case ContactFields.last_activity:
+        response = contactA.last_activity.compareTo(contactB.last_activity);
         break;
     }
 
@@ -85,7 +145,31 @@ abstract class ContactEntity extends Object
       return true;
     }
 
+    if (cell_phone.toLowerCase().contains(search)) {
+      return true;
+    }
+
+    if (office_phone.toLowerCase().contains(search)) {
+      return true;
+    }
+
+    if (home_phone.toLowerCase().contains(search)) {
+      return true;
+    }
+
+    if (date_created.toLowerCase().contains(search)) {
+      return true;
+    }
+
+    if (date_modified.toLowerCase().contains(search)) {
+      return true;
+    }
+
     if (email.toLowerCase().contains(search)) {
+      return true;
+    }
+
+    if (last_activity.toLowerCase().contains(search)) {
       return true;
     }
 

@@ -24,7 +24,19 @@ class _ContactEditState extends State<ContactEdit> {
 
   final _last_nameController = TextEditingController();
 
+  final _cell_phoneController = TextEditingController();
+
+  final _office_phoneController = TextEditingController();
+
+  final _home_phoneController = TextEditingController();
+
+  final _date_createdController = TextEditingController();
+
+  final _date_modifiedController = TextEditingController();
+
   final _emailController = TextEditingController();
+
+  final _last_activityController = TextEditingController();
 
   var _controllers = [];
 
@@ -36,7 +48,19 @@ class _ContactEditState extends State<ContactEdit> {
 
       _last_nameController,
 
+      _cell_phoneController,
+
+      _office_phoneController,
+
+      _home_phoneController,
+
+      _date_createdController,
+
+      _date_modifiedController,
+
       _emailController,
+
+      _last_activityController,
     ];
 
     _controllers.forEach((controller) => controller.removeListener(_onChanged));
@@ -47,7 +71,19 @@ class _ContactEditState extends State<ContactEdit> {
 
     _last_nameController.text = contact.last_name;
 
+    _cell_phoneController.text = contact.cell_phone;
+
+    _office_phoneController.text = contact.office_phone;
+
+    _home_phoneController.text = contact.home_phone;
+
+    _date_createdController.text = contact.date_created;
+
+    _date_modifiedController.text = contact.date_modified;
+
     _emailController.text = contact.email;
+
+    _last_activityController.text = contact.last_activity;
 
     _controllers.forEach((controller) => controller.addListener(_onChanged));
 
@@ -69,7 +105,13 @@ class _ContactEditState extends State<ContactEdit> {
       // STARTER: set value - do not remove comment
       ..first_name = _first_nameController.text.trim()
       ..last_name = _last_nameController.text.trim()
-      ..email = _emailController.text.trim());
+      ..cell_phone = _cell_phoneController.text.trim()
+      ..office_phone = _office_phoneController.text.trim()
+      ..home_phone = _home_phoneController.text.trim()
+      ..date_created = _date_createdController.text.trim()
+      ..date_modified = _date_modifiedController.text.trim()
+      ..email = _emailController.text.trim()
+      ..last_activity = _last_activityController.text.trim());
     if (contact != widget.viewModel.contact) {
       widget.viewModel.onChanged(contact);
     }
@@ -128,10 +170,58 @@ class _ContactEditState extends State<ContactEdit> {
                   ),
 
                   TextFormField(
+                    controller: _cell_phoneController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Cell_phone',
+                    ),
+                  ),
+
+                  TextFormField(
+                    controller: _office_phoneController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Office_phone',
+                    ),
+                  ),
+
+                  TextFormField(
+                    controller: _home_phoneController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Home_phone',
+                    ),
+                  ),
+
+                  TextFormField(
+                    controller: _date_createdController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Date_created',
+                    ),
+                  ),
+
+                  TextFormField(
+                    controller: _date_modifiedController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Date_modified',
+                    ),
+                  ),
+
+                  TextFormField(
                     controller: _emailController,
                     autocorrect: false,
                     decoration: InputDecoration(
                       labelText: 'Email',
+                    ),
+                  ),
+
+                  TextFormField(
+                    controller: _last_activityController,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      labelText: 'Last_activity',
                     ),
                   ),
                 ],

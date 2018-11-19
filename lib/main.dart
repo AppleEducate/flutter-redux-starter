@@ -46,7 +46,7 @@ class _SampleReduxAppState extends State<SampleReduxApp> {
     return StoreProvider<AppState>(
       store: widget.store,
       child: MaterialApp(
-        title: 'Sample App',
+        title: 'My Unify Mobile',
         routes: {
           InitScreen.route: (context) => InitScreen(),
           LoginScreen.route: (context) => LoginScreen(),
