@@ -6,23 +6,23 @@ part 'contact_model.g.dart';
 
 class ContactFields {
   // STARTER: fields - do not remove comment
-  static const String first_name = 'first_name';
+  static const String first_name = 'First Name';
 
-  static const String last_name = 'last_name';
+  static const String last_name = 'Last Name';
 
-  static const String cell_phone = 'cell_phone';
+  static const String cell_phone = 'Cell Phone';
 
-  static const String office_phone = 'office_phone';
+  static const String office_phone = 'Office Phone';
 
-  static const String home_phone = 'home_phone';
+  static const String home_phone = 'Home Phone';
 
-  static const String date_created = 'date_created';
+  static const String date_created = 'Date Created';
 
-  static const String date_modified = 'date_modified';
+  static const String date_modified = 'Date Modified';
 
-  static const String email = 'email';
+  static const String email = 'Email';
 
-  static const String last_activity = 'last_activity';
+  static const String last_activity = 'Last Activity';
 }
 
 abstract class ContactEntity extends Object
