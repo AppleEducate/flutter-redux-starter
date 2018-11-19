@@ -14,7 +14,6 @@ class AuthRepository {
   });
 
   Future<BuiltList<dynamic>> login(String email, String password) async {
-
     final credentials = {
       'email': email,
       'password': password,
@@ -24,8 +23,8 @@ class AuthRepository {
 
     final response = await webClient.post(url, json.encode(credentials));
 
-    LoginResponse loginResponse = serializers.deserializeWith(
-        LoginResponse.serializer, response);
+    LoginResponse loginResponse =
+        serializers.deserializeWith(LoginResponse.serializer, response);
 
     return loginResponse.data.toBuiltList();
   }

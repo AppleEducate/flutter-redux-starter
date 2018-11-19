@@ -35,7 +35,6 @@ class SampleReduxApp extends StatefulWidget {
 }
 
 class _SampleReduxAppState extends State<SampleReduxApp> {
-
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(

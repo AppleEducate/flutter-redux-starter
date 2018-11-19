@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
-
   FormCard({
     Key key,
     @required this.children,

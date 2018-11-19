@@ -39,7 +39,6 @@ class _LoginState extends State<LoginView> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     var viewModel = widget.viewModel;
@@ -60,8 +59,7 @@ class _LoginState extends State<LoginView> {
                   controller: _emailController,
                   key: _emailKey,
                   autocorrect: false,
-                  decoration: InputDecoration(
-                      labelText: 'Email'),
+                  decoration: InputDecoration(labelText: 'Email'),
                   keyboardType: TextInputType.emailAddress,
                   validator: (val) => val.isEmpty || val.trim().length == 0
                       ? 'Please enter your email'
@@ -71,8 +69,7 @@ class _LoginState extends State<LoginView> {
                   controller: _passwordController,
                   key: _passwordKey,
                   autocorrect: false,
-                  decoration: InputDecoration(
-                      labelText: 'Password'),
+                  decoration: InputDecoration(labelText: 'Password'),
                   validator: (val) => val.isEmpty || val.trim().length == 0
                       ? 'Please enter your password'
                       : null,
@@ -81,17 +78,17 @@ class _LoginState extends State<LoginView> {
                 viewModel.authState.error == null
                     ? Container()
                     : Container(
-                  padding: EdgeInsets.only(top: 26.0, bottom: 4.0),
-                  child: Center(
-                    child: Text(
-                      viewModel.authState.error,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
+                        padding: EdgeInsets.only(top: 26.0, bottom: 4.0),
+                        child: Center(
+                          child: Text(
+                            viewModel.authState.error,
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -102,10 +99,7 @@ class _LoginState extends State<LoginView> {
                 return;
               }
               viewModel.onLoginPressed(
-                  context,
-                  _emailController.text,
-                  _passwordController.text
-              );
+                  context, _emailController.text, _passwordController.text);
             },
           ),
         ],
@@ -115,7 +109,6 @@ class _LoginState extends State<LoginView> {
 }
 
 class FormCard extends StatelessWidget {
-
   FormCard({
     Key key,
     @required this.children,

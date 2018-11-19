@@ -20,11 +20,9 @@ class AppDrawerBuilder extends StatelessWidget {
 }
 
 class AppDrawerVM {
-
   AppDrawerVM();
 
   static AppDrawerVM fromStore(Store<AppState> store) {
-
     return AppDrawerVM();
   }
 }

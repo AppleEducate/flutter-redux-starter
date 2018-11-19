@@ -17,4 +17,4 @@ part 'serializers.g.dart';
   // STARTER: serializers - do not remove comment
 ])
 final Serializers serializers =
-(_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
+    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

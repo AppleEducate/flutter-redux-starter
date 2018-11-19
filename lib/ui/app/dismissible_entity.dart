@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux_starter/data/models/models.dart';
 
 class DismissibleEntity extends StatelessWidget {
-
   DismissibleEntity({
     this.entity,
     this.child,
     this.onDismissed,
-    this.onTap,});
+    this.onTap,
+  });
 
   final BaseEntity entity;
   final Widget child;
@@ -23,16 +23,18 @@ class DismissibleEntity extends StatelessWidget {
       key: _itemKey(entity.id),
       onDismissed: onDismissed,
       child: child,
-      background: entity.isDeleted ? Container(
-        color: Colors.blue,
-        child: const ListTile(
-            leading:
-            const Icon(Icons.restore, color: Colors.white, size: 36.0)),
-      ) : Container(
-          color: Colors.red,
-          child: const ListTile(
-              leading:
-              const Icon(Icons.delete, color: Colors.white, size: 36.0))),
-      );
+      background: entity.isDeleted
+          ? Container(
+              color: Colors.blue,
+              child: const ListTile(
+                  leading: const Icon(Icons.restore,
+                      color: Colors.white, size: 36.0)),
+            )
+          : Container(
+              color: Colors.red,
+              child: const ListTile(
+                  leading: const Icon(Icons.delete,
+                      color: Colors.white, size: 36.0))),
+    );
   }
 }

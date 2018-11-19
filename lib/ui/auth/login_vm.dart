@@ -49,8 +49,8 @@ class LoginVM {
             return;
           }
           final Completer<Null> completer = new Completer<Null>();
-          store.dispatch(UserLoginRequest(
-              completer, email.trim(), password.trim()));
+          store.dispatch(
+              UserLoginRequest(completer, email.trim(), password.trim()));
           completer.future.then((_) {
             //Navigator.of(context).pushReplacementNamed(DashboardScreen.route);
             //store.dispatch(UpdateCurrentRoute(DashboardScreen.route));

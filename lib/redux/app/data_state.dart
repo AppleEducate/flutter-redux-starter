@@ -5,13 +5,12 @@ import 'package:built_value/serializer.dart';
 part 'data_state.g.dart';
 
 abstract class DataState implements Built<DataState, DataStateBuilder> {
-
   // STARTER: fields - do not remove comment
 
   factory DataState() {
     return _$DataState._(
-      // STARTER: constructor - do not remove comment
-    );
+        // STARTER: constructor - do not remove comment
+        );
   }
 
   DataState._();

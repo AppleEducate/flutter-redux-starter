@@ -17,8 +17,7 @@ AppState appReducer(AppState state, action) {
     ..isLoading = loadingReducer(state.isLoading, action)
     ..uiState.replace(uiReducer(state.uiState, action))
     ..authState.replace(authReducer(state.authState, action))
-    ..dataState.replace(dataReducer(state.dataState, action))
-  );
+    ..dataState.replace(dataReducer(state.dataState, action)));
 }
 
 final loadingReducer = combineReducers<bool>([
@@ -33,5 +32,3 @@ bool _setLoading(bool state, action) {
 bool _setLoaded(bool state, action) {
   return false;
 }
-
-

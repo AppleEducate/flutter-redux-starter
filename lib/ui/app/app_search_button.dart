@@ -6,7 +6,6 @@ import 'package:flutter_redux_starter/redux/ui/list_ui_state.dart';
 import 'package:redux/redux.dart';
 
 class AppSearchButton extends StatelessWidget {
-
   final EntityType entityType;
   final Function onSearchPressed;
 
@@ -25,7 +24,8 @@ class AppSearchButton extends StatelessWidget {
         return IconButton(
           icon: Icon(listUIState.search == null ? Icons.search : Icons.close),
           tooltip: 'Search',
-          onPressed: () => onSearchPressed(listUIState.search == null ? '' : null),
+          onPressed: () =>
+              onSearchPressed(listUIState.search == null ? '' : null),
         );
       },
     );

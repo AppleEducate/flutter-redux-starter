@@ -32,7 +32,6 @@ class EntityAction extends EnumClass {
 }
 
 abstract class BaseEntity {
-
   int get id;
 
   String get listDisplayName {
@@ -62,12 +61,10 @@ abstract class BaseEntity {
   bool get isDeleted {
     return false;
   }
-
 }
 
-
-abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
-
+abstract class LoginResponse
+    implements Built<LoginResponse, LoginResponseBuilder> {
   BuiltList<dynamic> get data;
 
   LoginResponse._();

@@ -4,7 +4,6 @@ import 'package:built_value/serializer.dart';
 part 'list_ui_state.g.dart';
 
 abstract class ListUIState implements Built<ListUIState, ListUIStateBuilder> {
-
   @nullable
   String get search;
 

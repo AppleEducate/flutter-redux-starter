@@ -4,7 +4,6 @@ import 'package:built_value/serializer.dart';
 part 'auth_state.g.dart';
 
 abstract class AuthState implements Built<AuthState, AuthStateBuilder> {
-
   String get email;
   String get password;
   bool get isInitialized;

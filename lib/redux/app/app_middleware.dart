@@ -33,18 +33,12 @@ List<Middleware<AppState>> createStorePersistenceMiddleware([
     ),
   ),
 ]) {
-  final loadState = _createLoadState(
-      authRepository,
-      uiRepository,
-      dataRepository);
-  final userLoggedIn = _createUserLoggedIn(
-      authRepository,
-      uiRepository);
+  final loadState =
+      _createLoadState(authRepository, uiRepository, dataRepository);
+  final userLoggedIn = _createUserLoggedIn(authRepository, uiRepository);
   final uiChange = _createUIChange(uiRepository);
   final dataChange = _createDataChange(dataRepository);
-  final deleteState = _createDeleteState(
-      authRepository,
-      uiRepository);
+  final deleteState = _createDeleteState(authRepository, uiRepository);
 
   return [
     TypedMiddleware<AppState, UserLogout>(deleteState),
@@ -56,16 +50,15 @@ List<Middleware<AppState>> createStorePersistenceMiddleware([
 }
 
 Middleware<AppState> _createLoadState(
-    PersistenceRepository authRepository,
-    PersistenceRepository uiRepository,
-    PersistenceRepository dataRepository,
-    ) {
+  PersistenceRepository authRepository,
+  PersistenceRepository uiRepository,
+  PersistenceRepository dataRepository,
+) {
   AuthState authState;
   UIState uiState;
   DataState dataState;
 
   return (Store<AppState> store, action, NextDispatcher next) {
-
     // TODO passing back future/single catchError
     authRepository.exists().then((exists) {
       if (exists) {
@@ -92,7 +85,8 @@ Middleware<AppState> _createLoadState(
                   isFirst = false;
                 });
               }
-            }).catchError((error) => _handleError(store, error, action.context));
+            }).catchError(
+                (error) => _handleError(store, error, action.context));
           }).catchError((error) => _handleError(store, error, action.context));
         }).catchError((error) => _handleError(store, error, action.context));
       } else {
@@ -148,9 +142,9 @@ _handleError(store, error, context) {
 }
 
 Middleware<AppState> _createUserLoggedIn(
-    PersistenceRepository authRepository,
-    PersistenceRepository uiRepository,
-    ) {
+  PersistenceRepository authRepository,
+  PersistenceRepository uiRepository,
+) {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
@@ -178,9 +172,9 @@ Middleware<AppState> _createDataChange(PersistenceRepository dataRepository) {
 }
 
 Middleware<AppState> _createDeleteState(
-    PersistenceRepository authRepository,
-    PersistenceRepository uiRepository,
-    ) {
+  PersistenceRepository authRepository,
+  PersistenceRepository uiRepository,
+) {
   return (Store<AppState> store, action, NextDispatcher next) {
     authRepository.delete();
     uiRepository.delete();

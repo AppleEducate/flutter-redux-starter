@@ -6,7 +6,6 @@ import 'package:flutter_redux_starter/ui/home/home_screen.dart';
 part 'ui_state.g.dart';
 
 abstract class UIState implements Built<UIState, UIStateBuilder> {
-
   String get currentRoute;
 
   // STARTER: properties - do not remove comment
@@ -22,4 +21,3 @@ abstract class UIState implements Built<UIState, UIStateBuilder> {
   UIState._();
   static Serializer<UIState> get serializer => _$uIStateSerializer;
 }
-

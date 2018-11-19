@@ -6,9 +6,9 @@ class FileStorage {
   final Future<Directory> Function() getDirectory;
 
   const FileStorage(
-      this.tag,
-      this.getDirectory,
-      );
+    this.tag,
+    this.getDirectory,
+  );
 
   Future<File> _getLocalFile() async {
     final dir = await getDirectory();

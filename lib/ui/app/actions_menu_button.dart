@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux_starter/data/models/models.dart';
 
 class ActionMenuChoice {
-  const ActionMenuChoice({
-    @required this.action,
-    @required this.label,
-    @required this.icon});
+  const ActionMenuChoice(
+      {@required this.action, @required this.label, @required this.icon});
 
   final String label;
   final IconData icon;

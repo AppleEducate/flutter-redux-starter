@@ -7,6 +7,7 @@ class LoadStateRequest {
   final BuildContext context;
   LoadStateRequest(this.context);
 }
+
 class LoadStateSuccess {
   final AppState state;
   LoadStateSuccess(this.state);
@@ -40,4 +41,3 @@ class UserLoginFailure implements StopLoading {
 }
 
 class UserLogout implements PersistData {}
-

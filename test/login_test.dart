@@ -4,7 +4,6 @@ import 'package:test/test.dart';
 
 void main() {
   group('LOGIN TEST', () {
-
     FlutterDriver driver;
     String loginEmail, loginPassword;
 
@@ -17,7 +16,7 @@ void main() {
     });
 
     tearDown(() async {
-      if(driver!=null) {
+      if (driver != null) {
         driver.close();
       }
     });
@@ -29,7 +28,6 @@ void main() {
     });
 
     test('Details filled by user and login', () async {
-
       await driver.tap(find.byValueKey(LoginKeys.emailKey));
       await driver.enterText(loginEmail);
 

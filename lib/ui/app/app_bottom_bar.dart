@@ -6,15 +6,11 @@ import 'package:flutter_redux_starter/data/models/models.dart';
 import 'package:redux/redux.dart';
 
 class AppBottomBar extends StatefulWidget {
-
   final List<String> sortFields;
   final Function(String) onSelectedSortField;
   final EntityType entityType;
 
-  AppBottomBar(
-      {this.sortFields,
-        this.onSelectedSortField,
-        this.entityType});
+  AppBottomBar({this.sortFields, this.onSelectedSortField, this.entityType});
 
   @override
   _AppBottomBarState createState() => new _AppBottomBarState();
@@ -31,9 +27,10 @@ class _AppBottomBarState extends State<AppBottomBar> {
         return;
       }
 
-      _sortController  = Scaffold.of(context).showBottomSheet((context) {
+      _sortController = Scaffold.of(context).showBottomSheet((context) {
         return StoreConnector<AppState, ListUIState>(
-          converter: (Store<AppState> store) => store.state.getListState(widget.entityType),
+          converter: (Store<AppState> store) =>
+              store.state.getListState(widget.entityType),
           builder: (BuildContext context, listUIState) {
             return Container(
               color: Theme.of(context).backgroundColor,
@@ -43,11 +40,12 @@ class _AppBottomBarState extends State<AppBottomBar> {
                     return RadioListTile(
                       dense: true,
                       // TODO replace with localization
-                      title: Text(sortField[0].toUpperCase() + sortField.substring(1)),
+                      title: Text(
+                          sortField[0].toUpperCase() + sortField.substring(1)),
                       subtitle: sortField == listUIState.sortField
                           ? Text(listUIState.sortAscending
-                          ? 'Ascending'
-                          : 'Descending')
+                              ? 'Ascending'
+                              : 'Descending')
                           : null,
                       groupValue: listUIState.sortField,
                       onChanged: (value) {
