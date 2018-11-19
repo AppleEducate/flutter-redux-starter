@@ -1,11 +1,11 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:flutter_redux_starter/data/models/models.dart';
-import 'package:flutter_redux_starter/redux/app/data_state.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_state.dart';
-import 'package:flutter_redux_starter/redux/ui/entity_ui_state.dart';
-import 'package:flutter_redux_starter/redux/ui/list_ui_state.dart';
-import 'package:flutter_redux_starter/redux/ui/ui_state.dart';
+import 'package:MyUnifyMobile/data/models/models.dart';
+import 'package:MyUnifyMobile/redux/app/data_state.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_state.dart';
+import 'package:MyUnifyMobile/redux/ui/entity_ui_state.dart';
+import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
+import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 // STARTER: import - do not remove comment
 
 part 'app_state.g.dart';

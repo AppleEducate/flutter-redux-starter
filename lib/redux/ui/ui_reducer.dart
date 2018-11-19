@@ -1,5 +1,5 @@
-import 'package:flutter_redux_starter/redux/ui/ui_actions.dart';
-import 'package:flutter_redux_starter/redux/ui/ui_state.dart';
+import 'package:MyUnifyMobile/redux/ui/ui_actions.dart';
+import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
 

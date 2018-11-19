@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux_starter/data/repositories/auth_repository.dart';
-import 'package:flutter_redux_starter/redux/app/app_state.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_actions.dart';
-import 'package:flutter_redux_starter/ui/auth/login_vm.dart';
+import 'package:MyUnifyMobile/data/repositories/auth_repository.dart';
+import 'package:MyUnifyMobile/redux/app/app_state.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_actions.dart';
+import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_redux_starter/data/file_storage.dart';
-import 'package:flutter_redux_starter/data/models/serializers.dart';
-import 'package:flutter_redux_starter/redux/app/data_state.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_state.dart';
-import 'package:flutter_redux_starter/redux/ui/ui_state.dart';
+import 'package:MyUnifyMobile/data/file_storage.dart';
+import 'package:MyUnifyMobile/data/models/serializers.dart';
+import 'package:MyUnifyMobile/redux/app/data_state.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_state.dart';
+import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 import 'package:meta/meta.dart';
 
 class PersistenceRepository {

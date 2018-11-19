@@ -2,13 +2,13 @@ import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_redux_starter/redux/app/app_middleware.dart';
-import 'package:flutter_redux_starter/redux/app/app_state.dart';
-import 'package:flutter_redux_starter/redux/app/app_reducer.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_middleware.dart';
-import 'package:flutter_redux_starter/ui/app/init.dart';
-import 'package:flutter_redux_starter/ui/auth/login_vm.dart';
-import 'package:flutter_redux_starter/ui/home/home_screen.dart';
+import 'package:MyUnifyMobile/redux/app/app_middleware.dart';
+import 'package:MyUnifyMobile/redux/app/app_state.dart';
+import 'package:MyUnifyMobile/redux/app/app_reducer.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_middleware.dart';
+import 'package:MyUnifyMobile/ui/app/init.dart';
+import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
+import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 // STARTER: import - do not remove comment
 
 void main() {

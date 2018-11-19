@@ -1,9 +1,9 @@
-import 'package:flutter_redux_starter/redux/app/app_actions.dart';
-import 'package:flutter_redux_starter/redux/app/app_state.dart';
-import 'package:flutter_redux_starter/redux/app/data_reducer.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_actions.dart';
-import 'package:flutter_redux_starter/redux/auth/auth_reducer.dart';
-import 'package:flutter_redux_starter/redux/ui/ui_reducer.dart';
+import 'package:MyUnifyMobile/redux/app/app_actions.dart';
+import 'package:MyUnifyMobile/redux/app/app_state.dart';
+import 'package:MyUnifyMobile/redux/app/data_reducer.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_actions.dart';
+import 'package:MyUnifyMobile/redux/auth/auth_reducer.dart';
+import 'package:MyUnifyMobile/redux/ui/ui_reducer.dart';
 import 'package:redux/redux.dart';
 
 AppState appReducer(AppState state, action) {

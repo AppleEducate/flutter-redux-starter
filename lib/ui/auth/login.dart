@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux_starter/keys.dart';
-import 'package:flutter_redux_starter/ui/auth/login_vm.dart';
+import 'package:MyUnifyMobile/keys.dart';
+import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 
 class LoginView extends StatefulWidget {
   final LoginVM viewModel;

@@ -1,4 +1,4 @@
-package com.hillelcoren.flutterreduxstarter;
+package com.crossmedia-llc.flutterreduxstarter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
