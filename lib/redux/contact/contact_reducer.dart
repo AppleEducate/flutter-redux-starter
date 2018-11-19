@@ -8,8 +8,7 @@ import 'package:MyUnifyMobile/redux/contact/contact_state.dart';
 EntityUIState contactUIReducer(ContactUIState state, action) {
   return state.rebuild((b) => b
     ..listUIState.replace(contactListReducer(state.listUIState, action))
-    ..selected.replace(editingReducer(state.selected, action))
-  );
+    ..selected.replace(editingReducer(state.selected, action)));
 }
 
 final editingReducer = combineReducers<ContactEntity>([
@@ -35,65 +34,56 @@ final contactListReducer = combineReducers<ListUIState>([
   TypedReducer<ListUIState, SearchContacts>(_searchContacts),
 ]);
 
-ListUIState _searchContacts(ListUIState contactListState, SearchContacts action) {
-  return contactListState.rebuild((b) => b
-    ..search = action.search
-  );
+ListUIState _searchContacts(
+    ListUIState contactListState, SearchContacts action) {
+  return contactListState.rebuild((b) => b..search = action.search);
 }
 
 ListUIState _sortContacts(ListUIState contactListState, SortContacts action) {
   return contactListState.rebuild((b) => b
-      ..sortAscending = b.sortField != action.field || ! b.sortAscending
-      ..sortField = action.field
-  );
+    ..sortAscending = b.sortField != action.field || !b.sortAscending
+    ..sortField = action.field);
 }
-
 
 final contactsReducer = combineReducers<ContactState>([
   TypedReducer<ContactState, SaveContactSuccess>(_updateContact),
   TypedReducer<ContactState, AddContactSuccess>(_addContact),
   TypedReducer<ContactState, LoadContactsSuccess>(_setLoadedContacts),
   TypedReducer<ContactState, LoadContactsFailure>(_setNoContacts),
-
   TypedReducer<ContactState, DeleteContactRequest>(_deleteContactRequest),
   TypedReducer<ContactState, DeleteContactSuccess>(_deleteContactSuccess),
   TypedReducer<ContactState, DeleteContactFailure>(_deleteContactFailure),
 ]);
 
-ContactState _deleteContactRequest(ContactState contactState, DeleteContactRequest action) {
-  var contact = contactState.map[action.contactId].rebuild((b) => b
-  );
+ContactState _deleteContactRequest(
+    ContactState contactState, DeleteContactRequest action) {
+  var contact = contactState.map[action.contactId].rebuild((b) => b);
 
-  return contactState.rebuild((b) => b
-    ..map[action.contactId] = contact
-  );
+  return contactState.rebuild((b) => b..map[action.contactId] = contact);
 }
 
-ContactState _deleteContactSuccess(ContactState contactState, DeleteContactSuccess action) {
-  return contactState.rebuild((b) => b
-    ..map[action.contact.id] = action.contact
-  );
+ContactState _deleteContactSuccess(
+    ContactState contactState, DeleteContactSuccess action) {
+  return contactState
+      .rebuild((b) => b..map[action.contact.id] = action.contact);
 }
 
-ContactState _deleteContactFailure(ContactState contactState, DeleteContactFailure action) {
-  return contactState.rebuild((b) => b
-    ..map[action.contact.id] = action.contact
-  );
+ContactState _deleteContactFailure(
+    ContactState contactState, DeleteContactFailure action) {
+  return contactState
+      .rebuild((b) => b..map[action.contact.id] = action.contact);
 }
 
-ContactState _addContact(
-    ContactState contactState, AddContactSuccess action) {
+ContactState _addContact(ContactState contactState, AddContactSuccess action) {
   return contactState.rebuild((b) => b
     ..map[action.contact.id] = action.contact
-    ..list.add(action.contact.id)
-  );
+    ..list.add(action.contact.id));
 }
 
 ContactState _updateContact(
     ContactState contactState, SaveContactSuccess action) {
-  return contactState.rebuild((b) => b
-      ..map[action.contact.id] = action.contact
-  );
+  return contactState
+      .rebuild((b) => b..map[action.contact.id] = action.contact);
 }
 
 ContactState _setNoContacts(
@@ -103,15 +93,12 @@ ContactState _setNoContacts(
 
 ContactState _setLoadedContacts(
     ContactState contactState, LoadContactsSuccess action) {
-  return contactState.rebuild(
-    (b) => b
-      ..lastUpdated = DateTime.now().millisecondsSinceEpoch
-      ..map.addAll(Map.fromIterable(
-        action.contacts,
-        key: (item) => item.id,
-        value: (item) => item,
-      ))
-      ..list.replace(action.contacts.map(
-              (contact) => contact.id).toList())
-  );
+  return contactState.rebuild((b) => b
+    ..lastUpdated = DateTime.now().millisecondsSinceEpoch
+    ..map.addAll(Map.fromIterable(
+      action.contacts,
+      key: (item) => item.id,
+      value: (item) => item,
+    ))
+    ..list.replace(action.contacts.map((contact) => contact.id).toList()));
 }

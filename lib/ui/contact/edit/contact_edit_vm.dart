@@ -59,7 +59,8 @@ class ContactEditVM {
       },
       onSavePressed: (BuildContext context) {
         final Completer<Null> completer = new Completer<Null>();
-        store.dispatch(SaveContactRequest(completer: completer, contact: contact));
+        store.dispatch(
+            SaveContactRequest(completer: completer, contact: contact));
         return completer.future.then((_) {
           Scaffold.of(context).showSnackBar(SnackBar(
               content: IconMessage(

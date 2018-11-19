@@ -8,7 +8,6 @@ import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
 import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
 
-
 class AppDrawer extends StatelessWidget {
   final AppDrawerVM viewModel;
 
@@ -39,11 +38,11 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           // STARTER: menu - do not remove comment
-ListTile(
-leading: Icon(Icons.widgets),
-title: Text('Contacts'),
-onTap: () => store.dispatch(ViewContactList(context)),
-),
+          ListTile(
+            leading: Icon(Icons.widgets),
+            title: Text('Contacts'),
+            onTap: () => store.dispatch(ViewContactList(context)),
+          ),
 
           AboutListTile(
             applicationName: '',

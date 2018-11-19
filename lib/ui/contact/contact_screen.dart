@@ -43,21 +43,24 @@ class ContactScreen extends StatelessWidget {
         },
         sortFields: [
           // STARTER: sort - do not remove comment
-ContactFields.first_name,
+          ContactFields.first_name,
 
-ContactFields.last_name,
+          ContactFields.last_name,
 
-ContactFields.email,
-
+          ContactFields.email,
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColorDark,
         onPressed: () {
-          store.dispatch(EditContact(contact: ContactEntity(), context: context));
+          store.dispatch(
+              EditContact(contact: ContactEntity(), context: context));
         },
-        child: Icon(Icons.add,color: Colors.white,),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         tooltip: 'New Contact',
       ),
     );

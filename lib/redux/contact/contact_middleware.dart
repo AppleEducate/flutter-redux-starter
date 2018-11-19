@@ -56,13 +56,11 @@ Middleware<AppState> _editContact() {
   };
 }
 
-
 Middleware<AppState> _deleteContact(ContactRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     var origContact = store.state.contactState.map[action.contactId];
     repository
-        .saveData(store.state.authState,
-            origContact, EntityAction.delete)
+        .saveData(store.state.authState, origContact, EntityAction.delete)
         .then((contact) {
       store.dispatch(DeleteContactSuccess(contact));
       if (action.completer != null) {
@@ -79,10 +77,7 @@ Middleware<AppState> _deleteContact(ContactRepository repository) {
 
 Middleware<AppState> _saveContact(ContactRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    repository
-        .saveData(
-            store.state.authState, action.contact)
-        .then((contact) {
+    repository.saveData(store.state.authState, action.contact).then((contact) {
       if (action.contact.isNew) {
         store.dispatch(AddContactSuccess(contact));
       } else {
@@ -100,7 +95,6 @@ Middleware<AppState> _saveContact(ContactRepository repository) {
 
 Middleware<AppState> _loadContacts(ContactRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-
     AppState state = store.state;
 
     if (!state.contactState.isStale && !action.force) {
@@ -114,9 +108,7 @@ Middleware<AppState> _loadContacts(ContactRepository repository) {
     }
 
     store.dispatch(LoadContactsRequest());
-    repository
-        .loadList(state.authState)
-        .then((data) {
+    repository.loadList(state.authState).then((data) {
       store.dispatch(LoadContactsSuccess(data));
 
       if (action.completer != null) {

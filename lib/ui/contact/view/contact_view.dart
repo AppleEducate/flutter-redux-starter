@@ -41,16 +41,14 @@ class _ContactViewState extends State<ContactView> {
                 )
               ],
       ),
-      body: FormCard(
-        children: [
-          // STARTER: widgets - do not remove comment
-Text(contact.first_name, style: Theme.of(context).textTheme.title),
-SizedBox(height: 12.0),
+      body: FormCard(children: [
+        // STARTER: widgets - do not remove comment
+        Text(contact.first_name, style: Theme.of(context).textTheme.title),
+        SizedBox(height: 12.0),
 
-Text(contact.last_name),
-Text(contact.email),
-        ]
-      ),
+        Text(contact.last_name),
+        Text(contact.email),
+      ]),
     );
   }
 }

@@ -69,7 +69,6 @@ class ContactViewVM {
                   duration: Duration(seconds: 3)));
             });
           }
-        }
-    );
+        });
   }
 }

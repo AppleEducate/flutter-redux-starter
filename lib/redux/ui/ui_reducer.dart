@@ -4,14 +4,11 @@ import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
 import 'package:MyUnifyMobile/redux/contact/contact_reducer.dart';
 
-
 UIState uiReducer(UIState state, action) {
-  return state.rebuild(
-      (b) => b..currentRoute = currentRouteReducer(state.currentRoute, action)
-      // STARTER: reducer - do not remove comment
-..contactUIState.replace(contactUIReducer(state.contactUIState, action))
-
-      );
+  return state.rebuild((b) => b
+    ..currentRoute = currentRouteReducer(state.currentRoute, action)
+    // STARTER: reducer - do not remove comment
+    ..contactUIState.replace(contactUIReducer(state.contactUIState, action)));
 }
 
 Reducer<String> currentRouteReducer = combineReducers([

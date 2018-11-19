@@ -8,8 +8,8 @@ import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
 
 part 'contact_state.g.dart';
 
-abstract class ContactState implements Built<ContactState, ContactStateBuilder> {
-
+abstract class ContactState
+    implements Built<ContactState, ContactStateBuilder> {
   @nullable
   int get lastUpdated;
 
@@ -24,11 +24,12 @@ abstract class ContactState implements Built<ContactState, ContactStateBuilder> 
   }
 
   bool get isStale {
-    if (! isLoaded) {
+    if (!isLoaded) {
       return true;
     }
 
-    return DateTime.now().millisecondsSinceEpoch - lastUpdated > kMillisecondsToRefreshData;
+    return DateTime.now().millisecondsSinceEpoch - lastUpdated >
+        kMillisecondsToRefreshData;
   }
 
   bool get isLoaded {
@@ -39,8 +40,9 @@ abstract class ContactState implements Built<ContactState, ContactStateBuilder> 
   static Serializer<ContactState> get serializer => _$contactStateSerializer;
 }
 
-abstract class ContactUIState extends Object with EntityUIState implements Built<ContactUIState, ContactUIStateBuilder> {
-
+abstract class ContactUIState extends Object
+    with EntityUIState
+    implements Built<ContactUIState, ContactUIStateBuilder> {
   @nullable
   ContactEntity get selected;
 
@@ -54,5 +56,6 @@ abstract class ContactUIState extends Object with EntityUIState implements Built
   }
 
   ContactUIState._();
-  static Serializer<ContactUIState> get serializer => _$contactUIStateSerializer;
+  static Serializer<ContactUIState> get serializer =>
+      _$contactUIStateSerializer;
 }

@@ -13,7 +13,7 @@ class ContactList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (! viewModel.isLoaded) {
+    if (!viewModel.isLoaded) {
       return Center(child: CircularProgressIndicator());
     }
 

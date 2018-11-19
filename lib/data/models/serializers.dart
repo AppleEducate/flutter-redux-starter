@@ -11,15 +11,13 @@ import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/contact/contact_state.dart';
 
-
 part 'serializers.g.dart';
 
 @SerializersFor(const [
   AppState,
   LoginResponse,
   // STARTER: serializers - do not remove comment
-ContactEntity,
-
+  ContactEntity,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

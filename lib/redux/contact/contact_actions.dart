@@ -4,7 +4,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/app/app_actions.dart';
 
-
 class ViewContactList implements PersistUI {
   final BuildContext context;
   ViewContactList(this.context);
@@ -21,7 +20,6 @@ class EditContact implements PersistUI {
   final BuildContext context;
   EditContact({this.contact, this.context});
 }
-
 
 class LoadContacts {
   final Completer completer;
@@ -52,7 +50,6 @@ class LoadContactsSuccess implements StopLoading, PersistData {
   }
 }
 
-
 class UpdateContact implements PersistUI {
   final ContactEntity contact;
   UpdateContact(this.contact);
@@ -69,7 +66,6 @@ class AddContactSuccess implements StopLoading, PersistData {
   AddContactSuccess(this.contact);
 }
 
-
 class SaveContactSuccess implements StopLoading, PersistData {
   final ContactEntity contact;
 
@@ -78,7 +74,7 @@ class SaveContactSuccess implements StopLoading, PersistData {
 
 class SaveContactFailure implements StopLoading {
   final String error;
-  SaveContactFailure (this.error);
+  SaveContactFailure(this.error);
 }
 
 class DeleteContactRequest implements StartLoading {
@@ -97,8 +93,6 @@ class DeleteContactFailure implements StopLoading {
   final ContactEntity contact;
   DeleteContactFailure(this.contact);
 }
-
-
 
 class SearchContacts {
   final String search;

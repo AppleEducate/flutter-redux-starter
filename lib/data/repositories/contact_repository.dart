@@ -26,14 +26,14 @@ class ContactRepository {
     return list;
   }
 
-  Future saveData(AuthState auth, ContactEntity contact, [EntityAction action]) async {
-
+  Future saveData(AuthState auth, ContactEntity contact,
+      [EntityAction action]) async {
     var data = serializers.serializeWith(ContactEntity.serializer, contact);
     var response;
 
     if (contact.isNew) {
-      response = await webClient.post(
-          kApiUrl + '/contacts/new', json.encode(data));
+      response =
+          await webClient.post(kApiUrl + '/contacts/new', json.encode(data));
     } else {
       var url = kApiUrl + '/contacts/info/' + contact.id.toString();
       response = await webClient.put(url, json.encode(data));

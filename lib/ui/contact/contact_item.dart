@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 //import 'package:MyUnifyMobile/ui/app/dismissible_entity.dart';
 
-
 class ContactItem extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
@@ -63,8 +62,7 @@ subtitle: Text(contact.last_name, maxLines: 4),
         ),
       ),
       // STARTER: subtitle - do not remove comment
-subtitle: Text(contact.last_name, maxLines: 4),
-
+      subtitle: Text(contact.last_name, maxLines: 4),
     );
   }
 }
