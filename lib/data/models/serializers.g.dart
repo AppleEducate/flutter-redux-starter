@@ -22,7 +22,18 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppState.serializer)
       ..add(AuthState.serializer)
+      ..add(ContactEntity.serializer)
+      ..add(ContactState.serializer)
+      ..add(ContactUIState.serializer)
       ..add(DataState.serializer)
+      ..add(ListUIState.serializer)
       ..add(LoginResponse.serializer)
-      ..add(UIState.serializer))
+      ..add(UIState.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(int), const FullType(ContactEntity)]),
+          () => new MapBuilder<int, ContactEntity>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>()))
     .build();

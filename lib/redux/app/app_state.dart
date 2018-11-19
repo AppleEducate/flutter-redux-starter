@@ -7,6 +7,8 @@ import 'package:MyUnifyMobile/redux/ui/entity_ui_state.dart';
 import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
 import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/redux/contact/contact_state.dart';
+
 
 part 'app_state.g.dart';
 
@@ -31,6 +33,9 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   EntityUIState getUIState(EntityType type) {
     switch (type) {
       // STARTER: states switch - do not remove comment
+case EntityType.contact:
+return contactUIState;
+
       default:
         return null;
     }
@@ -41,6 +46,11 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   }
 
   // STARTER: state getters - do not remove comment
+ContactState get contactState => this.dataState.contactState;
+ListUIState get contactListState => this.uiState.contactUIState.listUIState;
+ContactUIState get contactUIState => this.uiState.contactUIState;
+
+
 
   /*
   @override

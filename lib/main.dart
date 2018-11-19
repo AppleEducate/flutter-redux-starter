@@ -10,6 +10,12 @@ import 'package:MyUnifyMobile/ui/app/init.dart';
 import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/ui/contact/contact_screen.dart';
+import 'package:MyUnifyMobile/ui/contact/edit/contact_edit_vm.dart';
+import 'package:MyUnifyMobile/ui/contact/view/contact_view_vm.dart';
+import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
+import 'package:MyUnifyMobile/redux/contact/contact_middleware.dart';
+
 
 void main() {
   final store = Store<AppState>(appReducer,
@@ -18,6 +24,8 @@ void main() {
         ..addAll(createStoreAuthMiddleware())
         ..addAll(createStorePersistenceMiddleware())
         // STARTER: middleware - do not remove comment
+..addAll(createStoreContactsMiddleware())
+
         ..addAll([
           LoggingMiddleware.printer(),
         ]));
@@ -46,6 +54,13 @@ class _SampleReduxAppState extends State<SampleReduxApp> {
           LoginScreen.route: (context) => LoginScreen(),
           HomeScreen.route: (context) => HomeScreen(),
           // STARTER: routes - do not remove comment
+ContactScreen.route: (context) {
+widget.store.dispatch(LoadContacts());
+return ContactScreen();
+},
+ContactViewScreen.route: (context) => ContactViewScreen(),
+ContactEditScreen.route: (context) => ContactEditScreen(),
+
         },
       ),
     );

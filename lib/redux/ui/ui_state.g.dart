@@ -34,6 +34,9 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
       'currentRoute',
       serializers.serialize(object.currentRoute,
           specifiedType: const FullType(String)),
+      'contactUIState',
+      serializers.serialize(object.contactUIState,
+          specifiedType: const FullType(ContactUIState)),
     ];
 
     return result;
@@ -54,6 +57,10 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
           result.currentRoute = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'contactUIState':
+          result.contactUIState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ContactUIState)) as ContactUIState);
+          break;
       }
     }
 
@@ -64,13 +71,18 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
 class _$UIState extends UIState {
   @override
   final String currentRoute;
+  @override
+  final ContactUIState contactUIState;
 
   factory _$UIState([void updates(UIStateBuilder b)]) =>
       (new UIStateBuilder()..update(updates)).build();
 
-  _$UIState._({this.currentRoute}) : super._() {
+  _$UIState._({this.currentRoute, this.contactUIState}) : super._() {
     if (currentRoute == null) {
       throw new BuiltValueNullFieldError('UIState', 'currentRoute');
+    }
+    if (contactUIState == null) {
+      throw new BuiltValueNullFieldError('UIState', 'contactUIState');
     }
   }
 
@@ -84,18 +96,21 @@ class _$UIState extends UIState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UIState && currentRoute == other.currentRoute;
+    return other is UIState &&
+        currentRoute == other.currentRoute &&
+        contactUIState == other.contactUIState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, currentRoute.hashCode));
+    return $jf($jc($jc(0, currentRoute.hashCode), contactUIState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('UIState')
-          ..add('currentRoute', currentRoute))
+          ..add('currentRoute', currentRoute)
+          ..add('contactUIState', contactUIState))
         .toString();
   }
 }
@@ -107,11 +122,18 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   String get currentRoute => _$this._currentRoute;
   set currentRoute(String currentRoute) => _$this._currentRoute = currentRoute;
 
+  ContactUIStateBuilder _contactUIState;
+  ContactUIStateBuilder get contactUIState =>
+      _$this._contactUIState ??= new ContactUIStateBuilder();
+  set contactUIState(ContactUIStateBuilder contactUIState) =>
+      _$this._contactUIState = contactUIState;
+
   UIStateBuilder();
 
   UIStateBuilder get _$this {
     if (_$v != null) {
       _currentRoute = _$v.currentRoute;
+      _contactUIState = _$v.contactUIState?.toBuilder();
       _$v = null;
     }
     return this;
@@ -132,7 +154,23 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
 
   @override
   _$UIState build() {
-    final _$result = _$v ?? new _$UIState._(currentRoute: currentRoute);
+    _$UIState _$result;
+    try {
+      _$result = _$v ??
+          new _$UIState._(
+              currentRoute: currentRoute,
+              contactUIState: contactUIState.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'contactUIState';
+        contactUIState.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'UIState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

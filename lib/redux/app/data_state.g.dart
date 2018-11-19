@@ -30,21 +30,49 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
   @override
   Iterable serialize(Serializers serializers, DataState object,
       {FullType specifiedType = FullType.unspecified}) {
-    return <Object>[];
+    final result = <Object>[
+      'contactState',
+      serializers.serialize(object.contactState,
+          specifiedType: const FullType(ContactState)),
+    ];
+
+    return result;
   }
 
   @override
   DataState deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new DataStateBuilder().build();
+    final result = new DataStateBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'contactState':
+          result.contactState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(ContactState)) as ContactState);
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
 class _$DataState extends DataState {
+  @override
+  final ContactState contactState;
+
   factory _$DataState([void updates(DataStateBuilder b)]) =>
       (new DataStateBuilder()..update(updates)).build();
 
-  _$DataState._() : super._();
+  _$DataState._({this.contactState}) : super._() {
+    if (contactState == null) {
+      throw new BuiltValueNullFieldError('DataState', 'contactState');
+    }
+  }
 
   @override
   DataState rebuild(void updates(DataStateBuilder b)) =>
@@ -56,24 +84,40 @@ class _$DataState extends DataState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DataState;
+    return other is DataState && contactState == other.contactState;
   }
 
   @override
   int get hashCode {
-    return 190850634;
+    return $jf($jc(0, contactState.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('DataState').toString();
+    return (newBuiltValueToStringHelper('DataState')
+          ..add('contactState', contactState))
+        .toString();
   }
 }
 
 class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
   _$DataState _$v;
 
+  ContactStateBuilder _contactState;
+  ContactStateBuilder get contactState =>
+      _$this._contactState ??= new ContactStateBuilder();
+  set contactState(ContactStateBuilder contactState) =>
+      _$this._contactState = contactState;
+
   DataStateBuilder();
+
+  DataStateBuilder get _$this {
+    if (_$v != null) {
+      _contactState = _$v.contactState?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(DataState other) {
@@ -90,7 +134,20 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
 
   @override
   _$DataState build() {
-    final _$result = _$v ?? new _$DataState._();
+    _$DataState _$result;
+    try {
+      _$result = _$v ?? new _$DataState._(contactState: contactState.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'contactState';
+        contactState.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DataState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

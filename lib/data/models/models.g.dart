@@ -19,15 +19,21 @@ part of 'models.dart';
 // ignore_for_file: unnecessary_new
 // ignore_for_file: test_types_in_equals
 
+const EntityType _$contact = const EntityType._('contact');
+
 EntityType _$typeValueOf(String name) {
   switch (name) {
+    case 'contact':
+      return _$contact;
     default:
       throw new ArgumentError(name);
   }
 }
 
 final BuiltSet<EntityType> _$typeValues =
-    new BuiltSet<EntityType>(const <EntityType>[]);
+    new BuiltSet<EntityType>(const <EntityType>[
+  _$contact,
+]);
 
 const EntityAction _$delete = const EntityAction._('delete');
 
