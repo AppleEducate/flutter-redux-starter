@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class WebClient {
   const WebClient();
 
   Future<dynamic> get(String url) async {
-    final http.Response response = await http.Client().get(
+    final http.Response response = await getClient().get(
           url,
         );
 
@@ -19,7 +20,7 @@ class WebClient {
   }
 
   Future<dynamic> post(String url, dynamic data) async {
-    final http.Response response = await http.Client().post(
+    final http.Response response = await getClient().post(
       url,
       body: data,
       headers: {
@@ -41,7 +42,7 @@ class WebClient {
   }
 
   Future<dynamic> put(String url, dynamic data) async {
-    final http.Response response = await http.Client().put(
+    final http.Response response = await getClient().put(
       url,
       body: data,
       headers: {
@@ -60,5 +61,14 @@ class WebClient {
       print(response.body);
       throw ('An error occurred');
     }
+  }
+
+  http.IOClient getClient() {
+    bool trustSelfSigned = true;
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => trustSelfSigned);
+    http.IOClient ioClient = new http.IOClient(httpClient);
+    return ioClient;
   }
 }
