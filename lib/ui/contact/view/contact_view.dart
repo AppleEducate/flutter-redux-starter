@@ -24,7 +24,7 @@ class _ContactViewState extends State<ContactView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: contact.isNew ?  Text("New Contact") : Text(contact.displayName),
+        title: contact.isNew ? Text("New Contact") : Text(contact.displayName),
         actions: contact.isNew
             ? []
             : [

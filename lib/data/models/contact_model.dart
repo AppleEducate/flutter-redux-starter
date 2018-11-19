@@ -74,7 +74,7 @@ abstract class ContactEntity extends Object
 
   String get displayName {
     // STARTER: display name - do not remove comment
-    return first_name;
+    return "$first_name $last_name";
   }
 
   int compareTo(ContactEntity contact, String sortField, bool sortAscending) {
