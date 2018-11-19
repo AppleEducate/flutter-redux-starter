@@ -70,6 +70,8 @@ subtitle: Text(contact.last_name, maxLines: 4),
 
     return ThreeRowTile(
       width: MediaQuery.of(context).size.width,
+      iconTap: onTap,
+      icon: Icon(Icons.person),
       title: Text(
         contact.displayName,
         style: Theme.of(context).textTheme.title,
@@ -79,7 +81,6 @@ subtitle: Text(contact.last_name, maxLines: 4),
         style: Theme.of(context).textTheme.subtitle,
       ),
       onTap: onTap,
-      // iconTap: onTap,
       cell: contact?.cell_phone,
       home: contact?.cell_phone,
       office: contact?.cell_phone,
@@ -94,7 +95,6 @@ subtitle: Text(contact.last_name, maxLines: 4),
             .format(DateTime.parse(contact?.date_modified)),
         hint: "Date Modified",
       ),
-      icon: Icon(Icons.person),
     );
   }
 }
