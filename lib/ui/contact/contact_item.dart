@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MyUnifyMobile/data/models/contact_model.dart';
-//import 'package:MyUnifyMobile/ui/app/dismissible_entity.dart';
+
+import '../../data/models/contact_model.dart';
+import '../../utils/date_formatter.dart';
 import '../../widgets/three_row_tile.dart';
-import 'package:intl/intl.dart';
+//import 'package:MyUnifyMobile/ui/app/dismissible_entity.dart';
 
 class ContactItem extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -86,13 +87,11 @@ subtitle: Text(contact.last_name, maxLines: 4),
       office: contact?.cell_phone,
       email: contact?.email,
       box1: Utility(
-        value: DateFormat('MM-dd-yy')
-            .format(DateTime.parse(contact?.date_created)),
+        value: formatDate(contact?.date_created),
         hint: "Date Created",
       ),
       box2: Utility(
-        value: DateFormat('MM-dd-yy')
-            .format(DateTime.parse(contact?.date_modified)),
+        value: formatDate(contact?.date_modified),
         hint: "Date Modified",
       ),
     );
