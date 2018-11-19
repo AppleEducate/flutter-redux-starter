@@ -33,9 +33,9 @@ class StubRepository {
 
     if (stub.isNew) {
       response = await webClient.post(
-          kApiUrl + '/stubs', json.encode(data));
+          kApiUrl + '/stubs/new', json.encode(data));
     } else {
-      var url = kApiUrl + '/stubs/' + stub.id.toString();
+      var url = kApiUrl + '/stubs/info/' + stub.id.toString();
       response = await webClient.put(url, json.encode(data));
     }
 
