@@ -83,7 +83,7 @@ class SaveContactFailure implements StopLoading {
 
 class DeleteContactRequest implements StartLoading {
   final Completer completer;
-  final int contactId;
+  final String contactId;
 
   DeleteContactRequest(this.completer, this.contactId);
 }

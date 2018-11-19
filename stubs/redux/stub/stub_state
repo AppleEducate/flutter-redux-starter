@@ -13,13 +13,13 @@ abstract class StubState implements Built<StubState, StubStateBuilder> {
   @nullable
   int get lastUpdated;
 
-  BuiltMap<int, StubEntity> get map;
-  BuiltList<int> get list;
+  BuiltMap<String, StubEntity> get map;
+  BuiltList<String> get list;
 
   factory StubState() {
     return _$StubState._(
-      map: BuiltMap<int, StubEntity>(),
-      list: BuiltList<int>(),
+      map: BuiltMap<String, StubEntity>(),
+      list: BuiltList<String>(),
     );
   }
 

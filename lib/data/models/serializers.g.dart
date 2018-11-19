@@ -31,9 +31,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UIState.serializer)
       ..addBuilderFactory(
           const FullType(BuiltMap,
-              const [const FullType(int), const FullType(ContactEntity)]),
-          () => new MapBuilder<int, ContactEntity>())
+              const [const FullType(String), const FullType(ContactEntity)]),
+          () => new MapBuilder<String, ContactEntity>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(int)]),
-          () => new ListBuilder<int>()))
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>()))
     .build();

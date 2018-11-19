@@ -13,13 +13,13 @@ abstract class ContactState implements Built<ContactState, ContactStateBuilder> 
   @nullable
   int get lastUpdated;
 
-  BuiltMap<int, ContactEntity> get map;
-  BuiltList<int> get list;
+  BuiltMap<String, ContactEntity> get map;
+  BuiltList<String> get list;
 
   factory ContactState() {
     return _$ContactState._(
-      map: BuiltMap<int, ContactEntity>(),
-      list: BuiltList<int>(),
+      map: BuiltMap<String, ContactEntity>(),
+      list: BuiltList<String>(),
     );
   }
 

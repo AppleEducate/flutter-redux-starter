@@ -30,8 +30,8 @@ class StubListBuilder extends StatelessWidget {
 }
 
 class StubListVM {
-  final List<int> stubList;
-  final BuiltMap<int, StubEntity> stubMap;
+  final List<String> stubList;
+  final BuiltMap<String, StubEntity> stubMap;
   final bool isLoading;
   final bool isLoaded;
   final Function(BuildContext, StubEntity) onStubTap;
@@ -63,7 +63,7 @@ class StubListVM {
 
     return StubListVM(
         stubList: memoizedStubList(store.state.stubState.map,
-            store.state.stubState.list, store.state.stubListState),
+            store.state.stubState.list, store.state.stubListState,),
         stubMap: store.state.stubState.map,
         isLoading: store.state.isLoading,
         isLoaded: store.state.stubState.isLoaded,

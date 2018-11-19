@@ -4,14 +4,14 @@ import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
 
 var memoizedContactList = memo3((
-    BuiltMap<int, ContactEntity> contactMap,
-    BuiltList<int> contactList,
+    BuiltMap<String, ContactEntity> contactMap,
+    BuiltList<String> contactList,
     ListUIState contactListState) => visibleContactsSelector(contactMap, contactList, contactListState)
 );
 
-List<int> visibleContactsSelector(
-    BuiltMap<int, ContactEntity> contactMap,
-    BuiltList<int> contactList,
+List<String> visibleContactsSelector(
+    BuiltMap<String, ContactEntity> contactMap,
+    BuiltList<String> contactList,
     ListUIState contactListState) {
 
   var list = contactList.where((contactId) {

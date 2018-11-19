@@ -15,7 +15,7 @@ abstract class StubEntity extends Object with BaseEntity implements Built<StubEn
   static int counter = 0;
   factory StubEntity() {
     return _$StubEntity._(
-      id: 0,
+      id: '',
       // STARTER: constructor - do not remove comment
     );
   }

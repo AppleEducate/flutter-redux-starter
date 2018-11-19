@@ -30,8 +30,8 @@ class ContactListBuilder extends StatelessWidget {
 }
 
 class ContactListVM {
-  final List<int> contactList;
-  final BuiltMap<int, ContactEntity> contactMap;
+  final List<String> contactList;
+  final BuiltMap<String, ContactEntity> contactMap;
   final bool isLoading;
   final bool isLoaded;
   final Function(BuildContext, ContactEntity) onContactTap;
@@ -62,8 +62,11 @@ class ContactListVM {
     }
 
     return ContactListVM(
-        contactList: memoizedContactList(store.state.contactState.map,
-            store.state.contactState.list, store.state.contactListState),
+        contactList: memoizedContactList(
+          store.state.contactState.map,
+          store.state.contactState.list,
+          store.state.contactListState,
+        ),
         contactMap: store.state.contactState.map,
         isLoading: store.state.isLoading,
         isLoaded: store.state.contactState.isLoaded,

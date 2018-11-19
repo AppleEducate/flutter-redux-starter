@@ -83,7 +83,7 @@ class SaveStubFailure implements StopLoading {
 
 class DeleteStubRequest implements StartLoading {
   final Completer completer;
-  final int stubId;
+  final String stubId;
 
   DeleteStubRequest(this.completer, this.stubId);
 }

@@ -37,11 +37,11 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
       'map',
       serializers.serialize(object.map,
           specifiedType: const FullType(BuiltMap,
-              const [const FullType(int), const FullType(ContactEntity)])),
+              const [const FullType(String), const FullType(ContactEntity)])),
       'list',
       serializers.serialize(object.list,
           specifiedType:
-              const FullType(BuiltList, const [const FullType(int)])),
+              const FullType(BuiltList, const [const FullType(String)])),
     ];
     if (object.lastUpdated != null) {
       result
@@ -71,14 +71,14 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
         case 'map':
           result.map.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
-                const FullType(int),
+                const FullType(String),
                 const FullType(ContactEntity)
               ])) as BuiltMap);
           break;
         case 'list':
           result.list.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(BuiltList, const [const FullType(int)]))
+                      const FullType(BuiltList, const [const FullType(String)]))
               as BuiltList);
           break;
       }
@@ -143,9 +143,9 @@ class _$ContactState extends ContactState {
   @override
   final int lastUpdated;
   @override
-  final BuiltMap<int, ContactEntity> map;
+  final BuiltMap<String, ContactEntity> map;
   @override
-  final BuiltList<int> list;
+  final BuiltList<String> list;
 
   factory _$ContactState([void updates(ContactStateBuilder b)]) =>
       (new ContactStateBuilder()..update(updates)).build();
@@ -199,14 +199,14 @@ class ContactStateBuilder
   int get lastUpdated => _$this._lastUpdated;
   set lastUpdated(int lastUpdated) => _$this._lastUpdated = lastUpdated;
 
-  MapBuilder<int, ContactEntity> _map;
-  MapBuilder<int, ContactEntity> get map =>
-      _$this._map ??= new MapBuilder<int, ContactEntity>();
-  set map(MapBuilder<int, ContactEntity> map) => _$this._map = map;
+  MapBuilder<String, ContactEntity> _map;
+  MapBuilder<String, ContactEntity> get map =>
+      _$this._map ??= new MapBuilder<String, ContactEntity>();
+  set map(MapBuilder<String, ContactEntity> map) => _$this._map = map;
 
-  ListBuilder<int> _list;
-  ListBuilder<int> get list => _$this._list ??= new ListBuilder<int>();
-  set list(ListBuilder<int> list) => _$this._list = list;
+  ListBuilder<String> _list;
+  ListBuilder<String> get list => _$this._list ??= new ListBuilder<String>();
+  set list(ListBuilder<String> list) => _$this._list = list;
 
   ContactStateBuilder();
 
