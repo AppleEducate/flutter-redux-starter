@@ -17,7 +17,7 @@ class ContactRepository {
   });
 
   Future<BuiltList<ContactEntity>> loadList(AuthState auth) async {
-    final response = await webClient.get(kApiUrl + '/contacts');
+    final response = await webClient.get(kApiUrl + '/contacts/50');
 
     var list = new BuiltList<ContactEntity>(response.map((contact) {
       return serializers.deserializeWith(ContactEntity.serializer, contact);
