@@ -3,14 +3,18 @@ import 'dart:core';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import '../constants.dart';
 
 class WebClient {
   const WebClient();
 
   Future<dynamic> get(String url) async {
     final http.Response response = await getClient().get(
-          url,
-        );
+      url,
+      headers: {
+        HttpHeaders.authorizationHeader: "Bearer $kToken",
+      },
+    );
 
     if (response.statusCode >= 400) {
       throw ('An error occurred: ' + response.body);
@@ -25,6 +29,7 @@ class WebClient {
       body: data,
       headers: {
         'Content-Type': 'application/json',
+        HttpHeaders.authorizationHeader: "Bearer $kToken",
       },
     );
 
@@ -47,6 +52,7 @@ class WebClient {
       body: data,
       headers: {
         'Content-Type': 'application/json',
+        HttpHeaders.authorizationHeader: "Bearer $kToken",
       },
     );
 
