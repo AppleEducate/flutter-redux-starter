@@ -11,6 +11,7 @@ if [ ${action} = "cleanup" ]; then
 
     echo "Cleaning temporary built files.."
     find . -name "*-e" -type f -delete
+    flutter format .
 
 elif [ ${action} = "build" ]; then
 
