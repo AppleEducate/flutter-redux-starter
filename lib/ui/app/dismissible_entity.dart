@@ -15,7 +15,7 @@ class DismissibleEntity extends StatelessWidget {
   final Function onTap;
 
   //static final _itemKey = (int id) => Key('__client_item_${id}__');
-  static final _itemKey = (int id) => Key('__item_${id}__');
+  static final _itemKey = (String id) => Key('__item_${id}__');
 
   @override
   Widget build(BuildContext context) {

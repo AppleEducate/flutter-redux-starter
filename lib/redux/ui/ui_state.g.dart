@@ -9,10 +9,15 @@ part of 'ui_state.dart';
 // ignore_for_file: always_put_control_body_on_new_line
 // ignore_for_file: annotate_overrides
 // ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_catches_without_on_clauses
 // ignore_for_file: avoid_returning_this
+// ignore_for_file: lines_longer_than_80_chars
 // ignore_for_file: omit_local_variable_types
 // ignore_for_file: prefer_expression_function_bodies
 // ignore_for_file: sort_constructors_first
+// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_new
+// ignore_for_file: test_types_in_equals
 
 Serializer<UIState> _$uIStateSerializer = new _$UIStateSerializer();
 
@@ -24,7 +29,7 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
 
   @override
   Iterable serialize(Serializers serializers, UIState object,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'currentRoute',
       serializers.serialize(object.currentRoute,
@@ -36,7 +41,7 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
 
   @override
   UIState deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType: FullType.unspecified}) {
+      {FullType specifiedType = FullType.unspecified}) {
     final result = new UIStateBuilder();
 
     final iterator = serialized.iterator;
@@ -64,8 +69,9 @@ class _$UIState extends UIState {
       (new UIStateBuilder()..update(updates)).build();
 
   _$UIState._({this.currentRoute}) : super._() {
-    if (currentRoute == null)
+    if (currentRoute == null) {
       throw new BuiltValueNullFieldError('UIState', 'currentRoute');
+    }
   }
 
   @override
@@ -76,10 +82,9 @@ class _$UIState extends UIState {
   UIStateBuilder toBuilder() => new UIStateBuilder()..replace(this);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! UIState) return false;
-    return currentRoute == other.currentRoute;
+    return other is UIState && currentRoute == other.currentRoute;
   }
 
   @override
@@ -114,7 +119,9 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
 
   @override
   void replace(UIState other) {
-    if (other == null) throw new ArgumentError.notNull('other');
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
     _$v = other as _$UIState;
   }
 

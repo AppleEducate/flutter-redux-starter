@@ -32,7 +32,7 @@ class EntityAction extends EnumClass {
 }
 
 abstract class BaseEntity {
-  int get id;
+  String get id;
 
   String get listDisplayName {
     return 'Error: not set';
@@ -51,7 +51,7 @@ abstract class BaseEntity {
   }
 
   bool get isNew {
-    return this.id == null || this.id <= 0;
+    return this.id == null;
   }
 
   bool get isActive {
