@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:MyUnifyMobile/ui/app/actions_menu_button.dart';
 import 'package:MyUnifyMobile/ui/task/view/task_view_vm.dart';
 import 'package:MyUnifyMobile/ui/app/form_card.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
+import '../../../utils/date_formatter.dart';
 
 class TaskView extends StatefulWidget {
   final TaskViewVM viewModel;
@@ -32,6 +34,20 @@ class _TaskViewState extends State<TaskView> {
                   icon: Icon(Icons.edit),
                   onPressed: () {
                     viewModel.onEditPressed(context);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.event_available),
+                  onPressed: () {
+                    var _date = parseDate(task.Lead_Task_Time);
+                    final Event event = Event(
+                      title: task?.Lead_Task_Title ?? "",
+                      description: task?.Lead_Task_Description ?? "",
+                      startDate: _date,
+                      endDate: _date.add(Duration(minutes: 30)),
+                    );
+                    print("Adding Event: $_date ${task?.Lead_Task_Title}");
+                    Add2Calendar.addEvent2Cal(event);
                   },
                 ),
                 ActionMenuButton(

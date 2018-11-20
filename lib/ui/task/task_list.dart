@@ -25,7 +25,7 @@ class TaskList extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           DateViewWidget(
-            date: parseDate(viewModel?.date ?? DateTime.now()),
+            date: parseDate(viewModel?.date),
             dateChanged: (DateTime value) =>
                 viewModel.onDateChange(context, value),
           ),
@@ -36,29 +36,26 @@ class TaskList extends StatelessWidget {
   }
 
   Widget _buildListView(BuildContext context) {
-    if (viewModel.taskList == null || viewModel.taskList.isEmpty) {
-      return Center(
-        child: Text('No Tasks Found'),
-      );
-    }
     return RefreshIndicator(
       onRefresh: () => viewModel.onRefreshed(context),
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: viewModel.taskList.length,
-          itemBuilder: (BuildContext context, index) {
-            var taskId = viewModel.taskList[index];
-            var task = viewModel.taskMap[taskId];
-            return Column(children: <Widget>[
-              TaskItem(
-                task: task,
-                onDismissed: (DismissDirection direction) =>
-                    viewModel.onDismissed(context, task, direction),
-                onTap: () => viewModel.onTaskTap(context, task),
-              ),
-              Divider(height: 1.0),
-            ]);
-          }),
+      child: viewModel.taskList == null || viewModel.taskList.isEmpty
+          ? Center(child: Text('No Tasks Found'))
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: viewModel.taskList.length,
+              itemBuilder: (BuildContext context, index) {
+                var taskId = viewModel.taskList[index];
+                var task = viewModel.taskMap[taskId];
+                return Column(children: <Widget>[
+                  TaskItem(
+                    task: task,
+                    onDismissed: (DismissDirection direction) =>
+                        viewModel.onDismissed(context, task, direction),
+                    onTap: () => viewModel.onTaskTap(context, task),
+                  ),
+                  Divider(height: 1.0),
+                ]);
+              }),
     );
   }
 }

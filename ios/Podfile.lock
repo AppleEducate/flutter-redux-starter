@@ -1,4 +1,6 @@
 PODS:
+  - add_2_calendar (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_email_sender (0.0.1):
     - Flutter
@@ -12,6 +14,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_email_sender (from `.symlinks/plugins/flutter_email_sender/ios`)
   - flutter_sms (from `.symlinks/plugins/flutter_sms/ios`)
@@ -20,6 +23,8 @@ DEPENDENCIES:
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 EXTERNAL SOURCES:
+  add_2_calendar:
+    :path: ".symlinks/plugins/add_2_calendar/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
   flutter_email_sender:
@@ -34,6 +39,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
+  add_2_calendar: da1cb32f7bda3252f01c732f49e6ec72983b50fa
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   flutter_email_sender: 3e082af9295b573948e8b2673fc7ad0f7cd7d3b4
   flutter_sms: fe8c88d249cd328d355a63032400ba0c9477630e

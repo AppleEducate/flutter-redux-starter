@@ -65,9 +65,7 @@ class TaskListVM {
       ));
       return completer.future.then((_) {
         Scaffold.of(context).showSnackBar(SnackBar(
-            content: IconMessage(
-              message: 'Refresh complete',
-            ),
+            content: IconMessage(message: 'Refresh complete'),
             duration: Duration(seconds: 3)));
       });
     }
