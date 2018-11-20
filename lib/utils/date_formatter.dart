@@ -9,5 +9,9 @@ String formatDate(String value) {
     return "";
   }
   if (date.year < 1900) return "";
-  return DateFormat('MM-dd-yy').format(date);
+  return formatDateCustom(date, format: 'MM-dd-yy');
+}
+
+String formatDateCustom(DateTime value, {String format = "MM-dd-yyyy"}) {
+  return DateFormat(format).format(value);
 }
