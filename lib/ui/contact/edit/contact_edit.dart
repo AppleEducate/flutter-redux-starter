@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MyUnifyMobile/ui/app/form_card.dart';
-import 'package:MyUnifyMobile/ui/contact/edit/contact_edit_vm.dart';
-import 'package:MyUnifyMobile/ui/app/save_icon_button.dart';
+
+import '../../app/form_card.dart';
+import '../../app/save_icon_button.dart';
+import 'contact_edit_vm.dart';
 
 class ContactEdit extends StatefulWidget {
   final ContactEditVM viewModel;

@@ -6,6 +6,7 @@ import 'package:MyUnifyMobile/ui/app/app_drawer_vm.dart';
 import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
+
 import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -38,6 +39,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           // STARTER: menu - do not remove comment
+
           ListTile(
             leading: Icon(Icons.contacts),
             title: Text('Contacts'),

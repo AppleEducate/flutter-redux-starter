@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MyUnifyMobile/ui/app/actions_menu_button.dart';
-import 'package:MyUnifyMobile/ui/contact/view/contact_view_vm.dart';
-import 'package:MyUnifyMobile/ui/app/form_card.dart';
+
 import '../../../utils/text_format.dart';
-import '../../../widgets/phone_tile.dart';
 import '../../../widgets/email_tile.dart';
-import '../../../utils/sendEmail.dart';
+import '../../../widgets/phone_tile.dart';
+import '../../app/actions_menu_button.dart';
+import 'contact_view_vm.dart';
 
 class ContactView extends StatefulWidget {
   final ContactViewVM viewModel;

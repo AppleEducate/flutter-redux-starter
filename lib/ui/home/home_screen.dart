@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:MyUnifyMobile/ui/app/app_drawer_vm.dart';
+
+import '../../widgets/date_view.dart';
+import '../app/app_drawer_vm.dart';
 
 class HomeScreen extends StatelessWidget {
   static final String route = '/home';
@@ -11,6 +13,14 @@ class HomeScreen extends StatelessWidget {
         title: Text('Home'),
       ),
       drawer: AppDrawerBuilder(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            DateViewWidget(),
+          ],
+        ),
+      ),
     );
   }
 }

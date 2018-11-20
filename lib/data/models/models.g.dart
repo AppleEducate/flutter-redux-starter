@@ -19,10 +19,13 @@ part of 'models.dart';
 // ignore_for_file: unnecessary_new
 // ignore_for_file: test_types_in_equals
 
+const EntityType _$task = const EntityType._('task');
 const EntityType _$contact = const EntityType._('contact');
 
 EntityType _$typeValueOf(String name) {
   switch (name) {
+    case 'task':
+      return _$task;
     case 'contact':
       return _$contact;
     default:
@@ -32,6 +35,7 @@ EntityType _$typeValueOf(String name) {
 
 final BuiltSet<EntityType> _$typeValues =
     new BuiltSet<EntityType>(const <EntityType>[
+  _$task,
   _$contact,
 ]);
 

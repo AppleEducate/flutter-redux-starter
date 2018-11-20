@@ -35,5 +35,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new MapBuilder<String, ContactEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))
     .build();

@@ -133,6 +133,7 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   UIStateBuilder get _$this {
     if (_$v != null) {
       _currentRoute = _$v.currentRoute;
+
       _contactUIState = _$v.contactUIState?.toBuilder();
       _$v = null;
     }
@@ -163,6 +164,8 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'taskUIState';
+
         _$failedField = 'contactUIState';
         contactUIState.build();
       } catch (e) {

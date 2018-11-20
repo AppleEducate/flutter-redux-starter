@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MyUnifyMobile/ui/contact/contact_item.dart';
-import 'package:MyUnifyMobile/ui/contact/contact_list_vm.dart';
+
+import 'contact_item.dart';
+import 'contact_list_vm.dart';
 
 class ContactList extends StatelessWidget {
   final ContactListVM viewModel;

@@ -140,6 +140,8 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'taskState';
+
         _$failedField = 'contactState';
         contactState.build();
       } catch (e) {

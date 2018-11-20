@@ -1,16 +1,18 @@
 import 'dart:async';
-import 'package:redux/redux.dart';
+
 import 'package:built_collection/built_collection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:MyUnifyMobile/redux/contact/contact_selectors.dart';
-import 'package:MyUnifyMobile/ui/app/icon_message.dart';
-import 'package:MyUnifyMobile/data/models/contact_model.dart';
-import 'package:MyUnifyMobile/ui/contact/contact_list.dart';
-import 'package:MyUnifyMobile/redux/app/app_state.dart';
-import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
+import 'package:redux/redux.dart';
+
+import '../../data/models/contact_model.dart';
+import '../../redux/app/app_state.dart';
+import '../../redux/contact/contact_actions.dart';
+import '../../redux/contact/contact_selectors.dart';
+import '../app/icon_message.dart';
+import 'contact_list.dart';
 
 class ContactListBuilder extends StatelessWidget {
   static final String route = '/contacts/edit';

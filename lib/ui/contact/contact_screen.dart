@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:MyUnifyMobile/ui/app/app_search.dart';
-import 'package:MyUnifyMobile/ui/app/app_search_button.dart';
-import 'package:MyUnifyMobile/redux/app/app_state.dart';
-import 'package:MyUnifyMobile/data/models/models.dart';
-import 'package:MyUnifyMobile/data/models/contact_model.dart';
-import 'package:MyUnifyMobile/ui/contact/contact_list_vm.dart';
-import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
-import 'package:MyUnifyMobile/ui/app/app_drawer_vm.dart';
-import 'package:MyUnifyMobile/ui/app/app_bottom_bar.dart';
+
+import '../../data/models/contact_model.dart';
+import '../../data/models/models.dart';
+import '../../redux/app/app_state.dart';
+import '../../redux/contact/contact_actions.dart';
+import '../app/app_bottom_bar.dart';
+import '../app/app_drawer_vm.dart';
+import '../app/app_search.dart';
+import '../app/app_search_button.dart';
+import 'contact_list_vm.dart';
 
 class ContactScreen extends StatelessWidget {
   static final String route = '/contact';

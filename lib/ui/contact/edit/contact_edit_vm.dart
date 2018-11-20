@@ -1,15 +1,17 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:MyUnifyMobile/redux/ui/ui_actions.dart';
-import 'package:MyUnifyMobile/ui/contact/contact_screen.dart';
 import 'package:redux/redux.dart';
-import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
-import 'package:MyUnifyMobile/data/models/contact_model.dart';
-import 'package:MyUnifyMobile/ui/contact/edit/contact_edit.dart';
-import 'package:MyUnifyMobile/redux/app/app_state.dart';
-import 'package:MyUnifyMobile/ui/app/icon_message.dart';
+
+import '../../../data/models/contact_model.dart';
+import '../../../redux/app/app_state.dart';
+import '../../../redux/contact/contact_actions.dart';
+import '../../../redux/ui/ui_actions.dart';
+import '../../app/icon_message.dart';
+import '../contact_screen.dart';
+import 'contact_edit.dart';
 
 class ContactEditScreen extends StatelessWidget {
   static final String route = '/contact/edit';
