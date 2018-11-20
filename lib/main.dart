@@ -10,6 +10,11 @@ import 'package:MyUnifyMobile/ui/app/init.dart';
 import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/ui/task/task_screen.dart';
+import 'package:MyUnifyMobile/ui/task/edit/task_edit_vm.dart';
+import 'package:MyUnifyMobile/ui/task/view/task_view_vm.dart';
+import 'package:MyUnifyMobile/redux/task/task_actions.dart';
+import 'package:MyUnifyMobile/redux/task/task_middleware.dart';
 
 import 'package:MyUnifyMobile/ui/contact/contact_screen.dart';
 import 'package:MyUnifyMobile/ui/contact/edit/contact_edit_vm.dart';
@@ -24,7 +29,7 @@ void main() {
         ..addAll(createStoreAuthMiddleware())
         ..addAll(createStorePersistenceMiddleware())
         // STARTER: middleware - do not remove comment
-
+        ..addAll(createStoreTasksMiddleware())
         ..addAll(createStoreContactsMiddleware())
         ..addAll([
           LoggingMiddleware.printer(),
@@ -54,6 +59,12 @@ class _SampleReduxAppState extends State<SampleReduxApp> {
           LoginScreen.route: (context) => LoginScreen(),
           HomeScreen.route: (context) => HomeScreen(),
           // STARTER: routes - do not remove comment
+          TaskScreen.route: (context) {
+            widget.store.dispatch(LoadTasks());
+            return TaskScreen();
+          },
+          TaskViewScreen.route: (context) => TaskViewScreen(),
+          TaskEditScreen.route: (context) => TaskEditScreen(),
 
           ContactScreen.route: (context) {
             widget.store.dispatch(LoadContacts());

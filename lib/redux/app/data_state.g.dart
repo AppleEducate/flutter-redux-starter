@@ -31,6 +31,9 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
   Iterable serialize(Serializers serializers, DataState object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'taskState',
+      serializers.serialize(object.taskState,
+          specifiedType: const FullType(TaskState)),
       'contactState',
       serializers.serialize(object.contactState,
           specifiedType: const FullType(ContactState)),
@@ -50,6 +53,10 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'taskState':
+          result.taskState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(TaskState)) as TaskState);
+          break;
         case 'contactState':
           result.contactState.replace(serializers.deserialize(value,
               specifiedType: const FullType(ContactState)) as ContactState);
@@ -63,12 +70,17 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
 
 class _$DataState extends DataState {
   @override
+  final TaskState taskState;
+  @override
   final ContactState contactState;
 
   factory _$DataState([void updates(DataStateBuilder b)]) =>
       (new DataStateBuilder()..update(updates)).build();
 
-  _$DataState._({this.contactState}) : super._() {
+  _$DataState._({this.taskState, this.contactState}) : super._() {
+    if (taskState == null) {
+      throw new BuiltValueNullFieldError('DataState', 'taskState');
+    }
     if (contactState == null) {
       throw new BuiltValueNullFieldError('DataState', 'contactState');
     }
@@ -84,17 +96,20 @@ class _$DataState extends DataState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DataState && contactState == other.contactState;
+    return other is DataState &&
+        taskState == other.taskState &&
+        contactState == other.contactState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, contactState.hashCode));
+    return $jf($jc($jc(0, taskState.hashCode), contactState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DataState')
+          ..add('taskState', taskState)
           ..add('contactState', contactState))
         .toString();
   }
@@ -102,6 +117,11 @@ class _$DataState extends DataState {
 
 class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
   _$DataState _$v;
+
+  TaskStateBuilder _taskState;
+  TaskStateBuilder get taskState =>
+      _$this._taskState ??= new TaskStateBuilder();
+  set taskState(TaskStateBuilder taskState) => _$this._taskState = taskState;
 
   ContactStateBuilder _contactState;
   ContactStateBuilder get contactState =>
@@ -113,6 +133,7 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
 
   DataStateBuilder get _$this {
     if (_$v != null) {
+      _taskState = _$v.taskState?.toBuilder();
       _contactState = _$v.contactState?.toBuilder();
       _$v = null;
     }
@@ -136,12 +157,14 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
   _$DataState build() {
     _$DataState _$result;
     try {
-      _$result = _$v ?? new _$DataState._(contactState: contactState.build());
+      _$result = _$v ??
+          new _$DataState._(
+              taskState: taskState.build(), contactState: contactState.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'taskState';
-
+        taskState.build();
         _$failedField = 'contactState';
         contactState.build();
       } catch (e) {

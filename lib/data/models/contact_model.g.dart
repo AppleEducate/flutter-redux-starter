@@ -59,7 +59,7 @@ class _$ContactEntitySerializer implements StructuredSerializer<ContactEntity> {
       'last_activity',
       serializers.serialize(object.last_activity,
           specifiedType: const FullType(String)),
-      'id',
+      'contact_id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
     ];
 
@@ -113,7 +113,7 @@ class _$ContactEntitySerializer implements StructuredSerializer<ContactEntity> {
           result.last_activity = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'id':
+        case 'contact_id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;

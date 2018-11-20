@@ -34,6 +34,9 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
       'currentRoute',
       serializers.serialize(object.currentRoute,
           specifiedType: const FullType(String)),
+      'taskUIState',
+      serializers.serialize(object.taskUIState,
+          specifiedType: const FullType(TaskUIState)),
       'contactUIState',
       serializers.serialize(object.contactUIState,
           specifiedType: const FullType(ContactUIState)),
@@ -57,6 +60,10 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
           result.currentRoute = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'taskUIState':
+          result.taskUIState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(TaskUIState)) as TaskUIState);
+          break;
         case 'contactUIState':
           result.contactUIState.replace(serializers.deserialize(value,
               specifiedType: const FullType(ContactUIState)) as ContactUIState);
@@ -72,14 +79,20 @@ class _$UIState extends UIState {
   @override
   final String currentRoute;
   @override
+  final TaskUIState taskUIState;
+  @override
   final ContactUIState contactUIState;
 
   factory _$UIState([void updates(UIStateBuilder b)]) =>
       (new UIStateBuilder()..update(updates)).build();
 
-  _$UIState._({this.currentRoute, this.contactUIState}) : super._() {
+  _$UIState._({this.currentRoute, this.taskUIState, this.contactUIState})
+      : super._() {
     if (currentRoute == null) {
       throw new BuiltValueNullFieldError('UIState', 'currentRoute');
+    }
+    if (taskUIState == null) {
+      throw new BuiltValueNullFieldError('UIState', 'taskUIState');
     }
     if (contactUIState == null) {
       throw new BuiltValueNullFieldError('UIState', 'contactUIState');
@@ -98,18 +111,21 @@ class _$UIState extends UIState {
     if (identical(other, this)) return true;
     return other is UIState &&
         currentRoute == other.currentRoute &&
+        taskUIState == other.taskUIState &&
         contactUIState == other.contactUIState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, currentRoute.hashCode), contactUIState.hashCode));
+    return $jf($jc($jc($jc(0, currentRoute.hashCode), taskUIState.hashCode),
+        contactUIState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('UIState')
           ..add('currentRoute', currentRoute)
+          ..add('taskUIState', taskUIState)
           ..add('contactUIState', contactUIState))
         .toString();
   }
@@ -122,6 +138,12 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   String get currentRoute => _$this._currentRoute;
   set currentRoute(String currentRoute) => _$this._currentRoute = currentRoute;
 
+  TaskUIStateBuilder _taskUIState;
+  TaskUIStateBuilder get taskUIState =>
+      _$this._taskUIState ??= new TaskUIStateBuilder();
+  set taskUIState(TaskUIStateBuilder taskUIState) =>
+      _$this._taskUIState = taskUIState;
+
   ContactUIStateBuilder _contactUIState;
   ContactUIStateBuilder get contactUIState =>
       _$this._contactUIState ??= new ContactUIStateBuilder();
@@ -133,7 +155,7 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   UIStateBuilder get _$this {
     if (_$v != null) {
       _currentRoute = _$v.currentRoute;
-
+      _taskUIState = _$v.taskUIState?.toBuilder();
       _contactUIState = _$v.contactUIState?.toBuilder();
       _$v = null;
     }
@@ -160,12 +182,13 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
       _$result = _$v ??
           new _$UIState._(
               currentRoute: currentRoute,
+              taskUIState: taskUIState.build(),
               contactUIState: contactUIState.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'taskUIState';
-
+        taskUIState.build();
         _$failedField = 'contactUIState';
         contactUIState.build();
       } catch (e) {

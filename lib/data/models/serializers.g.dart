@@ -28,6 +28,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(DataState.serializer)
       ..add(ListUIState.serializer)
       ..add(LoginResponse.serializer)
+      ..add(TaskEntity.serializer)
+      ..add(TaskState.serializer)
+      ..add(TaskUIState.serializer)
       ..add(UIState.serializer)
       ..addBuilderFactory(
           const FullType(BuiltMap,
@@ -36,6 +39,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(TaskEntity)]),
+          () => new MapBuilder<String, TaskEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))
