@@ -22,12 +22,11 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   factory AppState() {
     return _$AppState._(
-      isLoading: false,
-      authState: AuthState(),
-      uiState: UIState(),
-      dataState: DataState(),
-      tasksDate: '01-01-2018'
-    );
+        isLoading: false,
+        authState: AuthState(),
+        uiState: UIState(),
+        dataState: DataState(),
+        tasksDate: '01-01-2018');
   }
 
   AppState._();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/date_view.dart';
 import '../app/app_drawer_vm.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            DateViewWidget(),
+            // DateViewWidget(),
           ],
         ),
       ),
