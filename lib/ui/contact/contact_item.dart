@@ -74,13 +74,16 @@ subtitle: Text(contact.last_name, maxLines: 4),
       iconTap: onTap,
       icon: Icon(Icons.person),
       title: Text(
-        contact.displayName,
+        contact.lastFirstName,
         style: Theme.of(context).textTheme.title,
       ),
-      subtitle: Text(
-        contact?.last_activity ?? "",
-        style: Theme.of(context).textTheme.subtitle,
-      ),
+      subtitle: contact?.last_activity == null ||
+              contact?.last_activity.toString().isEmpty
+          ? null
+          : Text(
+              contact?.last_activity ?? "",
+              style: Theme.of(context).textTheme.subtitle,
+            ),
       onTap: onTap,
       cell: contact?.cell_phone,
       home: contact?.cell_phone,

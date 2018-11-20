@@ -157,7 +157,7 @@ class _ContactEditState extends State<ContactEdit> {
                     controller: _first_nameController,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'First_name',
+                      labelText: 'First Name',
                     ),
                   ),
 
@@ -165,7 +165,7 @@ class _ContactEditState extends State<ContactEdit> {
                     controller: _last_nameController,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'Last_name',
+                      labelText: 'Last Name',
                     ),
                   ),
 
@@ -173,7 +173,7 @@ class _ContactEditState extends State<ContactEdit> {
                     controller: _cell_phoneController,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'Cell_phone',
+                      labelText: 'Cell Phone',
                     ),
                   ),
 
@@ -181,7 +181,7 @@ class _ContactEditState extends State<ContactEdit> {
                     controller: _office_phoneController,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'Office_phone',
+                      labelText: 'Office Phone',
                     ),
                   ),
 
@@ -193,21 +193,21 @@ class _ContactEditState extends State<ContactEdit> {
                     ),
                   ),
 
-                  TextFormField(
-                    controller: _date_createdController,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: 'Date_created',
-                    ),
-                  ),
+                  // TextFormField(
+                  //   controller: _date_createdController,
+                  //   autocorrect: false,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Date Created',
+                  //   ),
+                  // ),
 
-                  TextFormField(
-                    controller: _date_modifiedController,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: 'Date_modified',
-                    ),
-                  ),
+                  // TextFormField(
+                  //   controller: _date_modifiedController,
+                  //   autocorrect: false,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Date Modified',
+                  //   ),
+                  // ),
 
                   TextFormField(
                     controller: _emailController,
@@ -217,13 +217,13 @@ class _ContactEditState extends State<ContactEdit> {
                     ),
                   ),
 
-                  TextFormField(
-                    controller: _last_activityController,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: 'Last_activity',
-                    ),
-                  ),
+                  // TextFormField(
+                  //   controller: _last_activityController,
+                  //   autocorrect: false,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Last_activity',
+                  //   ),
+                  // ),
                 ],
               ),
             ],

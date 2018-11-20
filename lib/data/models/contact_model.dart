@@ -77,6 +77,11 @@ abstract class ContactEntity extends Object
     return "$first_name $last_name";
   }
 
+  String get lastFirstName {
+    // STARTER: display name - do not remove comment
+    return "$last_name, $first_name";
+  }
+
   int compareTo(ContactEntity contact, String sortField, bool sortAscending) {
     int response = 0;
     ContactEntity contactA = sortAscending ? this : contact;

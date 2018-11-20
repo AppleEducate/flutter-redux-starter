@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
           ),
           // STARTER: menu - do not remove comment
           ListTile(
-            leading: Icon(Icons.widgets),
+            leading: Icon(Icons.contacts),
             title: Text('Contacts'),
             onTap: () => store.dispatch(ViewContactList(context)),
           ),
