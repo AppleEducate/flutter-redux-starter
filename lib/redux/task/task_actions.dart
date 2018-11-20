@@ -24,8 +24,13 @@ class EditTask implements PersistUI {
 class LoadTasks {
   final Completer completer;
   final bool force;
+  final String date;
 
-  LoadTasks([this.completer, this.force = false]);
+  LoadTasks([
+    this.completer,
+    this.force = false,
+    this.date,
+  ]);
 }
 
 class LoadTasksRequest implements StartLoading {}

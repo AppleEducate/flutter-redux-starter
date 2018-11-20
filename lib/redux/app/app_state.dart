@@ -18,6 +18,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   AuthState get authState;
   UIState get uiState;
   DataState get dataState;
+  String get tasksDate;
 
   factory AppState() {
     return _$AppState._(
@@ -25,6 +26,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
       authState: AuthState(),
       uiState: UIState(),
       dataState: DataState(),
+      tasksDate: '01-01-2018'
     );
   }
 

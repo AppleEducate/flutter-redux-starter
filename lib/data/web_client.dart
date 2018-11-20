@@ -19,6 +19,7 @@ class WebClient {
     );
 
     if (response.statusCode >= 400) {
+      if (response.statusCode == 404) return response.body; // Not Found Message
       throw ('An error occurred: ' + response.body);
     }
 

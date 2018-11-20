@@ -11,6 +11,9 @@ AppState appReducer(AppState state, action) {
     return AppState().rebuild((b) => b.authState.replace(state.authState));
   } else if (action is LoadStateSuccess) {
     return action.state.rebuild((b) => b.isLoading = false);
+  } else if (action is ChangeDate) {
+    print("Change Date: ${action.date}");
+    return action.state.rebuild((b) => b.tasksDate = action.date);
   }
 
   return state.rebuild((b) => b
@@ -32,3 +35,13 @@ bool _setLoading(bool state, action) {
 bool _setLoaded(bool state, action) {
   return false;
 }
+
+// String _setDate(String state, action) {
+//   if (action == ChangeDate) {
+//     ChangeDate _action = action;
+//     print("Change Date: ${_action.date}");
+//     return _action.date;
+//   }
+//   print("No Date Changed...");
+//   return state;
+// }

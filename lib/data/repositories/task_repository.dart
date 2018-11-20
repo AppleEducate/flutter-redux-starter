@@ -16,12 +16,21 @@ class TaskRepository {
     this.webClient = const WebClient(),
   });
 
-  Future<BuiltList<TaskEntity>> loadList(AuthState auth) async {
-    final response = await webClient.get(kApiUrl + '/calendar/01-01-2018');
+  Future<BuiltList<TaskEntity>> loadList(AuthState auth, String date) async {
+    final response = await webClient.get(kApiUrl + '/calendar/$date');
+    print("Loaded Tasks $date => $response");
 
-    var list = new BuiltList<TaskEntity>(response.map((task) {
-      return serializers.deserializeWith(TaskEntity.serializer, task);
-    }));
+    if (response.toString().contains("No Tasks Found")) {
+      print("No Tasks => $response");
+      var _list = BuiltList<TaskEntity>([]);
+      return _list;
+    }
+
+    var list = new BuiltList<TaskEntity>(
+      response.map((task) {
+        return serializers.deserializeWith(TaskEntity.serializer, task);
+      }),
+    );
 
     return list;
   }

@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:MyUnifyMobile/ui/task/task_item.dart';
 import 'package:MyUnifyMobile/ui/task/task_list_vm.dart';
+import '../../widgets/date_view.dart';
+import '../../utils/date_formatter.dart';
 
 class TaskList extends StatelessWidget {
   final TaskListVM viewModel;
@@ -17,10 +19,28 @@ class TaskList extends StatelessWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    return _buildListView(context);
+    // return _buildListView(context);
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          DateViewWidget(
+            date: parseDate(viewModel?.date ?? DateTime.now()),
+            dateChanged: (DateTime value) =>
+                viewModel.onDateChange(context, value),
+          ),
+          _buildListView(context),
+        ],
+      ),
+    );
   }
 
   Widget _buildListView(BuildContext context) {
+    if (viewModel.taskList == null || viewModel.taskList.isEmpty) {
+      return Center(
+        child: Text('No Tasks Found'),
+      );
+    }
     return RefreshIndicator(
       onRefresh: () => viewModel.onRefreshed(context),
       child: ListView.builder(
@@ -36,9 +56,7 @@ class TaskList extends StatelessWidget {
                     viewModel.onDismissed(context, task, direction),
                 onTap: () => viewModel.onTaskTap(context, task),
               ),
-              Divider(
-                height: 1.0,
-              ),
+              Divider(height: 1.0),
             ]);
           }),
     );

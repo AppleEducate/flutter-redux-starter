@@ -108,7 +108,7 @@ Middleware<AppState> _loadTasks(TaskRepository repository) {
     }
 
     store.dispatch(LoadTasksRequest());
-    repository.loadList(state.authState).then((data) {
+    repository.loadList(state.authState, store.state?.tasksDate).then((data) {
       store.dispatch(LoadTasksSuccess(data));
 
       if (action.completer != null) {

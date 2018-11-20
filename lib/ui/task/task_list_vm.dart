@@ -11,6 +11,8 @@ import 'package:MyUnifyMobile/data/models/task_model.dart';
 import 'package:MyUnifyMobile/ui/task/task_list.dart';
 import 'package:MyUnifyMobile/redux/app/app_state.dart';
 import 'package:MyUnifyMobile/redux/task/task_actions.dart';
+import '../../utils/date_formatter.dart';
+import '../../redux/app/app_actions.dart';
 
 class TaskListBuilder extends StatelessWidget {
   static final String route = '/tasks/edit';
@@ -37,6 +39,9 @@ class TaskListVM {
   final Function(BuildContext, TaskEntity) onTaskTap;
   final Function(BuildContext, TaskEntity, DismissDirection) onDismissed;
   final Function(BuildContext) onRefreshed;
+  final String date;
+  // final ValueChanged<DateTime> onDateChange;
+  final Function(BuildContext, DateTime) onDateChange;
 
   TaskListVM({
     @required this.taskList,
@@ -46,12 +51,18 @@ class TaskListVM {
     @required this.onTaskTap,
     @required this.onDismissed,
     @required this.onRefreshed,
+    @required this.date,
+    @required this.onDateChange,
   });
 
   static TaskListVM fromStore(Store<AppState> store) {
     Future<Null> _handleRefresh(BuildContext context) {
       final Completer<Null> completer = new Completer<Null>();
-      store.dispatch(LoadTasks(completer, true));
+      store.dispatch(LoadTasks(
+        completer,
+        true,
+        formatDateCustom(parseDate(store?.state?.tasksDate) ?? DateTime.now()),
+      ));
       return completer.future.then((_) {
         Scaffold.of(context).showSnackBar(SnackBar(
             content: IconMessage(
@@ -67,6 +78,12 @@ class TaskListVM {
           store.state.taskState.list,
           store.state.taskListState,
         ),
+        date: store.state.tasksDate,
+        onDateChange: (BuildContext context, DateTime value) {
+          var _date = formatDateCustom(value);
+          store.dispatch(ChangeDate(date: _date, state: store.state));
+          _handleRefresh(context);
+        },
         taskMap: store.state.taskState.map,
         isLoading: store.state.isLoading,
         isLoaded: store.state.taskState.isLoaded,

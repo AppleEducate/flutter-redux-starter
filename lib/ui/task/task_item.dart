@@ -54,7 +54,7 @@ subtitle: Text(task.Lead_Task_Title, maxLines: 4),
           children: <Widget>[
             Expanded(
               child: Text(
-                task.displayName,
+                task.Lead_Task_Title,
                 style: Theme.of(context).textTheme.title,
               ),
             ),
@@ -62,7 +62,7 @@ subtitle: Text(task.Lead_Task_Title, maxLines: 4),
         ),
       ),
       // STARTER: subtitle - do not remove comment
-      subtitle: Text(task.Lead_Task_Title, maxLines: 4),
+      subtitle: Text(task.Lead_Task_Description, maxLines: 4),
     );
   }
 }

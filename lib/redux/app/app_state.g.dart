@@ -43,6 +43,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'dataState',
       serializers.serialize(object.dataState,
           specifiedType: const FullType(DataState)),
+      'tasksDate',
+      serializers.serialize(object.tasksDate,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -75,6 +78,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.dataState.replace(serializers.deserialize(value,
               specifiedType: const FullType(DataState)) as DataState);
           break;
+        case 'tasksDate':
+          result.tasksDate = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -91,11 +98,18 @@ class _$AppState extends AppState {
   final UIState uiState;
   @override
   final DataState dataState;
+  @override
+  final String tasksDate;
 
   factory _$AppState([void updates(AppStateBuilder b)]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.isLoading, this.authState, this.uiState, this.dataState})
+  _$AppState._(
+      {this.isLoading,
+      this.authState,
+      this.uiState,
+      this.dataState,
+      this.tasksDate})
       : super._() {
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AppState', 'isLoading');
@@ -108,6 +122,9 @@ class _$AppState extends AppState {
     }
     if (dataState == null) {
       throw new BuiltValueNullFieldError('AppState', 'dataState');
+    }
+    if (tasksDate == null) {
+      throw new BuiltValueNullFieldError('AppState', 'tasksDate');
     }
   }
 
@@ -125,15 +142,18 @@ class _$AppState extends AppState {
         isLoading == other.isLoading &&
         authState == other.authState &&
         uiState == other.uiState &&
-        dataState == other.dataState;
+        dataState == other.dataState &&
+        tasksDate == other.tasksDate;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, isLoading.hashCode), authState.hashCode),
-            uiState.hashCode),
-        dataState.hashCode));
+        $jc(
+            $jc($jc($jc(0, isLoading.hashCode), authState.hashCode),
+                uiState.hashCode),
+            dataState.hashCode),
+        tasksDate.hashCode));
   }
 
   @override
@@ -142,7 +162,8 @@ class _$AppState extends AppState {
           ..add('isLoading', isLoading)
           ..add('authState', authState)
           ..add('uiState', uiState)
-          ..add('dataState', dataState))
+          ..add('dataState', dataState)
+          ..add('tasksDate', tasksDate))
         .toString();
   }
 }
@@ -168,6 +189,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._dataState ??= new DataStateBuilder();
   set dataState(DataStateBuilder dataState) => _$this._dataState = dataState;
 
+  String _tasksDate;
+  String get tasksDate => _$this._tasksDate;
+  set tasksDate(String tasksDate) => _$this._tasksDate = tasksDate;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -176,6 +201,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _authState = _$v.authState?.toBuilder();
       _uiState = _$v.uiState?.toBuilder();
       _dataState = _$v.dataState?.toBuilder();
+      _tasksDate = _$v.tasksDate;
       _$v = null;
     }
     return this;
@@ -203,7 +229,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               isLoading: isLoading,
               authState: authState.build(),
               uiState: uiState.build(),
-              dataState: dataState.build());
+              dataState: dataState.build(),
+              tasksDate: tasksDate);
     } catch (_) {
       String _$failedField;
       try {

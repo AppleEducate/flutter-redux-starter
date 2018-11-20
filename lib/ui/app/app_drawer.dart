@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
           ),
           // STARTER: menu - do not remove comment
           ListTile(
-            leading: Icon(Icons.widgets),
+            leading: Icon(Icons.track_changes),
             title: Text('Tasks'),
             onTap: () => store.dispatch(ViewTaskList(context)),
           ),
