@@ -51,15 +51,15 @@ class TaskScreen extends StatelessWidget {
 
           TaskFields.Lead_Task_Time,
 
-          TaskFields.Alert_Time_Offset,
+          // TaskFields.Alert_Time_Offset,
 
           TaskFields.Lead_Task_Status,
 
-          TaskFields.Lead_ID,
+          // TaskFields.Lead_ID,
 
-          TaskFields.Contact_ID,
+          // TaskFields.Contact_ID,
 
-          TaskFields.Core_Lead_ID,
+          // TaskFields.Core_Lead_ID,
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
