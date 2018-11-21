@@ -53,6 +53,7 @@ final contactsReducer = combineReducers<ContactState>([
   TypedReducer<ContactState, DeleteContactRequest>(_deleteContactRequest),
   TypedReducer<ContactState, DeleteContactSuccess>(_deleteContactSuccess),
   TypedReducer<ContactState, DeleteContactFailure>(_deleteContactFailure),
+  TypedReducer<ContactState, ChangePaging>(_changePaging),
 ]);
 
 ContactState _deleteContactRequest(
@@ -60,6 +61,10 @@ ContactState _deleteContactRequest(
   var contact = contactState.map[action.contactId].rebuild((b) => b);
 
   return contactState.rebuild((b) => b..map[action.contactId] = contact);
+}
+
+ContactState _changePaging(ContactState contactState, ChangePaging action) {
+  return contactState.rebuild((b) => b..paging = action.paging);
 }
 
 ContactState _deleteContactSuccess(

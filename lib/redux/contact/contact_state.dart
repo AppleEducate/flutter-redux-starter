@@ -5,7 +5,7 @@ import 'package:MyUnifyMobile/constants.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/ui/entity_ui_state.dart';
 import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
-
+import '../../data/models/paging_model.dart';
 part 'contact_state.g.dart';
 
 abstract class ContactState
@@ -16,10 +16,14 @@ abstract class ContactState
   BuiltMap<String, ContactEntity> get map;
   BuiltList<String> get list;
 
+  @nullable
+  PagingModel get paging;
+
   factory ContactState() {
     return _$ContactState._(
       map: BuiltMap<String, ContactEntity>(),
       list: BuiltList<String>(),
+      paging: PagingModel(rows: 100, page: 1),
     );
   }
 

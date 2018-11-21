@@ -108,7 +108,9 @@ Middleware<AppState> _loadContacts(ContactRepository repository) {
     }
 
     store.dispatch(LoadContactsRequest());
-    repository.loadList(state.authState).then((data) {
+    repository
+        .loadList(state.authState, paging: state?.contactState?.paging)
+        .then((data) {
       store.dispatch(LoadContactsSuccess(data));
 
       if (action.completer != null) {

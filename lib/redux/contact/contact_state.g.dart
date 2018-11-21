@@ -146,11 +146,14 @@ class _$ContactState extends ContactState {
   final BuiltMap<String, ContactEntity> map;
   @override
   final BuiltList<String> list;
+  @override
+  final PagingModel paging;
 
   factory _$ContactState([void updates(ContactStateBuilder b)]) =>
       (new ContactStateBuilder()..update(updates)).build();
 
-  _$ContactState._({this.lastUpdated, this.map, this.list}) : super._() {
+  _$ContactState._({this.lastUpdated, this.map, this.list, this.paging})
+      : super._() {
     if (map == null) {
       throw new BuiltValueNullFieldError('ContactState', 'map');
     }
@@ -172,13 +175,15 @@ class _$ContactState extends ContactState {
     return other is ContactState &&
         lastUpdated == other.lastUpdated &&
         map == other.map &&
-        list == other.list;
+        list == other.list &&
+        paging == other.paging;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, lastUpdated.hashCode), map.hashCode), list.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, paging.hashCode), lastUpdated.hashCode), map.hashCode),
+        list.hashCode));
   }
 
   @override
@@ -208,11 +213,16 @@ class ContactStateBuilder
   ListBuilder<String> get list => _$this._list ??= new ListBuilder<String>();
   set list(ListBuilder<String> list) => _$this._list = list;
 
+  PagingModel _paging;
+  PagingModel get paging => _$this._paging;
+  set paging(PagingModel paging) => _$this._paging = paging;
+
   ContactStateBuilder();
 
   ContactStateBuilder get _$this {
     if (_$v != null) {
       _lastUpdated = _$v.lastUpdated;
+      _paging = _$v.paging;
       _map = _$v.map?.toBuilder();
       _list = _$v.list?.toBuilder();
       _$v = null;

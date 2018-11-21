@@ -14,6 +14,7 @@ import '../../redux/contact/contact_selectors.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
 import '../app/icon_message.dart';
 import 'contact_list.dart';
+import '../../data/models/paging_model.dart';
 
 class ContactListBuilder extends StatelessWidget {
   static final String route = '/contacts/edit';
@@ -54,6 +55,11 @@ class ContactListVM {
   static ContactListVM fromStore(Store<AppState> store) {
     Future<Null> _handleRefresh(
         BuildContext context, bool up, RefreshController controller) {
+      if (up) {
+        store.dispatch(ChangePaging(paging: PagingModel(rows: 100, page: 1)));
+      } else {
+        store.dispatch(ChangePaging(paging: PagingModel(rows: 100, page: 2)));
+      }
       final Completer<Null> completer = new Completer<Null>();
       controller.requestRefresh(up);
       store.dispatch(LoadContacts(completer, true));

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/app/app_actions.dart';
+import '../../data/models/paging_model.dart';
 
 class ViewContactList implements PersistUI {
   final BuildContext context;
@@ -26,6 +27,11 @@ class LoadContacts {
   final bool force;
 
   LoadContacts([this.completer, this.force = false]);
+}
+
+class ChangePaging {
+  final PagingModel paging;
+  ChangePaging({this.paging});
 }
 
 class LoadContactsRequest implements StartLoading {}

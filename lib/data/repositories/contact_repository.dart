@@ -8,6 +8,8 @@ import 'package:MyUnifyMobile/redux/auth/auth_state.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/data/web_client.dart';
 import 'package:MyUnifyMobile/constants.dart';
+import '../models/paging_model.dart';
+import 'package:flutter/foundation.dart';
 
 class ContactRepository {
   final WebClient webClient;
@@ -17,9 +19,9 @@ class ContactRepository {
   });
 
   Future<BuiltList<ContactEntity>> loadList(AuthState auth,
-      {int rows, int page}) async {
+      {@required PagingModel paging}) async {
     final response = await webClient.get(
-        kApiUrl + '/contacts/' + (rows ?? 100).toString(),
+        kApiUrl + '/contacts/' + (paging?.rows ?? 100).toString(),
         token: auth?.token);
 
     var list = new BuiltList<ContactEntity>(response.map((contact) {
