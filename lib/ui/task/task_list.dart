@@ -4,6 +4,7 @@ import 'package:MyUnifyMobile/ui/task/task_item.dart';
 import 'package:MyUnifyMobile/ui/task/task_list_vm.dart';
 import '../../widgets/date_view.dart';
 import '../../utils/date_formatter.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 
 class TaskList extends StatelessWidget {
   final TaskListVM viewModel;
@@ -36,8 +37,12 @@ class TaskList extends StatelessWidget {
   }
 
   Widget _buildListView(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => viewModel.onRefreshed(context),
+    return SmartRefresher(
+      // onRefresh: () => viewModel.onRefreshed(context),
+      enablePullDown: true,
+      enablePullUp: true,
+      onRefresh: (bool up) => viewModel.onRefreshed(context, up),
+      // onOffsetChange: _onOffsetCallback,
       child: viewModel.taskList == null || viewModel.taskList.isEmpty
           ? Center(child: Text('No Tasks Found'))
           : ListView.builder(
