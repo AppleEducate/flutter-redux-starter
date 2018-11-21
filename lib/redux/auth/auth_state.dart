@@ -8,6 +8,7 @@ abstract class AuthState implements Built<AuthState, AuthStateBuilder> {
   String get password;
   bool get isInitialized;
   bool get isAuthenticated;
+  String get token;
 
   @nullable
   String get error;
@@ -18,6 +19,7 @@ abstract class AuthState implements Built<AuthState, AuthStateBuilder> {
       password: '',
       isAuthenticated: false,
       isInitialized: false,
+      token: '',
     );
   }
 

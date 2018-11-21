@@ -47,62 +47,64 @@ class _LoginState extends State<LoginView> {
       return Container();
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        children: <Widget>[
-          Form(
-            key: _formKey,
-            child: FormCard(
-              children: <Widget>[
-                TextFormField(
-                  controller: _emailController,
-                  key: _emailKey,
-                  autocorrect: false,
-                  decoration: InputDecoration(labelText: 'Email'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (val) => val.isEmpty || val.trim().length == 0
-                      ? 'Please enter your email'
-                      : null,
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  key: _passwordKey,
-                  autocorrect: false,
-                  decoration: InputDecoration(labelText: 'Password'),
-                  validator: (val) => val.isEmpty || val.trim().length == 0
-                      ? 'Please enter your password'
-                      : null,
-                  obscureText: true,
-                ),
-                viewModel.authState.error == null
-                    ? Container()
-                    : Container(
-                        padding: EdgeInsets.only(top: 26.0, bottom: 4.0),
-                        child: Center(
-                          child: Text(
-                            viewModel.authState.error,
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: <Widget>[
+            Form(
+              key: _formKey,
+              child: FormCard(
+                children: <Widget>[
+                  TextFormField(
+                    controller: _emailController,
+                    key: _emailKey,
+                    autocorrect: false,
+                    decoration: InputDecoration(labelText: 'Email'),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (val) => val.isEmpty || val.trim().length == 0
+                        ? 'Please enter your email'
+                        : null,
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    key: _passwordKey,
+                    autocorrect: false,
+                    decoration: InputDecoration(labelText: 'Password'),
+                    validator: (val) => val.isEmpty || val.trim().length == 0
+                        ? 'Please enter your password'
+                        : null,
+                    obscureText: true,
+                  ),
+                  viewModel.authState.error == null
+                      ? Container()
+                      : Container(
+                          padding: EdgeInsets.only(top: 26.0, bottom: 4.0),
+                          child: Center(
+                            child: Text(
+                              viewModel.authState.error,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
-          ),
-          RaisedButton(
-            child: Text('LOGIN'),
-            onPressed: () {
-              if (!_formKey.currentState.validate()) {
-                return;
-              }
-              viewModel.onLoginPressed(
-                  context, _emailController.text, _passwordController.text);
-            },
-          ),
-        ],
+            RaisedButton(
+              child: Text('LOGIN'),
+              onPressed: () {
+                if (!_formKey.currentState.validate()) {
+                  return;
+                }
+                viewModel.onLoginPressed(
+                    context, _emailController.text, _passwordController.text);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

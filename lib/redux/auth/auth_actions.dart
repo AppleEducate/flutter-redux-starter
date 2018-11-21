@@ -32,7 +32,16 @@ class UserLoginRequest implements StartLoading {
   UserLoginRequest(this.completer, this.email, this.password);
 }
 
-class UserLoginSuccess implements StopLoading {}
+class UserRefreshTokenRequest implements StartLoading {
+  final Completer completer;
+
+  UserRefreshTokenRequest(this.completer);
+}
+
+class UserLoginSuccess implements StopLoading {
+  final String token;
+  UserLoginSuccess(this.token);
+}
 
 class UserLoginFailure implements StopLoading {
   final String error;

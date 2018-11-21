@@ -5,6 +5,7 @@ import 'package:MyUnifyMobile/redux/auth/auth_actions.dart';
 import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/null_or_empty.dart';
 
 List<Middleware<AppState>> createStoreAuthMiddleware([
   AuthRepository repository = const AuthRepository(),
@@ -43,10 +44,14 @@ Middleware<AppState> _createLoginInit() {
 Middleware<AppState> _createLoginRequest(AuthRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     repository.login(action.email, action.password).then((data) {
-      _saveAuthLocal(action);
-
-      store.dispatch(UserLoginSuccess());
-      action.completer.complete(null);
+      if (isNullOrEmpty(data)) {
+        store.dispatch(UserLoginFailure("Token Not Found"));
+      } else {
+        print("Token: $data");
+        _saveAuthLocal(action);
+        store.dispatch(UserLoginSuccess(data));
+        action.completer.complete(null);
+      }
     }).catchError((error) {
       print(error);
       store.dispatch(UserLoginFailure(error));

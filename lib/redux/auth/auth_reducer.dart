@@ -26,7 +26,8 @@ AuthState userLoginSuccessReducer(
     AuthState authState, UserLoginSuccess action) {
   return authState.rebuild((b) => b
     ..isAuthenticated = true
-    ..password = '');
+    ..password = ''
+    ..token = action.token);
 }
 
 AuthState userLoginFailureReducer(

@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:core';
 import 'dart:convert';
-import 'package:built_collection/built_collection.dart';
-import 'package:MyUnifyMobile/data/models/models.dart';
-import 'package:MyUnifyMobile/data/models/serializers.dart';
-import 'package:MyUnifyMobile/data/web_client.dart';
+import 'dart:core';
+
+import '../models/token_model.dart';
+import '../web_client.dart';
+import '../../constants.dart';
 
 class AuthRepository {
   final WebClient webClient;
@@ -13,19 +13,38 @@ class AuthRepository {
     this.webClient = const WebClient(),
   });
 
-  Future<BuiltList<dynamic>> login(String email, String password) async {
+  Future<String> login(String email, String password) async {
     final credentials = {
-      'email': email,
+      'grant_type': 'password',
+      'username': email,
       'password': password,
     };
 
-    var url = 'https://example.com/login';
+    var url = kApiUrl.replaceAll('api', 'token');
 
-    final response = await webClient.post(url, json.encode(credentials));
+    final response = await webClient.post(
+      url,
+      credentials,
+      bodyContentType: "application/x-www-form-urlencoded",
+    );
 
-    LoginResponse loginResponse =
-        serializers.deserializeWith(LoginResponse.serializer, response);
+    // try {
+    //   Map<String, dynamic> _response = json.decode(response);
+    //   print("Response: $_response");
+    //   // var _token = Token.fromJson(_response)?.access_token;
+    //   // print("Token From JSON: $_token");
+    //   // return _token;
+      
+    // } catch (e) {
+    //   print(e);
+    //   return null;
+    // }
 
-    return loginResponse.data.toBuiltList();
+    return response['access_token'];
+
+    // LoginResponse loginResponse =
+    //     serializers.deserializeWith(LoginResponse.serializer, response);
+
+    // return loginResponse.data.toBuiltList();
   }
 }

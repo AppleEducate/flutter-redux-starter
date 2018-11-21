@@ -5,18 +5,21 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../constants.dart';
-
 class WebClient {
   const WebClient();
 
-  Future<dynamic> get(String url) async {
+  Future<dynamic> get(String url, {String token}) async {
     final http.Response response = await getClient().get(
       url,
       headers: {
-        HttpHeaders.authorizationHeader: "Bearer $kToken",
+        HttpHeaders.authorizationHeader: "Bearer $token",
       },
     );
+
+    print("URL: $url");
+    print("Token: $token");
+    print("Response Code: " + response.statusCode.toString());
+    print("Response Body: " + response.body.toString());
 
     if (response.statusCode >= 400) {
       if (response.statusCode == 404) return response.body; // Not Found Message
@@ -26,15 +29,25 @@ class WebClient {
     return json.decode(response.body);
   }
 
-  Future<dynamic> post(String url, dynamic data) async {
+  Future<dynamic> post(
+    String url,
+    dynamic data, {
+    String bodyContentType,
+    String token,
+  }) async {
     final http.Response response = await getClient().post(
       url,
       body: data,
       headers: {
-        'Content-Type': 'application/json',
-        HttpHeaders.authorizationHeader: "Bearer $kToken",
+        HttpHeaders.contentTypeHeader: bodyContentType ?? 'application/json',
+        HttpHeaders.authorizationHeader: "Bearer $token",
       },
     );
+    print("URL: $url");
+    print("Headers: $bodyContentType");
+    print("Body: $data");
+    print("Response Code: " + response.statusCode.toString());
+    print("Response Body: " + response.body.toString());
 
     if (response.statusCode >= 400) {
       throw ('An error occurred: ' + response.body);
@@ -49,13 +62,13 @@ class WebClient {
     }
   }
 
-  Future<dynamic> put(String url, dynamic data) async {
+  Future<dynamic> put(String url, dynamic data, {String token}) async {
     final http.Response response = await getClient().put(
       url,
       body: data,
       headers: {
         'Content-Type': 'application/json',
-        HttpHeaders.authorizationHeader: "Bearer $kToken",
+        HttpHeaders.authorizationHeader: "Bearer $token",
       },
     );
 

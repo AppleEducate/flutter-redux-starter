@@ -51,6 +51,13 @@ class _$AuthStateSerializer implements StructuredSerializer<AuthState> {
             specifiedType: const FullType(String)));
     }
 
+    if (object.token != null) {
+      result
+        ..add('token')
+        ..add(serializers.serialize(object.token,
+            specifiedType: const FullType(String)));
+    }
+
     return result;
   }
 
@@ -85,6 +92,10 @@ class _$AuthStateSerializer implements StructuredSerializer<AuthState> {
           result.error = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'token':
+          result.token = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -103,17 +114,20 @@ class _$AuthState extends AuthState {
   final bool isAuthenticated;
   @override
   final String error;
+  @override
+  final String token;
 
   factory _$AuthState([void updates(AuthStateBuilder b)]) =>
       (new AuthStateBuilder()..update(updates)).build();
 
-  _$AuthState._(
-      {this.email,
-      this.password,
-      this.isInitialized,
-      this.isAuthenticated,
-      this.error})
-      : super._() {
+  _$AuthState._({
+    this.email,
+    this.password,
+    this.isInitialized,
+    this.isAuthenticated,
+    this.error,
+    this.token,
+  }) : super._() {
     if (email == null) {
       throw new BuiltValueNullFieldError('AuthState', 'email');
     }
@@ -143,14 +157,17 @@ class _$AuthState extends AuthState {
         password == other.password &&
         isInitialized == other.isInitialized &&
         isAuthenticated == other.isAuthenticated &&
-        error == other.error;
+        error == other.error &&
+        token == other.token;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, email.hashCode), password.hashCode),
+            $jc(
+                $jc($jc($jc(0, token.hashCode), email.hashCode),
+                    password.hashCode),
                 isInitialized.hashCode),
             isAuthenticated.hashCode),
         error.hashCode));
@@ -163,7 +180,8 @@ class _$AuthState extends AuthState {
           ..add('password', password)
           ..add('isInitialized', isInitialized)
           ..add('isAuthenticated', isAuthenticated)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('token', token))
         .toString();
   }
 }
@@ -193,6 +211,10 @@ class AuthStateBuilder implements Builder<AuthState, AuthStateBuilder> {
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  String _token;
+  String get token => _$this._token;
+  set token(String token) => _$this._token = token;
+
   AuthStateBuilder();
 
   AuthStateBuilder get _$this {
@@ -202,6 +224,7 @@ class AuthStateBuilder implements Builder<AuthState, AuthStateBuilder> {
       _isInitialized = _$v.isInitialized;
       _isAuthenticated = _$v.isAuthenticated;
       _error = _$v.error;
+      _token = _$v.token;
       _$v = null;
     }
     return this;
@@ -224,11 +247,13 @@ class AuthStateBuilder implements Builder<AuthState, AuthStateBuilder> {
   _$AuthState build() {
     final _$result = _$v ??
         new _$AuthState._(
-            email: email,
-            password: password,
-            isInitialized: isInitialized,
-            isAuthenticated: isAuthenticated,
-            error: error);
+          email: email,
+          password: password,
+          isInitialized: isInitialized,
+          isAuthenticated: isAuthenticated,
+          error: error,
+          token: token,
+        );
     replace(_$result);
     return _$result;
   }

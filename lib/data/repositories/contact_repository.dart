@@ -16,8 +16,11 @@ class ContactRepository {
     this.webClient = const WebClient(),
   });
 
-  Future<BuiltList<ContactEntity>> loadList(AuthState auth) async {
-    final response = await webClient.get(kApiUrl + '/contacts/100');
+  Future<BuiltList<ContactEntity>> loadList(AuthState auth,
+      {int rows, int page}) async {
+    final response = await webClient.get(
+        kApiUrl + '/contacts/' + (rows ?? 100).toString(),
+        token: auth?.token);
 
     var list = new BuiltList<ContactEntity>(response.map((contact) {
       return serializers.deserializeWith(ContactEntity.serializer, contact);
@@ -36,7 +39,8 @@ class ContactRepository {
           await webClient.post(kApiUrl + '/contacts/new', json.encode(data));
     } else {
       var url = kApiUrl + '/contacts/info/' + contact.id.toString();
-      response = await webClient.put(url, json.encode(data));
+      response =
+          await webClient.put(url, json.encode(data), token: auth?.token);
     }
 
     return serializers.deserializeWith(ContactEntity.serializer, response);

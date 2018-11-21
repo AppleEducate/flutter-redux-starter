@@ -90,11 +90,11 @@ Middleware<AppState> _createLoadState(
           }).catchError((error) => _handleError(store, error, action.context));
         }).catchError((error) => _handleError(store, error, action.context));
       } else {
-        store.dispatch(UserLoginSuccess());
-        Navigator.of(action.context).pushReplacementNamed(HomeScreen.route);
+        // store.dispatch(UserLoginSuccess());
+        // Navigator.of(action.context).pushReplacementNamed(HomeScreen.route);
 
-        //store.dispatch(UserLogout());
-        //store.dispatch(LoadUserLogin(action.context));
+        store.dispatch(UserLogout());
+        store.dispatch(LoadUserLogin(action.context));
       }
     });
 
@@ -134,11 +134,11 @@ List<String> _getRoutes(AppState state) {
 _handleError(store, error, context) {
   print(error);
 
-  store.dispatch(UserLoginSuccess());
-  Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+  // store.dispatch(UserLoginSuccess());
+  // Navigator.of(context).pushReplacementNamed(HomeScreen.route);
 
-  //store.dispatch(UserLogout());
-  //store.dispatch(LoadUserLogin(context));
+  store.dispatch(UserLogout());
+  store.dispatch(LoadUserLogin(context));
 }
 
 Middleware<AppState> _createUserLoggedIn(

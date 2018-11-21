@@ -17,7 +17,8 @@ class TaskRepository {
   });
 
   Future<BuiltList<TaskEntity>> loadList(AuthState auth, String date) async {
-    final response = await webClient.get(kApiUrl + '/calendar/$date');
+    final response =
+        await webClient.get(kApiUrl + '/calendar/$date', token: auth?.token);
     print("Loaded Tasks $date => $response");
 
     if (response.toString().contains("No Tasks Found")) {
@@ -45,7 +46,8 @@ class TaskRepository {
           await webClient.post(kApiUrl + '/calendar/new', json.encode(data));
     } else {
       var url = kApiUrl + '/calendar/info/' + task.id.toString();
-      response = await webClient.put(url, json.encode(data));
+      response =
+          await webClient.put(url, json.encode(data), token: auth?.token);
     }
 
     return serializers.deserializeWith(TaskEntity.serializer, response);

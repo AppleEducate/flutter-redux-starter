@@ -7,7 +7,7 @@ import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
 import 'package:MyUnifyMobile/redux/task/task_actions.dart';
-
+import '../../redux/auth/auth_actions.dart';
 import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -53,8 +53,16 @@ class AppDrawer extends StatelessWidget {
           ),
 
           AboutListTile(
-            applicationName: '',
+            applicationName: 'My Unify Mobile',
             icon: Icon(Icons.info_outline),
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () => store.dispatch(LoadUserLogin(context)),
           ),
         ],
       ),

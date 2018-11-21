@@ -8,6 +8,8 @@ import 'package:MyUnifyMobile/redux/auth/auth_actions.dart';
 import 'package:MyUnifyMobile/redux/auth/auth_state.dart';
 import 'package:MyUnifyMobile/ui/auth/login.dart';
 import 'package:redux/redux.dart';
+import '../home/home_screen.dart';
+import '../../redux/ui/ui_actions.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -52,8 +54,8 @@ class LoginVM {
           store.dispatch(
               UserLoginRequest(completer, email.trim(), password.trim()));
           completer.future.then((_) {
-            //Navigator.of(context).pushReplacementNamed(DashboardScreen.route);
-            //store.dispatch(UpdateCurrentRoute(DashboardScreen.route));
+            store.dispatch(UpdateCurrentRoute(HomeScreen.route));
+            Navigator.of(context).pushReplacementNamed(HomeScreen.route);
           });
         });
   }

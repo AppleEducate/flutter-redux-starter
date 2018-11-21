@@ -10,6 +10,7 @@ import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 import 'package:MyUnifyMobile/redux/task/task_state.dart';
 
 import 'package:MyUnifyMobile/redux/contact/contact_state.dart';
+import '../../utils/date_formatter.dart';
 
 part 'app_state.g.dart';
 
@@ -26,7 +27,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
       authState: AuthState(),
       uiState: UIState(),
       dataState: DataState(),
-      tasksDate: '',
+      tasksDate: formatDateCustom(DateTime.now()),
     );
   }
 
