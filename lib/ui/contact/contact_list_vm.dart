@@ -11,6 +11,7 @@ import '../../data/models/contact_model.dart';
 import '../../redux/app/app_state.dart';
 import '../../redux/contact/contact_actions.dart';
 import '../../redux/contact/contact_selectors.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 import '../app/icon_message.dart';
 import 'contact_list.dart';
 
@@ -38,7 +39,7 @@ class ContactListVM {
   final bool isLoaded;
   final Function(BuildContext, ContactEntity) onContactTap;
   final Function(BuildContext, ContactEntity, DismissDirection) onDismissed;
-  final Function(BuildContext, bool) onRefreshed;
+  final Function(BuildContext, bool, RefreshController) onRefreshed;
 
   ContactListVM({
     @required this.contactList,
@@ -51,10 +52,13 @@ class ContactListVM {
   });
 
   static ContactListVM fromStore(Store<AppState> store) {
-    Future<Null> _handleRefresh(BuildContext context, bool up) {
+    Future<Null> _handleRefresh(
+        BuildContext context, bool up, RefreshController controller) {
       final Completer<Null> completer = new Completer<Null>();
+      controller.requestRefresh(up);
       store.dispatch(LoadContacts(completer, true));
       return completer.future.then((_) {
+        controller.sendBack(up, RefreshStatus.idle);
         Scaffold.of(context).showSnackBar(SnackBar(
             content: IconMessage(
               message: 'Refresh complete',
@@ -75,7 +79,8 @@ class ContactListVM {
         onContactTap: (context, contact) {
           store.dispatch(ViewContact(contact: contact, context: context));
         },
-        onRefreshed: (context, bool up) => _handleRefresh(context, up),
+        onRefreshed: (context, bool up, RefreshController controller) =>
+            _handleRefresh(context, up, controller),
         onDismissed: (BuildContext context, ContactEntity contact,
             DismissDirection direction) {
           final Completer<Null> completer = new Completer<Null>();

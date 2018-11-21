@@ -8,6 +8,7 @@ import "package:pull_to_refresh/pull_to_refresh.dart";
 
 class ContactList extends StatelessWidget {
   final ContactListVM viewModel;
+  final RefreshController _refreshController = RefreshController();
 
   ContactList({
     Key key,
@@ -24,17 +25,16 @@ class ContactList extends StatelessWidget {
   }
 
   Widget _buildListView(BuildContext context) {
-     if (viewModel.contactList == null || viewModel.contactList.isEmpty) {
+    if (viewModel.contactList == null || viewModel.contactList.isEmpty) {
       return Text('No Contacts Found');
     }
 
-
     return SmartRefresher(
-      // onRefresh: () => viewModel.onRefreshed(context),
+      controller: _refreshController,
       enablePullDown: true,
       enablePullUp: true,
-      onRefresh: (bool up) => viewModel.onRefreshed(context, up),
-      // onOffsetChange: _onOffsetCallback,
+      onRefresh: (bool up) =>
+          viewModel.onRefreshed(context, up, _refreshController),
       child: ListView.builder(
           shrinkWrap: true,
           itemCount: viewModel.contactList.length,
