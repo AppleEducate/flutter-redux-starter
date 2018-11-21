@@ -12,11 +12,11 @@ class DateViewWidget extends StatelessWidget {
     }
   }
 
-  void handleDateRange(range) {
-    if (range != null) {
-      print("Range is ${range.item1}, ${range.item2}");
-    }
-  }
+  // void handleDateRange(range) {
+  //   if (range != null) {
+  //     print("Range is ${range.item1}, ${range.item2}");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,6 @@ class DateViewWidget extends StatelessWidget {
       child: new Calendar(
         initialCalendarDateOverride: date,
         isExpandable: true,
-        onSelectedRangeChange: handleDateRange,
         onDateSelected: handleNewDate,
       ),
     );

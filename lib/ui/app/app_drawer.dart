@@ -55,6 +55,7 @@ class AppDrawer extends StatelessWidget {
           AboutListTile(
             applicationName: 'My Unify Mobile',
             icon: Icon(Icons.info_outline),
+            child: Text('About'),
           ),
 
           Divider(),
