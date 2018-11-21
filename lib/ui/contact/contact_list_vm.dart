@@ -38,7 +38,7 @@ class ContactListVM {
   final bool isLoaded;
   final Function(BuildContext, ContactEntity) onContactTap;
   final Function(BuildContext, ContactEntity, DismissDirection) onDismissed;
-  final Function(BuildContext) onRefreshed;
+  final Function(BuildContext, bool) onRefreshed;
 
   ContactListVM({
     @required this.contactList,
@@ -51,7 +51,7 @@ class ContactListVM {
   });
 
   static ContactListVM fromStore(Store<AppState> store) {
-    Future<Null> _handleRefresh(BuildContext context) {
+    Future<Null> _handleRefresh(BuildContext context, bool up) {
       final Completer<Null> completer = new Completer<Null>();
       store.dispatch(LoadContacts(completer, true));
       return completer.future.then((_) {
@@ -75,7 +75,7 @@ class ContactListVM {
         onContactTap: (context, contact) {
           store.dispatch(ViewContact(contact: contact, context: context));
         },
-        onRefreshed: (context) => _handleRefresh(context),
+        onRefreshed: (context, bool up) => _handleRefresh(context, up),
         onDismissed: (BuildContext context, ContactEntity contact,
             DismissDirection direction) {
           final Completer<Null> completer = new Completer<Null>();

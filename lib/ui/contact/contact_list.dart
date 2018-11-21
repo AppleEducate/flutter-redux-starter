@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'contact_item.dart';
 import 'contact_list_vm.dart';
 
+import "package:pull_to_refresh/pull_to_refresh.dart";
+
 class ContactList extends StatelessWidget {
   final ContactListVM viewModel;
 
@@ -22,8 +24,17 @@ class ContactList extends StatelessWidget {
   }
 
   Widget _buildListView(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => viewModel.onRefreshed(context),
+     if (viewModel.contactList == null || viewModel.contactList.isEmpty) {
+      return Text('No Contacts Found');
+    }
+
+
+    return SmartRefresher(
+      // onRefresh: () => viewModel.onRefreshed(context),
+      enablePullDown: true,
+      enablePullUp: true,
+      onRefresh: (bool up) => viewModel.onRefreshed(context, up),
+      // onOffsetChange: _onOffsetCallback,
       child: ListView.builder(
           shrinkWrap: true,
           itemCount: viewModel.contactList.length,
