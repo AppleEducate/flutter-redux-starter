@@ -1,23 +1,43 @@
-// ListTile(
-//   leading: const Icon(Icons.map),
-//   title: Text(
-//     'Address',
-//     textScaleFactor: textScaleFactor,
-//   ),
-//   subtitle: _contactDetails == null
-//       ? null
-//       : Text(
-//           _contactDetails?.address.toString().isEmpty
-//               ? "No Address Found"
-//               : _contactDetails?.address.toString(),
-//           textScaleFactor: textScaleFactor,
-//         ),
-//   onTap: _contactDetails?.address.toString().isEmpty
-//       ? null
-//       : () => openMaps(
-//           context,
-//           _contactDetails?.address
-//               .toString()
-//               .replaceAll('\n', ' ')
-//               .replaceAll(',', '')),
-// ),
+import 'package:flutter/material.dart';
+import '../utils/text_format.dart';
+import '../utils/openMaps.dart';
+
+class AddressTile extends StatelessWidget {
+  final String label, address;
+  final IconData icon;
+
+  AddressTile({
+    @required this.address,
+    this.label,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (address == null || address.isEmpty) {
+      return ListTile(
+          leading: Icon(icon ?? Icons.map),
+          title: Text(
+            label ?? 'Address',
+            textScaleFactor: textScaleFactor,
+          ),
+          subtitle: Text(
+            "No Address Found",
+            textScaleFactor: textScaleFactor,
+          ));
+    }
+    return ListTile(
+      leading: Icon(icon ?? Icons.map),
+      title: Text(
+        label ?? 'Address',
+        textScaleFactor: textScaleFactor,
+      ),
+      subtitle: Text(
+        address,
+        textScaleFactor: textScaleFactor,
+      ),
+      onTap: () => openMaps(context,
+          address.toString().replaceAll('\n', ' ').replaceAll(',', '')),
+    );
+  }
+}
