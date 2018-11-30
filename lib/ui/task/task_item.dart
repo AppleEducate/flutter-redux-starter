@@ -48,18 +48,9 @@ subtitle: Text(task.Lead_Task_Title, maxLines: 4),
 
     return ListTile(
       onTap: onTap,
-      title: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                task.Lead_Task_Title,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-          ],
-        ),
+      title: Text(
+        task.Lead_Task_Title,
+        style: Theme.of(context).textTheme.title,
       ),
       // STARTER: subtitle - do not remove comment
       subtitle: Text(task.Lead_Task_Description, maxLines: 4),

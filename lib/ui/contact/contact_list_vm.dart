@@ -56,9 +56,14 @@ class ContactListVM {
     Future<Null> _handleRefresh(
         BuildContext context, bool up, RefreshController controller) {
       if (up) {
-        store.dispatch(ChangePaging(paging: PagingModel(rows: 100, page: 1)));
+        store.dispatch(ChangePaging(paging: PagingModel(rows: 10, page: 1)));
       } else {
-        store.dispatch(ChangePaging(paging: PagingModel(rows: 100, page: 2)));
+        store.dispatch(ChangePaging(
+          paging: PagingModel(
+            rows: store.state.contactState.paging?.rows ?? 10,
+            page: store.state.contactState.paging?.page ?? 1 + 1,
+          ),
+        ));
       }
       final Completer<Null> completer = new Completer<Null>();
       controller.requestRefresh(up);

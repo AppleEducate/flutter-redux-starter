@@ -41,29 +41,18 @@ class TaskList extends StatelessWidget {
     if (viewModel.taskList == null || viewModel.taskList.isEmpty) {
       return Text('No Tasks Found');
     }
-
-    return SmartRefresher(
-      // onRefresh: () => viewModel.onRefreshed(context),
-      enablePullDown: true,
-      enablePullUp: true,
-      onRefresh: (bool up) => viewModel.onRefreshed(context, up),
-      // onOffsetChange: _onOffsetCallback,
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: viewModel.taskList.length,
-          itemBuilder: (BuildContext context, index) {
-            var taskId = viewModel.taskList[index];
-            var task = viewModel.taskMap[taskId];
-            return Column(children: <Widget>[
-              TaskItem(
-                task: task,
-                onDismissed: (DismissDirection direction) =>
-                    viewModel.onDismissed(context, task, direction),
-                onTap: () => viewModel.onTaskTap(context, task),
-              ),
-              Divider(height: 1.0),
-            ]);
-          }),
-    );
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: viewModel.taskList.length,
+        itemBuilder: (BuildContext context, index) {
+          var taskId = viewModel.taskList[index];
+          var task = viewModel.taskMap[taskId];
+          return TaskItem(
+            task: task,
+            onDismissed: (DismissDirection direction) =>
+                viewModel.onDismissed(context, task, direction),
+            onTap: () => viewModel.onTaskTap(context, task),
+          );
+        });
   }
 }

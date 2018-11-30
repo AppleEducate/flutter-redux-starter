@@ -56,7 +56,11 @@ class TaskListVM {
   });
 
   static TaskListVM fromStore(Store<AppState> store) {
-    Future<Null> _handleRefresh(BuildContext context, bool up) {
+    Future<Null> _handleRefresh(
+      BuildContext context, {
+      bool up,
+      String message,
+    }) {
       final Completer<Null> completer = new Completer<Null>();
       store.dispatch(LoadTasks(
         completer,
@@ -65,7 +69,7 @@ class TaskListVM {
       ));
       return completer.future.then((_) {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: IconMessage(message: 'Refresh complete'),
+          content: IconMessage(message: message ?? 'Refresh complete'),
           duration: Duration(seconds: 3),
         ));
       });
@@ -81,7 +85,7 @@ class TaskListVM {
         onDateChange: (BuildContext context, DateTime value) {
           var _date = formatDateCustom(value);
           store.dispatch(ChangeDate(date: _date, state: store.state));
-          _handleRefresh(context, true);
+          _handleRefresh(context, up: true, message: "Tasks Loaded!");
         },
         taskMap: store.state.taskState.map,
         isLoading: store.state.isLoading,
@@ -89,7 +93,7 @@ class TaskListVM {
         onTaskTap: (context, task) {
           store.dispatch(ViewTask(task: task, context: context));
         },
-        onRefreshed: (context, bool up) => _handleRefresh(context, up),
+        onRefreshed: (context, bool up) => _handleRefresh(context, up: up),
         onDismissed: (BuildContext context, TaskEntity task,
             DismissDirection direction) {
           final Completer<Null> completer = new Completer<Null>();

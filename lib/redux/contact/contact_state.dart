@@ -23,7 +23,7 @@ abstract class ContactState
     return _$ContactState._(
       map: BuiltMap<String, ContactEntity>(),
       list: BuiltList<String>(),
-      paging: PagingModel(rows: 100, page: 1),
+      paging: PagingModel(rows: 10, page: 1),
     );
   }
 
