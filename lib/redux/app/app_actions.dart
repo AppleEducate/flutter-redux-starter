@@ -9,7 +9,6 @@ class StartLoading {}
 class StopLoading {}
 
 class ChangeDate {
-  final AppState state;
   final String date;
-  ChangeDate({this.date, this.state});
+  ChangeDate({this.date});
 }

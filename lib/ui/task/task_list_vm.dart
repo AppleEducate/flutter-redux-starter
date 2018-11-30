@@ -84,7 +84,7 @@ class TaskListVM {
         date: store.state.tasksDate,
         onDateChange: (BuildContext context, DateTime value) {
           var _date = formatDateCustom(value);
-          store.dispatch(ChangeDate(date: _date, state: store.state));
+          store.dispatch(ChangeDate(date: _date));
           _handleRefresh(context, up: true, message: "Tasks Loaded!");
         },
         taskMap: store.state.taskState.map,

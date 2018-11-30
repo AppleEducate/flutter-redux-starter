@@ -13,7 +13,7 @@ AppState appReducer(AppState state, action) {
     return action.state.rebuild((b) => b.isLoading = false);
   } else if (action is ChangeDate) {
     print("Change Date: ${action.date}");
-    return action.state.rebuild((b) => b.tasksDate = action.date);
+    return state.rebuild((b) => b.tasksDate = action.date);
   }
 
   return state.rebuild((b) => b
