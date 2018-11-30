@@ -60,11 +60,13 @@ Middleware<AppState> _editContact() {
 Middleware<AppState> _deleteContact(ContactRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     var origContact = store.state.contactState.map[action.contactId];
+    store.dispatch(DeleteContactSuccess(origContact));
     repository
-        .deleteContact(
-            store.state.authState, origContact.id, EntityAction.delete)
-        .then((_) {
-      store.dispatch(DeleteContactSuccess(origContact));
+        .deleteContact(store.state.authState, origContact.id)
+        .then((response) {
+      if (!response.toString().contains("Deleted")) {
+        store.dispatch(DeleteContactFailure(origContact));
+      }
       if (action.completer != null) {
         action.completer.complete(null);
       }

@@ -74,8 +74,9 @@ ContactState _changePaging(ContactState contactState, ChangePaging action) {
 
 ContactState _deleteContactSuccess(
     ContactState contactState, DeleteContactSuccess action) {
-  return contactState
-      .rebuild((b) => b..map[action.contact.id] = action.contact);
+  return contactState.rebuild(
+    (b) => b..list.remove(action.contact.id),
+  );
 }
 
 ContactState _deleteContactFailure(
@@ -85,9 +86,11 @@ ContactState _deleteContactFailure(
 }
 
 ContactState _addContact(ContactState contactState, AddContactSuccess action) {
-  return contactState.rebuild((b) => b
-    ..map[action.contact.id] = action.contact
-    ..list.add(action.contact.id));
+  return contactState.rebuild(
+    (b) => b
+      ..map[action.contact.id] = action.contact
+      ..list.add(action.contact.id),
+  );
 }
 
 ContactState _updateContact(

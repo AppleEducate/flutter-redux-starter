@@ -36,15 +36,14 @@ class ContactRepository {
     return list;
   }
 
-  Future deleteContact(AuthState auth, String id, [EntityAction action]) async {
+  Future deleteContact(AuthState auth, String id) async {
     var url = kApiUrl + '/contacts/info/' + id.toString();
     var response;
     response = await webClient.delete(url, token: auth?.token);
     print(response);
   }
 
-  Future saveData(AuthState auth, ContactEntity contact,
-      [EntityAction action]) async {
+  Future saveData(AuthState auth, ContactEntity contact) async {
     var data = serializers.serializeWith(ContactEntity.serializer, contact);
     var response;
 
