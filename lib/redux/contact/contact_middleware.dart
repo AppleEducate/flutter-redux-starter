@@ -61,9 +61,10 @@ Middleware<AppState> _deleteContact(ContactRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     var origContact = store.state.contactState.map[action.contactId];
     repository
-        .saveData(store.state.authState, origContact, EntityAction.delete)
-        .then((contact) {
-      store.dispatch(DeleteContactSuccess(contact));
+        .deleteContact(
+            store.state.authState, origContact.id, EntityAction.delete)
+        .then((_) {
+      store.dispatch(DeleteContactSuccess(origContact));
       if (action.completer != null) {
         action.completer.complete(null);
       }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../data/models/contact_model.dart';
 import '../../utils/date_formatter.dart';
 import '../../widgets/three_row_tile.dart';
-//import 'package:MyUnifyMobile/ui/app/dismissible_entity.dart';
+import 'package:MyUnifyMobile/ui/app/dismissible_entity.dart';
 
 class ContactItem extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -21,7 +21,6 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*
     return DismissibleEntity(
       entity: contact,
       onDismissed: onDismissed,
@@ -42,12 +41,9 @@ class ContactItem extends StatelessWidget {
           ),
         ),
         // STARTER: subtitle - do not remove comment
-subtitle: Text(contact.last_name, maxLines: 4),
-
+        subtitle: Text(contact.last_name, maxLines: 4),
       ),
     );
-  }
-  */
 
     // return ListTile(
     //   onTap: onTap,
@@ -69,34 +65,34 @@ subtitle: Text(contact.last_name, maxLines: 4),
     //   subtitle: Text(contact.last_name, maxLines: 4),
     // );
 
-    return ThreeRowTile(
-      width: MediaQuery.of(context).size.width,
-      iconTap: onTap,
-      icon: Icon(Icons.person),
-      title: Text(
-        contact.lastFirstName,
-        style: Theme.of(context).textTheme.title,
-      ),
-      subtitle: contact?.last_activity == null ||
-              contact?.last_activity.toString().isEmpty
-          ? null
-          : Text(
-              contact?.last_activity ?? "",
-              style: Theme.of(context).textTheme.subtitle,
-            ),
-      onTap: onTap,
-      cell: contact?.cell_phone,
-      home: contact?.cell_phone,
-      office: contact?.cell_phone,
-      email: contact?.email,
-      box1: Utility(
-        value: formatDate(contact?.date_created),
-        hint: "Date Created",
-      ),
-      box2: Utility(
-        value: formatDate(contact?.date_modified),
-        hint: "Date Modified",
-      ),
-    );
+    // return ThreeRowTile(
+    //   width: MediaQuery.of(context).size.width,
+    //   iconTap: onTap,
+    //   icon: Icon(Icons.person),
+    //   title: Text(
+    //     contact.lastFirstName,
+    //     style: Theme.of(context).textTheme.title,
+    //   ),
+    //   subtitle: contact?.last_activity == null ||
+    //           contact?.last_activity.toString().isEmpty
+    //       ? null
+    //       : Text(
+    //           contact?.last_activity ?? "",
+    //           style: Theme.of(context).textTheme.subtitle,
+    //         ),
+    //   onTap: onTap,
+    //   cell: contact?.cell_phone,
+    //   home: contact?.cell_phone,
+    //   office: contact?.cell_phone,
+    //   email: contact?.email,
+    //   box1: Utility(
+    //     value: formatDate(contact?.date_created),
+    //     hint: "Date Created",
+    //   ),
+    //   box2: Utility(
+    //     value: formatDate(contact?.date_modified),
+    //     hint: "Date Modified",
+    //   ),
+    // );
   }
 }

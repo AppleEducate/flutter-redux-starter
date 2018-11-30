@@ -29,6 +29,27 @@ class WebClient {
     return json.decode(response.body);
   }
 
+  Future<dynamic> delete(String url, {String token}) async {
+    final http.Response response = await getClient().delete(
+      url,
+      headers: {
+        HttpHeaders.authorizationHeader: "Bearer $token",
+      },
+    );
+
+    print("URL: $url");
+    print("Token: $token");
+    print("Response Code: " + response.statusCode.toString());
+    print("Response Body: " + response.body.toString());
+
+    if (response.statusCode >= 400) {
+      if (response.statusCode == 404) return response.body; // Not Found Message
+      throw ('An error occurred: ' + response.body);
+    }
+
+    return json.decode(response.body);
+  }
+
   Future<dynamic> post(
     String url,
     dynamic data, {
