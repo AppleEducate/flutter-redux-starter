@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 /// List Widget for Common Null, Empty and Items Widget
 class ListWidget extends StatelessWidget {
-
   final List<dynamic> items;
   final Widget onNull, onEmpty, child;
 

@@ -16,14 +16,15 @@ abstract class ContactState
   BuiltMap<String, ContactEntity> get map;
   BuiltList<String> get list;
 
-  @nullable
-  PagingModel get paging;
+  int get page;
+  int get rows;
 
   factory ContactState() {
     return _$ContactState._(
       map: BuiltMap<String, ContactEntity>(),
       list: BuiltList<String>(),
-      paging: PagingModel(rows: 10, page: 1),
+      page: 1,
+      rows: 100,
     );
   }
 

@@ -8,6 +8,7 @@ import 'package:MyUnifyMobile/ui/contact/edit/contact_edit_vm.dart';
 import 'package:MyUnifyMobile/ui/contact/view/contact_view_vm.dart';
 import 'package:MyUnifyMobile/redux/app/app_state.dart';
 import 'package:MyUnifyMobile/data/repositories/contact_repository.dart';
+import '../../data/models/paging_model.dart';
 
 List<Middleware<AppState>> createStoreContactsMiddleware([
   ContactRepository repository = const ContactRepository(),
@@ -109,7 +110,11 @@ Middleware<AppState> _loadContacts(ContactRepository repository) {
 
     store.dispatch(LoadContactsRequest());
     repository
-        .loadList(state.authState, paging: state?.contactState?.paging)
+        .loadList(state.authState,
+            paging: PagingModel(
+              page: state?.contactState?.page,
+              rows: state?.contactState?.rows,
+            ))
         .then((data) {
       store.dispatch(LoadContactsSuccess(data));
 

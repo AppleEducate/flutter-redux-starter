@@ -21,13 +21,13 @@ class ContactRepository {
   Future<BuiltList<ContactEntity>> loadList(AuthState auth,
       {@required PagingModel paging}) async {
     final response = await webClient.get(
-      kApiUrl +
-          '/contacts/' +
-          (paging?.rows ?? 10).toString() +
-          "/" +
-          (paging?.page ?? 1).toString(),
+      kApiUrl + '/contacts/${paging.rows}/${paging.page}',
       token: auth?.token,
     );
+
+    if (response.toString().contains("No Contacts Found")) {
+      return new BuiltList<ContactEntity>();
+    }
 
     var list = new BuiltList<ContactEntity>(response.map((contact) {
       return serializers.deserializeWith(ContactEntity.serializer, contact);

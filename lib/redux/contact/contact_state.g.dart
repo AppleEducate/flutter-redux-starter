@@ -42,6 +42,10 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
       serializers.serialize(object.list,
           specifiedType:
               const FullType(BuiltList, const [const FullType(String)])),
+      'page',
+      serializers.serialize(object.page, specifiedType: const FullType(int)),
+      'rows',
+      serializers.serialize(object.rows, specifiedType: const FullType(int)),
     ];
     if (object.lastUpdated != null) {
       result
@@ -80,6 +84,14 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(String)]))
               as BuiltList);
+          break;
+        case 'page':
+          result.page = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'rows':
+          result.rows = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -147,18 +159,27 @@ class _$ContactState extends ContactState {
   @override
   final BuiltList<String> list;
   @override
-  final PagingModel paging;
+  final int page;
+  @override
+  final int rows;
 
   factory _$ContactState([void updates(ContactStateBuilder b)]) =>
       (new ContactStateBuilder()..update(updates)).build();
 
-  _$ContactState._({this.lastUpdated, this.map, this.list, this.paging})
+  _$ContactState._(
+      {this.lastUpdated, this.map, this.list, this.page, this.rows})
       : super._() {
     if (map == null) {
       throw new BuiltValueNullFieldError('ContactState', 'map');
     }
     if (list == null) {
       throw new BuiltValueNullFieldError('ContactState', 'list');
+    }
+    if (page == null) {
+      throw new BuiltValueNullFieldError('ContactState', 'page');
+    }
+    if (rows == null) {
+      throw new BuiltValueNullFieldError('ContactState', 'rows');
     }
   }
 
@@ -176,14 +197,16 @@ class _$ContactState extends ContactState {
         lastUpdated == other.lastUpdated &&
         map == other.map &&
         list == other.list &&
-        paging == other.paging;
+        page == other.page &&
+        rows == other.rows;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, paging.hashCode), lastUpdated.hashCode), map.hashCode),
-        list.hashCode));
+        $jc($jc($jc($jc(0, lastUpdated.hashCode), map.hashCode), list.hashCode),
+            page.hashCode),
+        rows.hashCode));
   }
 
   @override
@@ -191,7 +214,9 @@ class _$ContactState extends ContactState {
     return (newBuiltValueToStringHelper('ContactState')
           ..add('lastUpdated', lastUpdated)
           ..add('map', map)
-          ..add('list', list))
+          ..add('list', list)
+          ..add('page', page)
+          ..add('rows', rows))
         .toString();
   }
 }
@@ -213,18 +238,23 @@ class ContactStateBuilder
   ListBuilder<String> get list => _$this._list ??= new ListBuilder<String>();
   set list(ListBuilder<String> list) => _$this._list = list;
 
-  PagingModel _paging;
-  PagingModel get paging => _$this._paging;
-  set paging(PagingModel paging) => _$this._paging = paging;
+  int _page;
+  int get page => _$this._page;
+  set page(int page) => _$this._page = page;
+
+  int _rows;
+  int get rows => _$this._rows;
+  set rows(int rows) => _$this._rows = rows;
 
   ContactStateBuilder();
 
   ContactStateBuilder get _$this {
     if (_$v != null) {
       _lastUpdated = _$v.lastUpdated;
-      _paging = _$v.paging;
       _map = _$v.map?.toBuilder();
       _list = _$v.list?.toBuilder();
+      _page = _$v.page;
+      _rows = _$v.rows;
       _$v = null;
     }
     return this;
@@ -249,7 +279,11 @@ class ContactStateBuilder
     try {
       _$result = _$v ??
           new _$ContactState._(
-              lastUpdated: lastUpdated, map: map.build(), list: list.build());
+              lastUpdated: lastUpdated,
+              map: map.build(),
+              list: list.build(),
+              page: page,
+              rows: rows);
     } catch (_) {
       String _$failedField;
       try {

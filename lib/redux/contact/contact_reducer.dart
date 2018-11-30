@@ -64,7 +64,12 @@ ContactState _deleteContactRequest(
 }
 
 ContactState _changePaging(ContactState contactState, ChangePaging action) {
-  return contactState.rebuild((b) => b..paging = action.paging);
+  print(
+      "Change Paging => Page [${contactState?.page}] Rows [${contactState?.rows}]");
+
+  return contactState.rebuild((b) => b
+    ..page = action.paging.page
+    ..rows = action.paging.rows);
 }
 
 ContactState _deleteContactSuccess(
@@ -98,6 +103,33 @@ ContactState _setNoContacts(
 
 ContactState _setLoadedContacts(
     ContactState contactState, LoadContactsSuccess action) {
+  print(
+      "Loading Contacts => Page [${contactState?.page}] Rows [${contactState?.rows}]");
+  bool _firstPage = contactState?.page == 1;
+
+  if (action.contacts != null && action.contacts.isEmpty) {
+    int _lastPage = contactState?.page ?? 1;
+    int _page = _lastPage - 1;
+    if (_page <= 0) _page = 1;
+    print(
+        "Contacts Empty: ${action.contacts.length}, First: $_firstPage, $_lastPage => $_page");
+
+    return contactState.rebuild((b) => b
+      ..page = _page
+      ..rows = contactState?.rows);
+  }
+
+  if (_firstPage) {
+    return contactState.rebuild((b) => b
+      ..lastUpdated = DateTime.now().millisecondsSinceEpoch
+      ..map.addAll(Map.fromIterable(
+        action.contacts,
+        key: (item) => item.id,
+        value: (item) => item,
+      ))
+      ..list.replace(action.contacts.map((contact) => contact.id).toList()));
+  }
+
   return contactState.rebuild((b) => b
     ..lastUpdated = DateTime.now().millisecondsSinceEpoch
     ..map.addAll(Map.fromIterable(
@@ -105,5 +137,5 @@ ContactState _setLoadedContacts(
       key: (item) => item.id,
       value: (item) => item,
     ))
-    ..list.replace(action.contacts.map((contact) => contact.id).toList()));
+    ..list.addAll(action.contacts.map((contact) => contact.id).toList()));
 }

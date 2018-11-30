@@ -55,24 +55,47 @@ class ContactListVM {
   static ContactListVM fromStore(Store<AppState> store) {
     Future<Null> _handleRefresh(
         BuildContext context, bool up, RefreshController controller) {
+      var _message = "";
+
+      // Get Current Page and Rows from Store
+      int _currentPage = store.state.contactState?.page;
+      int _currentRows = store.state.contactState?.rows;
+
       if (up) {
-        store.dispatch(ChangePaging(paging: PagingModel(rows: 10, page: 1)));
+        // Reset List to Default
+        print("Resetting List => Page [$_currentPage] Rows [$_currentRows]");
+        store.dispatch(ChangePaging(paging: PagingModel(rows: 100, page: 1)));
+        _message = "Refresh Complete";
       } else {
-        store.dispatch(ChangePaging(
-          paging: PagingModel(
-            rows: store.state.contactState.paging?.rows ?? 10,
-            page: store.state.contactState.paging?.page ?? 1 + 1,
-          ),
-        ));
+        // Go to next Page
+        print("Loading Next Page => Page [$_currentPage] Rows [$_currentRows]");
+        var _nextPage = PagingModel(
+          rows: _currentRows,
+          page: _currentPage + 1,
+        );
+        store..dispatch(ChangePaging(paging: _nextPage));
+        _message = "Loading Complete";
       }
+
+      // Refresh List
       final Completer<Null> completer = new Completer<Null>();
       controller.requestRefresh(up);
       store.dispatch(LoadContacts(completer, true));
+
+      // Show new Page and Rows
+      // final int _newPage = store.state.contactState?.page;
+      // final int _newRows = store.state.contactState?.rows;
+      // print("New Store => Page [$_newPage] Rows [$_newRows]");
+      // if (_newPage - 1 == _currentPage) {
+      //   _message = "Refresh Complete";
+      // }
+      // _message = "Refresh Complete => Page [$_newPage] Rows [$_newRows]";
+
       return completer.future.then((_) {
         controller.sendBack(up, RefreshStatus.idle);
         Scaffold.of(context).showSnackBar(SnackBar(
             content: IconMessage(
-              message: 'Refresh complete',
+              message: _message,
             ),
             duration: Duration(seconds: 3)));
       });
