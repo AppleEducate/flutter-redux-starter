@@ -10,6 +10,7 @@ class ContactItem extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
   final ContactEntity contact;
+  final VoidCallback onDelete, onEdit, onShare;
 
   static final contactItemKey = (int id) => Key('__contact_item_${id}__');
 
@@ -17,82 +18,68 @@ class ContactItem extends StatelessWidget {
     @required this.onDismissed,
     @required this.onTap,
     @required this.contact,
+    this.onEdit,
+    this.onDelete,
+    this.onShare,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DismissibleEntity(
-      entity: contact,
-      onDismissed: onDismissed,
-      onTap: onTap,
-      child: ListTile(
-        onTap: onTap,
-        title: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                  contact.displayName,
-                  style: Theme.of(context).textTheme.title,
-                ),
-              ),
-            ],
-          ),
-        ),
-        // STARTER: subtitle - do not remove comment
-        subtitle: Text(contact.last_name, maxLines: 4),
+    // return DismissibleEntity(
+    //   entity: contact,
+    //   onDismissed: onDismissed,
+    //   onTap: onTap,
+    //   child: ListTile(
+    //     onTap: onTap,
+    //     title: Container(
+    //       width: MediaQuery.of(context).size.width,
+    //       child: Row(
+    //         children: <Widget>[
+    //           Expanded(
+    //             child: Text(
+    //               contact.displayName,
+    //               style: Theme.of(context).textTheme.title,
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //     // STARTER: subtitle - do not remove comment
+    //     subtitle: Text(contact.last_name, maxLines: 4),
+    //   ),
+    // );
+
+    return ThreeRowTile(
+      width: MediaQuery.of(context).size.width,
+      iconTap: onTap,
+      icon: Icon(Icons.person),
+      title: Text(
+        contact.lastFirstName,
+        style: Theme.of(context).textTheme.title,
       ),
+      subtitle: contact?.last_activity == null ||
+              contact?.last_activity.toString().isEmpty
+          ? null
+          : Text(
+              contact?.last_activity ?? "",
+              style: Theme.of(context).textTheme.subtitle,
+            ),
+      onTap: onTap,
+      cell: contact?.cell_phone,
+      home: contact?.cell_phone,
+      office: contact?.cell_phone,
+      email: contact?.email,
+      box1: Utility(
+        value: formatDate(contact?.date_created),
+        hint: "Date Created",
+      ),
+      box2: Utility(
+        value: formatDate(contact?.date_modified),
+        hint: "Date Modified",
+      ),
+      onDelete: onDelete,
+      onEdit: onEdit,
+      onShare: onShare,
     );
-
-    // return ListTile(
-    //   onTap: onTap,
-    //   title: Container(
-    //     width: MediaQuery.of(context).size.width,
-    //     // child: Row(
-    //     //   children: <Widget>[
-    //     //     Expanded(
-    //     //       child: Text(
-    //     //         contact.displayName,
-    //     //         style: Theme.of(context).textTheme.title,
-    //     //       ),
-    //     //     ),
-    //     //   ],
-    //     // ),
-
-    //   ),
-    //   // STARTER: subtitle - do not remove comment
-    //   subtitle: Text(contact.last_name, maxLines: 4),
-    // );
-
-    // return ThreeRowTile(
-    //   width: MediaQuery.of(context).size.width,
-    //   iconTap: onTap,
-    //   icon: Icon(Icons.person),
-    //   title: Text(
-    //     contact.lastFirstName,
-    //     style: Theme.of(context).textTheme.title,
-    //   ),
-    //   subtitle: contact?.last_activity == null ||
-    //           contact?.last_activity.toString().isEmpty
-    //       ? null
-    //       : Text(
-    //           contact?.last_activity ?? "",
-    //           style: Theme.of(context).textTheme.subtitle,
-    //         ),
-    //   onTap: onTap,
-    //   cell: contact?.cell_phone,
-    //   home: contact?.cell_phone,
-    //   office: contact?.cell_phone,
-    //   email: contact?.email,
-    //   box1: Utility(
-    //     value: formatDate(contact?.date_created),
-    //     hint: "Date Created",
-    //   ),
-    //   box2: Utility(
-    //     value: formatDate(contact?.date_modified),
-    //     hint: "Date Modified",
-    //   ),
-    // );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../utils/phoneCall.dart';
 import '../utils/sendEmail.dart';
@@ -10,7 +11,7 @@ class ThreeRowTile extends StatelessWidget {
   final Utility box1, box2;
   final Icon icon;
   final String cell, home, office, email;
-  final VoidCallback onTap, onLongPress, iconTap;
+  final VoidCallback onTap, onLongPress, iconTap, onShare, onDelete, onEdit;
   final double width;
 
   ThreeRowTile({
@@ -27,6 +28,9 @@ class ThreeRowTile extends StatelessWidget {
     this.box1,
     this.box2,
     @required this.width,
+    this.onDelete,
+    this.onEdit,
+    this.onShare,
   });
 
   @override
@@ -282,7 +286,50 @@ class ThreeRowTile extends StatelessWidget {
       // color: globals.isDarkTheme ? Colors.black45 : Colors.white,
     );
 
-    return (rowCard);
+    return Container(
+      child: new Slidable(
+        delegate: new SlidableDrawerDelegate(),
+        actionExtentRatio: 0.25,
+        child: rowCard,
+        // -- Left Side --
+        actions: onShare == null
+            ? null
+            : <Widget>[
+                // -- Share Button --
+                onShare == null
+                    ? Container()
+                    : new IconSlideAction(
+                        caption: 'Share',
+                        color: Colors.indigo,
+                        icon: Icons.share,
+                        onTap: onShare,
+                      ),
+              ],
+        // -- Right Side --
+        secondaryActions: onDelete == null && onEdit == null
+            ? null
+            : <Widget>[
+                // -- Edit Button --
+                onEdit == null
+                    ? Container()
+                    : new IconSlideAction(
+                        caption: 'Edit',
+                        color: Colors.black45,
+                        icon: Icons.edit,
+                        onTap: onEdit,
+                      ),
+                // -- Delete Button --
+                onDelete == null
+                    ? Container()
+                    : new IconSlideAction(
+                        caption: 'Delete',
+                        color: Colors.red,
+                        icon: Icons.delete,
+                        onTap: onDelete,
+                      ),
+              ],
+      ),
+    );
   }
 }
 

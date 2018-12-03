@@ -5,16 +5,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:redux/redux.dart';
 
 import '../../data/models/contact_model.dart';
+import '../../data/models/paging_model.dart';
 import '../../redux/app/app_state.dart';
 import '../../redux/contact/contact_actions.dart';
 import '../../redux/contact/contact_selectors.dart';
-import "package:pull_to_refresh/pull_to_refresh.dart";
 import '../app/icon_message.dart';
 import 'contact_list.dart';
-import '../../data/models/paging_model.dart';
 
 class ContactListBuilder extends StatelessWidget {
   static final String route = '/contacts/edit';
@@ -41,6 +41,9 @@ class ContactListVM {
   final Function(BuildContext, ContactEntity) onContactTap;
   final Function(BuildContext, ContactEntity, DismissDirection) onDismissed;
   final Function(BuildContext, bool, RefreshController) onRefreshed;
+  final Function(BuildContext, ContactEntity) onDelete;
+  final Function(BuildContext, ContactEntity) onShare;
+  final Function(BuildContext, ContactEntity) onEdit;
 
   ContactListVM({
     @required this.contactList,
@@ -50,6 +53,9 @@ class ContactListVM {
     @required this.onContactTap,
     @required this.onDismissed,
     @required this.onRefreshed,
+    this.onShare,
+    this.onDelete,
+    this.onEdit,
   });
 
   static ContactListVM fromStore(Store<AppState> store) {
@@ -102,31 +108,50 @@ class ContactListVM {
     }
 
     return ContactListVM(
-        contactList: memoizedContactList(
-          store.state.contactState.map,
-          store.state.contactState.list,
-          store.state.contactListState,
-        ),
-        contactMap: store.state.contactState.map,
-        isLoading: store.state.isLoading,
-        isLoaded: store.state.contactState.isLoaded,
-        onContactTap: (context, contact) {
-          store.dispatch(ViewContact(contact: contact, context: context));
-        },
-        onRefreshed: (context, bool up, RefreshController controller) =>
-            _handleRefresh(context, up, controller),
-        onDismissed: (BuildContext context, ContactEntity contact,
-            DismissDirection direction) {
-          final Completer<Null> completer = new Completer<Null>();
-          store.dispatch(DeleteContactRequest(completer, contact.id));
-          var message = 'Successfully Deleted Contact';
-          return completer.future.then((_) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-                content: IconMessage(
-                  message: message,
-                ),
-                duration: Duration(seconds: 3)));
-          });
+      contactList: memoizedContactList(
+        store.state.contactState.map,
+        store.state.contactState.list,
+        store.state.contactListState,
+      ),
+      contactMap: store.state.contactState.map,
+      isLoading: store.state.isLoading,
+      isLoaded: store.state.contactState.isLoaded,
+      onContactTap: (context, contact) {
+        store.dispatch(ViewContact(contact: contact, context: context));
+      },
+      onEdit: (context, contact) {
+        store.dispatch(EditContact(contact: contact, context: context));
+      },
+      onDelete: (context, contact) {
+        final Completer<Null> completer = new Completer<Null>();
+        store.dispatch(DeleteContactRequest(completer, contact.id));
+        var message = 'Successfully Deleted Contact';
+        return completer.future.then((_) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+              content: IconMessage(
+                message: message,
+              ),
+              duration: Duration(seconds: 3)));
         });
+      },
+      onShare: (context, contact) {
+        store.dispatch(ViewContact(contact: contact, context: context));
+      },
+      onRefreshed: (context, bool up, RefreshController controller) =>
+          _handleRefresh(context, up, controller),
+      onDismissed: (BuildContext context, ContactEntity contact,
+          DismissDirection direction) {
+        final Completer<Null> completer = new Completer<Null>();
+        store.dispatch(DeleteContactRequest(completer, contact.id));
+        var message = 'Successfully Deleted Contact';
+        return completer.future.then((_) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+              content: IconMessage(
+                message: message,
+              ),
+              duration: Duration(seconds: 3)));
+        });
+      },
+    );
   }
 }

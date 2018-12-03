@@ -47,10 +47,11 @@ class ContactList extends StatelessWidget {
                 onDismissed: (DismissDirection direction) =>
                     viewModel.onDismissed(context, contact, direction),
                 onTap: () => viewModel.onContactTap(context, contact),
+                onEdit: () => viewModel.onEdit(context, contact),
+                onDelete: () => viewModel.onDelete(context, contact),
+                onShare: () => viewModel.onShare(context, contact),
               ),
-              Divider(
-                height: 1.0,
-              ),
+              Divider(height: 1.0),
             ]);
           }),
     );
