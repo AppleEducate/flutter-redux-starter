@@ -8,15 +8,16 @@ abstract class ListUIState implements Built<ListUIState, ListUIStateBuilder> {
   String get search;
 
   String get sortField;
-  
+
   String get groupField;
 
   bool get sortAscending;
 
-  factory ListUIState(sortField) {
+  factory ListUIState(sortField, groupField) {
     return _$ListUIState._(
       sortField: sortField,
       sortAscending: true,
+      groupField: groupField,
     );
   }
 

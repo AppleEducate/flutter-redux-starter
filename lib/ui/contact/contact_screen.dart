@@ -11,6 +11,7 @@ import '../app/app_search.dart';
 import '../app/app_search_button.dart';
 import 'contact_list_vm.dart';
 import '../../data/models/search_model.dart';
+import '../../data/models/paging_model.dart';
 
 class ContactScreen extends StatelessWidget {
   static final String route = '/contact';
@@ -24,14 +25,14 @@ class ContactScreen extends StatelessWidget {
         title: AppSearch(
           entityType: EntityType.contact,
           onSearchChanged: (value) {
-            store.dispatch(SearchContacts(value));
+            store.dispatch(SearchContacts(value, [0]));
           },
         ),
         actions: [
           AppSearchButton(
             entityType: EntityType.contact,
             onSearchPressed: (value) {
-              store.dispatch(SearchContacts(value));
+              store.dispatch(SearchContacts(value, [0]));
             },
           ),
         ],
@@ -45,14 +46,22 @@ class ContactScreen extends StatelessWidget {
           store.dispatch(SortContacts(value));
         },
         onSelectedContactGroup: (value) {
-          if (value.contains("All")) {
+          print("Group ==> $value");
+          if (value != null) {
+            store.dispatch(GroupContacts(value));
+            print(
+              "New Group Field ==> ${store.state.contactListState.groupField}",
+            );
             store.dispatch(ChangeSearchModel(
-              search: SearchModel(search: "", filters: []),
+              search: SearchModel(
+                search: value == "all" ? "" : value,
+                filters: [value == "all" ? 0 : 5],
+              ),
             ));
-          } else {
-            store.dispatch(ChangeSearchModel(
-              search: SearchModel(search: value, filters: [5]),
-            ));
+            store
+              ..dispatch(ChangePaging(
+                paging: PagingModel(page: 1, rows: 100),
+              ));
           }
         },
         sortFields: [

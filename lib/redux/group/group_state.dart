@@ -49,7 +49,7 @@ abstract class GroupUIState extends Object
 
   factory GroupUIState() {
     return _$GroupUIState._(
-      listUIState: ListUIState(''),
+      listUIState: ListUIState('', 'All'),
       selected: GroupEntity(),
     );
   }

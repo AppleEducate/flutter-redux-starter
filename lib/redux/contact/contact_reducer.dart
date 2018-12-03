@@ -32,6 +32,7 @@ ContactEntity _updateEditing(ContactEntity contact, action) {
 final contactListReducer = combineReducers<ListUIState>([
   TypedReducer<ListUIState, SortContacts>(_sortContacts),
   TypedReducer<ListUIState, SearchContacts>(_searchContacts),
+  TypedReducer<ListUIState, GroupContacts>(_changeContactGroup),
 ]);
 
 ListUIState _searchContacts(
@@ -39,10 +40,19 @@ ListUIState _searchContacts(
   return contactListState.rebuild((b) => b..search = action.search);
 }
 
+ListUIState _changeContactGroup(
+    ListUIState contactListState, GroupContacts action) {
+  print(
+      "Changing Group from ${contactListState.groupField} => ${action.field}");
+  return contactListState.rebuild((b) => b..groupField = action.field);
+}
+
 ListUIState _sortContacts(ListUIState contactListState, SortContacts action) {
-  return contactListState.rebuild((b) => b
-    ..sortAscending = b.sortField != action.field || !b.sortAscending
-    ..sortField = action.field);
+  return contactListState.rebuild(
+    (b) => b
+      ..sortAscending = b.sortField != action.field || !b.sortAscending
+      ..sortField = action.field,
+  );
 }
 
 final contactsReducer = combineReducers<ContactState>([
@@ -54,7 +64,7 @@ final contactsReducer = combineReducers<ContactState>([
   TypedReducer<ContactState, DeleteContactSuccess>(_deleteContactSuccess),
   TypedReducer<ContactState, DeleteContactFailure>(_deleteContactFailure),
   TypedReducer<ContactState, ChangePaging>(_changePaging),
-   TypedReducer<ContactState, ChangeSearchModel>(_changeSearchModel),
+  TypedReducer<ContactState, ChangeSearchModel>(_changeSearchModel),
 ]);
 
 ContactState _deleteContactRequest(

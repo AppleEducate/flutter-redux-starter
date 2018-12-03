@@ -60,7 +60,7 @@ abstract class ContactUIState extends Object
 
   factory ContactUIState() {
     return _$ContactUIState._(
-      listUIState: ListUIState(''),
+      listUIState: ListUIState('last_name', 'All'),
       selected: ContactEntity(),
     );
   }

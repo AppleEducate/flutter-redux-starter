@@ -9,6 +9,7 @@ import 'package:MyUnifyMobile/ui/contact/view/contact_view_vm.dart';
 import 'package:MyUnifyMobile/redux/app/app_state.dart';
 import 'package:MyUnifyMobile/data/repositories/contact_repository.dart';
 import '../../data/models/paging_model.dart';
+import '../../data/models/search_model.dart';
 
 List<Middleware<AppState>> createStoreContactsMiddleware([
   ContactRepository repository = const ContactRepository(),
@@ -117,6 +118,10 @@ Middleware<AppState> _loadContacts(ContactRepository repository) {
             paging: PagingModel(
               page: state?.contactState?.page,
               rows: state?.contactState?.rows,
+            ),
+            search: SearchModel(
+              search: state?.contactState?.search,
+              filters: state?.contactState?.filters,
             ))
         .then((data) {
       store.dispatch(LoadContactsSuccess(data));

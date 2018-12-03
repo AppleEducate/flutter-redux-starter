@@ -49,7 +49,7 @@ abstract class TaskUIState extends Object
 
   factory TaskUIState() {
     return _$TaskUIState._(
-      listUIState: ListUIState(''),
+      listUIState: ListUIState('', 'All'),
       selected: TaskEntity(),
     );
   }

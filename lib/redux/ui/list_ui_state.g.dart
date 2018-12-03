@@ -34,6 +34,9 @@ class _$ListUIStateSerializer implements StructuredSerializer<ListUIState> {
       'sortField',
       serializers.serialize(object.sortField,
           specifiedType: const FullType(String)),
+      'groupField',
+      serializers.serialize(object.groupField,
+          specifiedType: const FullType(String)),
       'sortAscending',
       serializers.serialize(object.sortAscending,
           specifiedType: const FullType(bool)),
@@ -67,6 +70,10 @@ class _$ListUIStateSerializer implements StructuredSerializer<ListUIState> {
           result.sortField = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'groupField':
+          result.groupField = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'sortAscending':
           result.sortAscending = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
@@ -84,15 +91,21 @@ class _$ListUIState extends ListUIState {
   @override
   final String sortField;
   @override
+  final String groupField;
+  @override
   final bool sortAscending;
 
   factory _$ListUIState([void updates(ListUIStateBuilder b)]) =>
       (new ListUIStateBuilder()..update(updates)).build();
 
-  _$ListUIState._({this.search, this.sortField, this.sortAscending})
+  _$ListUIState._(
+      {this.search, this.sortField, this.groupField, this.sortAscending})
       : super._() {
     if (sortField == null) {
       throw new BuiltValueNullFieldError('ListUIState', 'sortField');
+    }
+    if (groupField == null) {
+      throw new BuiltValueNullFieldError('ListUIState', 'groupField');
     }
     if (sortAscending == null) {
       throw new BuiltValueNullFieldError('ListUIState', 'sortAscending');
@@ -112,12 +125,15 @@ class _$ListUIState extends ListUIState {
     return other is ListUIState &&
         search == other.search &&
         sortField == other.sortField &&
+        groupField == other.groupField &&
         sortAscending == other.sortAscending;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, search.hashCode), sortField.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, search.hashCode), sortField.hashCode),
+            groupField.hashCode),
         sortAscending.hashCode));
   }
 
@@ -126,6 +142,7 @@ class _$ListUIState extends ListUIState {
     return (newBuiltValueToStringHelper('ListUIState')
           ..add('search', search)
           ..add('sortField', sortField)
+          ..add('groupField', groupField)
           ..add('sortAscending', sortAscending))
         .toString();
   }
@@ -142,6 +159,10 @@ class ListUIStateBuilder implements Builder<ListUIState, ListUIStateBuilder> {
   String get sortField => _$this._sortField;
   set sortField(String sortField) => _$this._sortField = sortField;
 
+  String _groupField;
+  String get groupField => _$this._groupField;
+  set groupField(String groupField) => _$this._groupField = groupField;
+
   bool _sortAscending;
   bool get sortAscending => _$this._sortAscending;
   set sortAscending(bool sortAscending) =>
@@ -153,6 +174,7 @@ class ListUIStateBuilder implements Builder<ListUIState, ListUIStateBuilder> {
     if (_$v != null) {
       _search = _$v.search;
       _sortField = _$v.sortField;
+      _groupField = _$v.groupField;
       _sortAscending = _$v.sortAscending;
       _$v = null;
     }
@@ -176,7 +198,10 @@ class ListUIStateBuilder implements Builder<ListUIState, ListUIStateBuilder> {
   _$ListUIState build() {
     final _$result = _$v ??
         new _$ListUIState._(
-            search: search, sortField: sortField, sortAscending: sortAscending);
+            search: search,
+            sortField: sortField,
+            groupField: groupField,
+            sortAscending: sortAscending);
     replace(_$result);
     return _$result;
   }

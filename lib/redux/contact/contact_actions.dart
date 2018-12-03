@@ -108,10 +108,16 @@ class DeleteContactFailure implements StopLoading {
 
 class SearchContacts {
   final String search;
-  SearchContacts(this.search);
+  final List<int> filters;
+  SearchContacts(this.search, this.filters);
 }
 
 class SortContacts implements PersistUI {
   final String field;
   SortContacts(this.field);
+}
+
+class GroupContacts implements PersistUI {
+  final String field;
+  GroupContacts(this.field);
 }
