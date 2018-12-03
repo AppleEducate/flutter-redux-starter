@@ -152,6 +152,8 @@ class _AppBottomBarState extends State<AppBottomBar> {
         _groupTap = true;
       });
 
+      var _groups = ["None", "Builder", "Top 40 Realtors", "Test Group", "Custom"];
+
       _groupsController = Scaffold.of(context).showBottomSheet((context) {
         return StoreConnector<AppState, ListUIState>(
           converter: (Store<AppState> store) =>
@@ -161,7 +163,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
               color: Theme.of(context).backgroundColor,
               child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: widget.sortFields.map((sortField) {
+                  children: _groups.map((sortField) {
                     return RadioListTile(
                       dense: true,
                       // TODO replace with localization
@@ -211,7 +213,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
                 _sortTap == true || _groupTap == true ? null : _showFilterSheet,
           ),
           IconButton(
-            tooltip: 'Groups',
+            tooltip: 'Contact Groups',
             icon: Icon(Icons.group),
             onPressed:
                 _filterTap == true || _sortTap == true ? null : _showGroupSheet,
