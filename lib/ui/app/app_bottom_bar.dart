@@ -168,9 +168,11 @@ class _AppBottomBarState extends State<AppBottomBar> {
                       title: Text(
                           sortField[0].toUpperCase() + sortField.substring(1)),
                       subtitle: sortField == listUIState.sortField
-                          ? Text(listUIState.sortAscending
-                              ? 'Ascending'
-                              : 'Descending')
+                          ? Text(
+                              listUIState.sortAscending
+                                  ? 'Ascending'
+                                  : 'Descending',
+                            )
                           : null,
                       groupValue: listUIState.sortField,
                       onChanged: (value) {
