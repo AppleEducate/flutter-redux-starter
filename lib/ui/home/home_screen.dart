@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               formatDateCustom(DateTime.now()),
+              style: Theme.of(context).textTheme.subhead,
               textAlign: TextAlign.center,
             ),
           ],
