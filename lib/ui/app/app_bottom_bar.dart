@@ -73,6 +73,16 @@ class _AppBottomBarState extends State<AppBottomBar> {
             icon: Icon(Icons.sort_by_alpha),
             onPressed: _showSortSheet,
           ),
+          IconButton(
+            tooltip: 'Filter',
+            icon: Icon(Icons.filter_list),
+            onPressed: null,
+          ),
+          IconButton(
+            tooltip: 'Groups',
+            icon: Icon(Icons.group),
+            onPressed: null,
+          ),
         ],
       ),
     );

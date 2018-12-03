@@ -53,6 +53,7 @@ class _SampleReduxAppState extends State<SampleReduxApp> {
     return StoreProvider<AppState>(
       store: widget.store,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'My Unify Mobile',
         routes: {
           InitScreen.route: (context) => InitScreen(),
