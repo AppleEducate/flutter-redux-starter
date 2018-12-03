@@ -41,6 +41,8 @@ class _ContactEditState extends State<ContactEdit> {
 
   var _controllers = [];
 
+  bool _dataChanged = false;
+
   @override
   void didChangeDependencies() {
     _controllers = [
@@ -114,7 +116,10 @@ class _ContactEditState extends State<ContactEdit> {
       ..email = _emailController.text.trim()
       ..last_activity = _last_activityController.text.trim());
     if (contact != widget.viewModel.contact) {
-      widget.viewModel.onChanged(contact);
+      setState(() => _dataChanged = true);
+      // widget.viewModel.onChanged(contact);
+    } else {
+      setState(() => _dataChanged = false);
     }
   }
 
@@ -135,6 +140,7 @@ class _ContactEditState extends State<ContactEdit> {
           actions: <Widget>[
             Builder(builder: (BuildContext context) {
               return SaveIconButton(
+                color: _dataChanged ? Colors.yellow : Colors.white,
                 isLoading: viewModel.isLoading,
                 onPressed: () {
                   if (!_formKey.currentState.validate()) {
@@ -190,7 +196,7 @@ class _ContactEditState extends State<ContactEdit> {
                     controller: _home_phoneController,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      labelText: 'Home_phone',
+                      labelText: 'Home phone',
                     ),
                   ),
 

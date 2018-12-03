@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SaveIconButton extends StatelessWidget {
-  SaveIconButton({this.isLoading, this.onPressed});
+  SaveIconButton({this.isLoading, this.onPressed, this.color});
   final bool isLoading;
   final Function onPressed;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class SaveIconButton extends StatelessWidget {
       tooltip: 'Save',
       icon: Icon(
         Icons.cloud_upload,
-        color: Colors.white,
+        color: color ?? Colors.white,
       ),
     );
   }
