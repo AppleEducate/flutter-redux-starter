@@ -8,6 +8,9 @@ import 'package:MyUnifyMobile/redux/ui/ui_state.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:MyUnifyMobile/redux/ui/list_ui_state.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/data/models/group_model.dart';
+import 'package:MyUnifyMobile/redux/group/group_state.dart';
+
 import 'package:MyUnifyMobile/data/models/task_model.dart';
 import 'package:MyUnifyMobile/redux/task/task_state.dart';
 
@@ -20,6 +23,8 @@ part 'serializers.g.dart';
   AppState,
   LoginResponse,
   // STARTER: serializers - do not remove comment
+  GroupEntity,
+
   TaskEntity,
 
   ContactEntity,

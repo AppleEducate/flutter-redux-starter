@@ -31,6 +31,9 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
   Iterable serialize(Serializers serializers, DataState object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'groupState',
+      serializers.serialize(object.groupState,
+          specifiedType: const FullType(GroupState)),
       'taskState',
       serializers.serialize(object.taskState,
           specifiedType: const FullType(TaskState)),
@@ -53,6 +56,10 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'groupState':
+          result.groupState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(GroupState)) as GroupState);
+          break;
         case 'taskState':
           result.taskState.replace(serializers.deserialize(value,
               specifiedType: const FullType(TaskState)) as TaskState);
@@ -70,6 +77,8 @@ class _$DataStateSerializer implements StructuredSerializer<DataState> {
 
 class _$DataState extends DataState {
   @override
+  final GroupState groupState;
+  @override
   final TaskState taskState;
   @override
   final ContactState contactState;
@@ -77,7 +86,11 @@ class _$DataState extends DataState {
   factory _$DataState([void updates(DataStateBuilder b)]) =>
       (new DataStateBuilder()..update(updates)).build();
 
-  _$DataState._({this.taskState, this.contactState}) : super._() {
+  _$DataState._({this.groupState, this.taskState, this.contactState})
+      : super._() {
+    if (groupState == null) {
+      throw new BuiltValueNullFieldError('DataState', 'groupState');
+    }
     if (taskState == null) {
       throw new BuiltValueNullFieldError('DataState', 'taskState');
     }
@@ -97,18 +110,21 @@ class _$DataState extends DataState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DataState &&
+        groupState == other.groupState &&
         taskState == other.taskState &&
         contactState == other.contactState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, taskState.hashCode), contactState.hashCode));
+    return $jf($jc($jc($jc(0, groupState.hashCode), taskState.hashCode),
+        contactState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DataState')
+          ..add('groupState', groupState)
           ..add('taskState', taskState)
           ..add('contactState', contactState))
         .toString();
@@ -117,6 +133,12 @@ class _$DataState extends DataState {
 
 class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
   _$DataState _$v;
+
+  GroupStateBuilder _groupState;
+  GroupStateBuilder get groupState =>
+      _$this._groupState ??= new GroupStateBuilder();
+  set groupState(GroupStateBuilder groupState) =>
+      _$this._groupState = groupState;
 
   TaskStateBuilder _taskState;
   TaskStateBuilder get taskState =>
@@ -133,6 +155,7 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
 
   DataStateBuilder get _$this {
     if (_$v != null) {
+      _groupState = _$v.groupState?.toBuilder();
       _taskState = _$v.taskState?.toBuilder();
       _contactState = _$v.contactState?.toBuilder();
       _$v = null;
@@ -159,10 +182,14 @@ class DataStateBuilder implements Builder<DataState, DataStateBuilder> {
     try {
       _$result = _$v ??
           new _$DataState._(
-              taskState: taskState.build(), contactState: contactState.build());
+              groupState: groupState.build(),
+              taskState: taskState.build(),
+              contactState: contactState.build());
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'groupState';
+        groupState.build();
         _$failedField = 'taskState';
         taskState.build();
         _$failedField = 'contactState';

@@ -34,6 +34,9 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
       'currentRoute',
       serializers.serialize(object.currentRoute,
           specifiedType: const FullType(String)),
+      'groupUIState',
+      serializers.serialize(object.groupUIState,
+          specifiedType: const FullType(GroupUIState)),
       'taskUIState',
       serializers.serialize(object.taskUIState,
           specifiedType: const FullType(TaskUIState)),
@@ -60,6 +63,10 @@ class _$UIStateSerializer implements StructuredSerializer<UIState> {
           result.currentRoute = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'groupUIState':
+          result.groupUIState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(GroupUIState)) as GroupUIState);
+          break;
         case 'taskUIState':
           result.taskUIState.replace(serializers.deserialize(value,
               specifiedType: const FullType(TaskUIState)) as TaskUIState);
@@ -79,6 +86,8 @@ class _$UIState extends UIState {
   @override
   final String currentRoute;
   @override
+  final GroupUIState groupUIState;
+  @override
   final TaskUIState taskUIState;
   @override
   final ContactUIState contactUIState;
@@ -86,10 +95,17 @@ class _$UIState extends UIState {
   factory _$UIState([void updates(UIStateBuilder b)]) =>
       (new UIStateBuilder()..update(updates)).build();
 
-  _$UIState._({this.currentRoute, this.taskUIState, this.contactUIState})
+  _$UIState._(
+      {this.currentRoute,
+      this.groupUIState,
+      this.taskUIState,
+      this.contactUIState})
       : super._() {
     if (currentRoute == null) {
       throw new BuiltValueNullFieldError('UIState', 'currentRoute');
+    }
+    if (groupUIState == null) {
+      throw new BuiltValueNullFieldError('UIState', 'groupUIState');
     }
     if (taskUIState == null) {
       throw new BuiltValueNullFieldError('UIState', 'taskUIState');
@@ -111,13 +127,16 @@ class _$UIState extends UIState {
     if (identical(other, this)) return true;
     return other is UIState &&
         currentRoute == other.currentRoute &&
+        groupUIState == other.groupUIState &&
         taskUIState == other.taskUIState &&
         contactUIState == other.contactUIState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, currentRoute.hashCode), taskUIState.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, currentRoute.hashCode), groupUIState.hashCode),
+            taskUIState.hashCode),
         contactUIState.hashCode));
   }
 
@@ -125,6 +144,7 @@ class _$UIState extends UIState {
   String toString() {
     return (newBuiltValueToStringHelper('UIState')
           ..add('currentRoute', currentRoute)
+          ..add('groupUIState', groupUIState)
           ..add('taskUIState', taskUIState)
           ..add('contactUIState', contactUIState))
         .toString();
@@ -137,6 +157,12 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   String _currentRoute;
   String get currentRoute => _$this._currentRoute;
   set currentRoute(String currentRoute) => _$this._currentRoute = currentRoute;
+
+  GroupUIStateBuilder _groupUIState;
+  GroupUIStateBuilder get groupUIState =>
+      _$this._groupUIState ??= new GroupUIStateBuilder();
+  set groupUIState(GroupUIStateBuilder groupUIState) =>
+      _$this._groupUIState = groupUIState;
 
   TaskUIStateBuilder _taskUIState;
   TaskUIStateBuilder get taskUIState =>
@@ -155,6 +181,7 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
   UIStateBuilder get _$this {
     if (_$v != null) {
       _currentRoute = _$v.currentRoute;
+      _groupUIState = _$v.groupUIState?.toBuilder();
       _taskUIState = _$v.taskUIState?.toBuilder();
       _contactUIState = _$v.contactUIState?.toBuilder();
       _$v = null;
@@ -182,11 +209,14 @@ class UIStateBuilder implements Builder<UIState, UIStateBuilder> {
       _$result = _$v ??
           new _$UIState._(
               currentRoute: currentRoute,
+              groupUIState: groupUIState.build(),
               taskUIState: taskUIState.build(),
               contactUIState: contactUIState.build());
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'groupUIState';
+        groupUIState.build();
         _$failedField = 'taskUIState';
         taskUIState.build();
         _$failedField = 'contactUIState';

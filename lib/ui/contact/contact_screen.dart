@@ -38,6 +38,7 @@ class ContactScreen extends StatelessWidget {
       drawer: AppDrawerBuilder(),
       body: ContactListBuilder(),
       bottomNavigationBar: AppBottomBar(
+        showGroups: true,
         entityType: EntityType.contact,
         onSelectedSortField: (value) {
           store.dispatch(SortContacts(value));

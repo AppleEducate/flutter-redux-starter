@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
-import 'package:MyUnifyMobile/data/models/models.dart';
+import '../models/search_model.dart';
 import 'package:MyUnifyMobile/data/models/serializers.dart';
 import 'package:MyUnifyMobile/redux/auth/auth_state.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
@@ -19,17 +19,36 @@ class ContactRepository {
   });
 
   Future<BuiltList<ContactEntity>> loadList(AuthState auth,
-      {@required PagingModel paging}) async {
-    final response = await webClient.get(
-      kApiUrl + '/contacts/${paging.rows}/${paging.page}',
-      token: auth?.token,
-    );
+      {@required PagingModel paging, SearchModel search}) async {
+    dynamic _response;
 
-    if (response.toString().contains("No Contacts Found")) {
+    // search = SearchModel(search: "Prospect", filters: [5]);
+
+    // -- Search By Filters --
+    if (search != null) {
+      final response = await webClient.post(
+        kApiUrl + '/search/contacts/${paging.rows}/${paging.page}',
+        json.encode(search),
+        token: auth?.token,
+      );
+      _response = response;
+
+      // -- Get List of Contacts --
+    } else {
+      final response = await webClient.get(
+        kApiUrl + '/contacts/${paging.rows}/${paging.page}',
+        token: auth?.token,
+      );
+      _response = response;
+    }
+
+    // -- No Contacts Found --
+    if (_response.toString().contains("No Contacts Found")) {
       return new BuiltList<ContactEntity>();
     }
 
-    var list = new BuiltList<ContactEntity>(response.map((contact) {
+    // -- Create List of Contacts --
+    var list = new BuiltList<ContactEntity>(_response.map((contact) {
       return serializers.deserializeWith(ContactEntity.serializer, contact);
     }));
 

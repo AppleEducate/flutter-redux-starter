@@ -26,6 +26,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ContactState.serializer)
       ..add(ContactUIState.serializer)
       ..add(DataState.serializer)
+      ..add(GroupEntity.serializer)
+      ..add(GroupState.serializer)
+      ..add(GroupUIState.serializer)
       ..add(ListUIState.serializer)
       ..add(LoginResponse.serializer)
       ..add(TaskEntity.serializer)
@@ -36,6 +39,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(ContactEntity)]),
           () => new MapBuilder<String, ContactEntity>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(GroupEntity)]),
+          () => new MapBuilder<String, GroupEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

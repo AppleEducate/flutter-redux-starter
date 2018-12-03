@@ -6,6 +6,8 @@ import 'package:MyUnifyMobile/ui/app/app_drawer_vm.dart';
 import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 import 'package:redux/redux.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/redux/group/group_actions.dart';
+
 import 'package:MyUnifyMobile/redux/task/task_actions.dart';
 import '../../redux/auth/auth_actions.dart';
 import 'package:MyUnifyMobile/redux/contact/contact_actions.dart';
@@ -40,6 +42,12 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           // STARTER: menu - do not remove comment
+          ListTile(
+            leading: Icon(Icons.people),
+            title: Text('Contact Groups'),
+            onTap: () => store.dispatch(ViewGroupList(context)),
+          ),
+
           ListTile(
             leading: Icon(Icons.track_changes),
             title: Text('Tasks'),

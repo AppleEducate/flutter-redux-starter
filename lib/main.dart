@@ -10,6 +10,12 @@ import 'package:MyUnifyMobile/ui/app/init.dart';
 import 'package:MyUnifyMobile/ui/auth/login_vm.dart';
 import 'package:MyUnifyMobile/ui/home/home_screen.dart';
 // STARTER: import - do not remove comment
+import 'package:MyUnifyMobile/ui/group/group_screen.dart';
+import 'package:MyUnifyMobile/ui/group/edit/group_edit_vm.dart';
+import 'package:MyUnifyMobile/ui/group/view/group_view_vm.dart';
+import 'package:MyUnifyMobile/redux/group/group_actions.dart';
+import 'package:MyUnifyMobile/redux/group/group_middleware.dart';
+
 import 'package:MyUnifyMobile/ui/task/task_screen.dart';
 import 'package:MyUnifyMobile/ui/task/edit/task_edit_vm.dart';
 import 'package:MyUnifyMobile/ui/task/view/task_view_vm.dart';
@@ -29,6 +35,7 @@ void main() {
         ..addAll(createStoreAuthMiddleware())
         ..addAll(createStorePersistenceMiddleware())
         // STARTER: middleware - do not remove comment
+        ..addAll(createStoreGroupsMiddleware())
         ..addAll(createStoreTasksMiddleware())
         ..addAll(createStoreContactsMiddleware())
         ..addAll([
@@ -60,6 +67,13 @@ class _SampleReduxAppState extends State<SampleReduxApp> {
           LoginScreen.route: (context) => LoginScreen(),
           HomeScreen.route: (context) => HomeScreen(),
           // STARTER: routes - do not remove comment
+          GroupScreen.route: (context) {
+            widget.store.dispatch(LoadGroups());
+            return GroupScreen();
+          },
+          GroupViewScreen.route: (context) => GroupViewScreen(),
+          GroupEditScreen.route: (context) => GroupEditScreen(),
+
           TaskScreen.route: (context) {
             widget.store.dispatch(LoadTasks());
             return TaskScreen();
