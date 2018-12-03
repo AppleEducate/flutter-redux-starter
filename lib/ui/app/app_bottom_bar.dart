@@ -99,6 +99,8 @@ class _AppBottomBarState extends State<AppBottomBar> {
         _filterTap = true;
       });
 
+      var _filters = ["Active", "Deleted"];
+
       _filterController = Scaffold.of(context).showBottomSheet((context) {
         return StoreConnector<AppState, ListUIState>(
           converter: (Store<AppState> store) =>
@@ -108,7 +110,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
               color: Theme.of(context).backgroundColor,
               child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: widget.sortFields.map((sortField) {
+                  children: _filters.map((sortField) {
                     return RadioListTile(
                       dense: true,
                       // TODO replace with localization
@@ -152,7 +154,13 @@ class _AppBottomBarState extends State<AppBottomBar> {
         _groupTap = true;
       });
 
-      var _groups = ["None", "Builder", "Top 40 Realtors", "Test Group", "Custom"];
+      var _groups = [
+        "None",
+        "Builder",
+        "Top 40 Realtors",
+        "Test Group",
+        "Custom"
+      ];
 
       _groupsController = Scaffold.of(context).showBottomSheet((context) {
         return StoreConnector<AppState, ListUIState>(
@@ -209,8 +217,9 @@ class _AppBottomBarState extends State<AppBottomBar> {
           IconButton(
             tooltip: 'Filter',
             icon: Icon(Icons.filter_list),
-            onPressed:
-                _sortTap == true || _groupTap == true ? null : _showFilterSheet,
+            // onPressed:
+            //     _sortTap == true || _groupTap == true ? null : _showFilterSheet,
+            onPressed: null,
           ),
           IconButton(
             tooltip: 'Contact Groups',
