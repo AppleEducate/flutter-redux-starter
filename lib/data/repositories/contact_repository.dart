@@ -25,7 +25,7 @@ class ContactRepository {
     // search = SearchModel(search: "Prospect", filters: [5]);
 
     // -- Search By Filters --
-    if (search != null) {
+    if (search != null && search.search.toString().isNotEmpty) {
       final response = await webClient.post(
         kApiUrl + '/search/contacts/${paging.rows}/${paging.page}',
         json.encode(search),

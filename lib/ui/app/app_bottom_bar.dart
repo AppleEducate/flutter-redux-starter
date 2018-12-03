@@ -12,12 +12,14 @@ import 'package:MyUnifyMobile/redux/app/app_state.dart';
 class AppBottomBar extends StatefulWidget {
   final List<String> sortFields;
   final Function(String) onSelectedSortField;
+  final Function(String) onSelectedContactGroup;
   final EntityType entityType;
   final bool showFilters, showGroups;
 
   AppBottomBar({
     this.sortFields,
     this.onSelectedSortField,
+    this.onSelectedContactGroup,
     this.entityType,
     this.showFilters = false,
     this.showGroups = false,
@@ -197,9 +199,12 @@ class _AppBottomBarState extends State<AppBottomBar> {
                     dense: true,
                     // TODO replace with localization
                     title: Text(_group),
-                    groupValue: listUIState.sortField,
+                    groupValue: listUIState.groupField,
                     onChanged: (value) {
-                      widget.onSelectedSortField(value);
+                      if (value != null) {
+                        widget.onSelectedContactGroup(value);
+                        Navigator.pop(context);
+                      }
                     },
                     value: _group,
                   );

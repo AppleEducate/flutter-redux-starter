@@ -54,6 +54,7 @@ final contactsReducer = combineReducers<ContactState>([
   TypedReducer<ContactState, DeleteContactSuccess>(_deleteContactSuccess),
   TypedReducer<ContactState, DeleteContactFailure>(_deleteContactFailure),
   TypedReducer<ContactState, ChangePaging>(_changePaging),
+   TypedReducer<ContactState, ChangeSearchModel>(_changeSearchModel),
 ]);
 
 ContactState _deleteContactRequest(
@@ -70,6 +71,16 @@ ContactState _changePaging(ContactState contactState, ChangePaging action) {
   return contactState.rebuild((b) => b
     ..page = action.paging.page
     ..rows = action.paging.rows);
+}
+
+ContactState _changeSearchModel(
+    ContactState contactState, ChangeSearchModel action) {
+  print(
+      "Change Search => Search [${contactState?.search}] Filters [${contactState?.filters}]");
+
+  return contactState.rebuild((b) => b
+    ..search = action.search.search
+    ..filters = action.search.filters);
 }
 
 ContactState _deleteContactSuccess(

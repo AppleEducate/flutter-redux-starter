@@ -19,12 +19,17 @@ abstract class ContactState
   int get page;
   int get rows;
 
+  String get search;
+  List<int> get filters;
+
   factory ContactState() {
     return _$ContactState._(
       map: BuiltMap<String, ContactEntity>(),
       list: BuiltList<String>(),
       page: 1,
       rows: 100,
+      search: "",
+      filters: [],
     );
   }
 

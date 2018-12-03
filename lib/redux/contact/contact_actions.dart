@@ -4,6 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:MyUnifyMobile/data/models/contact_model.dart';
 import 'package:MyUnifyMobile/redux/app/app_actions.dart';
 import '../../data/models/paging_model.dart';
+import '../../data/models/search_model.dart';
 
 class ViewContactList implements PersistUI {
   final BuildContext context;
@@ -32,6 +33,11 @@ class LoadContacts {
 class ChangePaging {
   final PagingModel paging;
   ChangePaging({this.paging});
+}
+
+class ChangeSearchModel {
+  final SearchModel search;
+  ChangeSearchModel({this.search});
 }
 
 class LoadContactsRequest implements StartLoading {}

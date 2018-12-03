@@ -46,6 +46,12 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
       serializers.serialize(object.page, specifiedType: const FullType(int)),
       'rows',
       serializers.serialize(object.rows, specifiedType: const FullType(int)),
+      'search',
+      serializers.serialize(object.search,
+          specifiedType: const FullType(String)),
+      'filters',
+      serializers.serialize(object.filters,
+          specifiedType: const FullType(List, const [const FullType(int)])),
     ];
     if (object.lastUpdated != null) {
       result
@@ -92,6 +98,16 @@ class _$ContactStateSerializer implements StructuredSerializer<ContactState> {
         case 'rows':
           result.rows = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+        case 'search':
+          result.search = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'filters':
+          result.filters = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(int)]))
+              as List<int>;
           break;
       }
     }
@@ -162,12 +178,22 @@ class _$ContactState extends ContactState {
   final int page;
   @override
   final int rows;
+  @override
+  final String search;
+  @override
+  final List<int> filters;
 
   factory _$ContactState([void updates(ContactStateBuilder b)]) =>
       (new ContactStateBuilder()..update(updates)).build();
 
   _$ContactState._(
-      {this.lastUpdated, this.map, this.list, this.page, this.rows})
+      {this.lastUpdated,
+      this.map,
+      this.list,
+      this.page,
+      this.rows,
+      this.search,
+      this.filters})
       : super._() {
     if (map == null) {
       throw new BuiltValueNullFieldError('ContactState', 'map');
@@ -180,6 +206,12 @@ class _$ContactState extends ContactState {
     }
     if (rows == null) {
       throw new BuiltValueNullFieldError('ContactState', 'rows');
+    }
+    if (search == null) {
+      throw new BuiltValueNullFieldError('ContactState', 'search');
+    }
+    if (filters == null) {
+      throw new BuiltValueNullFieldError('ContactState', 'filters');
     }
   }
 
@@ -198,15 +230,23 @@ class _$ContactState extends ContactState {
         map == other.map &&
         list == other.list &&
         page == other.page &&
-        rows == other.rows;
+        rows == other.rows &&
+        search == other.search &&
+        filters == other.filters;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, lastUpdated.hashCode), map.hashCode), list.hashCode),
-            page.hashCode),
-        rows.hashCode));
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, lastUpdated.hashCode), map.hashCode),
+                        list.hashCode),
+                    page.hashCode),
+                rows.hashCode),
+            search.hashCode),
+        filters.hashCode));
   }
 
   @override
@@ -216,7 +256,9 @@ class _$ContactState extends ContactState {
           ..add('map', map)
           ..add('list', list)
           ..add('page', page)
-          ..add('rows', rows))
+          ..add('rows', rows)
+          ..add('search', search)
+          ..add('filters', filters))
         .toString();
   }
 }
@@ -246,6 +288,14 @@ class ContactStateBuilder
   int get rows => _$this._rows;
   set rows(int rows) => _$this._rows = rows;
 
+  String _search;
+  String get search => _$this._search;
+  set search(String search) => _$this._search = search;
+
+  List<int> _filters;
+  List<int> get filters => _$this._filters;
+  set filters(List<int> filters) => _$this._filters = filters;
+
   ContactStateBuilder();
 
   ContactStateBuilder get _$this {
@@ -255,6 +305,8 @@ class ContactStateBuilder
       _list = _$v.list?.toBuilder();
       _page = _$v.page;
       _rows = _$v.rows;
+      _search = _$v.search;
+      _filters = _$v.filters;
       _$v = null;
     }
     return this;
@@ -283,7 +335,9 @@ class ContactStateBuilder
               map: map.build(),
               list: list.build(),
               page: page,
-              rows: rows);
+              rows: rows,
+              search: search,
+              filters: filters);
     } catch (_) {
       String _$failedField;
       try {

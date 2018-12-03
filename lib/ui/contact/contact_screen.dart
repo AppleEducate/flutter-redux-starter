@@ -10,6 +10,7 @@ import '../app/app_drawer_vm.dart';
 import '../app/app_search.dart';
 import '../app/app_search_button.dart';
 import 'contact_list_vm.dart';
+import '../../data/models/search_model.dart';
 
 class ContactScreen extends StatelessWidget {
   static final String route = '/contact';
@@ -42,6 +43,17 @@ class ContactScreen extends StatelessWidget {
         entityType: EntityType.contact,
         onSelectedSortField: (value) {
           store.dispatch(SortContacts(value));
+        },
+        onSelectedContactGroup: (value) {
+          if (value.contains("All")) {
+            store.dispatch(ChangeSearchModel(
+              search: SearchModel(search: "", filters: []),
+            ));
+          } else {
+            store.dispatch(ChangeSearchModel(
+              search: SearchModel(search: value, filters: [5]),
+            ));
+          }
         },
         sortFields: [
           // STARTER: sort - do not remove comment
