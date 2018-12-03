@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../utils/date_formatter.dart';
 import '../app/app_drawer_vm.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,8 +15,20 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // DateViewWidget(),
+            Container(
+              padding: EdgeInsets.only(top: 10.0),
+            ),
+            Text(
+              "Welcome!",
+              style: Theme.of(context).textTheme.display1,
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              formatDateCustom(DateTime.now()),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
